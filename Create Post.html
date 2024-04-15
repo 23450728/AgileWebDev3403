@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="\Static\Main CSS.css">
+</head>
+<body>
+
+<div class="topnav">
+    <a href="\Main">Home</a>
+    <a class="active">New Post</a>
+    <a href="\Profile">Profile</a>
+    <div class="search-container">
+        <form>
+            <input type="text" placeholder="Search..." name="search">
+            <button type="submit">Search</button>            
+        </form>
+    </div>
+</div>
+
+<div class="page1">
+    <form METHOD="POST">
+        <label for="title"><b>Title</b></label>
+        <input type="text" placeholder="Enter Title" name="title" required>
+
+        <label for="description"><b>Post Body</b></label>
+        <textarea id="description" name="description" placeholder="Write something.." style="height:200px"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+
+</html>

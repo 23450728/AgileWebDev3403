@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/Static/Main CSS.css">
+</head>
+
+<body class="page1">
+    <form method = "POST">
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" value="{{request.form['username']}}" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" value="{{request.form['password']}}" required>
+      
+          <button type="submit">Login</button>
+
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+
+          <br>
+          <br>
+
+          <label>
+            <span class="sign_up"> Sign <a href="\signup">Up?</a></span>
+            <span class="psw">Forgot <a href="\Forgot Password">password?</a></span>
+          </label>
+      </form>
+</body>
+
+
+
+</html>
