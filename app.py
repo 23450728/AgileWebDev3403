@@ -19,13 +19,11 @@ connect.execute(
 @app.route('/')
 @app.route('/Main')
 def main():
-    #
-    #connect = sqlite3.connect('database.db')
-    #cursor = connect.cursor()
-    #cursor.execute('SELECT * FROM POST')
-    #data=cursor.fetchall()
-    #return render_template('Main.html', data=data)
-    return render_template('Main.html')
+    connect = sqlite3.connect('database.db')
+    cursor = connect.cursor()
+    cursor.execute('SELECT * FROM POST')
+    data=cursor.fetchall()
+    return render_template('Main.html', data=data)
 
 @app.route('/login')
 def login_page():
