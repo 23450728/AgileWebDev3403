@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 import sqlite3
 
-app = Flask(__name__, template_folder='templates', static_folder='Static')
+app = Flask(__name__, template_folder='Templates', static_folder='Static')
 socketio = SocketIO(app)
 app.config['SECRET_KEY'] = 'hard to guess string'
 
@@ -19,12 +19,13 @@ connect.execute(
 @app.route('/')
 @app.route('/Main')
 def main():
-    connect = sqlite3.connect('database.db')
-    cursor = connect.cursor()
-    cursor.execute('SELECT * FROM POST')
-
-    data=cursor.fetchall()
-    return render_template('Main.html', data=data)
+    #
+    #connect = sqlite3.connect('database.db')
+    #cursor = connect.cursor()
+    #cursor.execute('SELECT * FROM POST')
+    #data=cursor.fetchall()
+    #return render_template('Main.html', data=data)
+    return render_template('Main.html')
 
 @app.route('/login')
 def login_page():
