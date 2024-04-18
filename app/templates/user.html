@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>User: {{ current_user.username }}</h1>
+    <h1>History: </h1>
+    {% for i in posts %}
+    <p>
+    {{ i.author.username }}
+    </p>
+    {% endfor %}
+
+{% endblock %}

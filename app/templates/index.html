@@ -1,20 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-    </tr>
-
-    {%for post in data%}
-    <tr>
-        <td>{{post[0]}}</td>
-        <td>{{post[1]}}</td>
-        <td>{{post[2]}}</td>
-        <td>{{post[3]}}</td>
-    </tr>
-    {%endfor%}
-</table>
-
+    <h1>Hi, {{ current_user.username }}!</h1>
+    {% for post in posts %}
+    <div class="post">
+        <h2>Title: {{ post.title }}</h2>
+        <p>User: {{ post.author.username }}<p>
+        <p>Post: {{ post.body }}</p>
+    </div>
+    {% endfor %}
 {% endblock %}

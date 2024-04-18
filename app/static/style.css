@@ -60,7 +60,6 @@ span.psw {
 }
 
 span.login {
-
   float: left;
 }
   
@@ -190,3 +189,18 @@ span.login {
   width: 65%;
   height: 300px;
 }
+
+/*Error Messages and Form errors */
+.error p{
+  text-align: center;
+  color: red;
+ }
+
+ /*Posts */
+ .post {
+  border: 3px solid #f1f1f1;
+ }
+
+ .post h2 {
+  text-align:center
+ }
