@@ -51,7 +51,6 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-
 @app.route('/logout')
 def logout():
     logout_user()
@@ -81,14 +80,11 @@ def post():
         return redirect(url_for('index'))
     return render_template("post.html", form=form)
 
-#
-#@app.route('/comment')
-#@login_required
-#def comment():
-#    form = CommentForm()
-#    if form.validate_on_submit():
-#        comment = Comment(comment=form.comment.data, author=current_user)
-#        db.session.add(comment)
-#        db.session.commit()
-#        return redirect(url_for)
-#    return render_template("comment.html")
+@login_required
+@app.route('/post/<int:id>')
+def SelectPst(id):
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).where(Post.id == id)
+    posts = db.paginate(query, page=page, per_page=1, error_out=False)
+    return render_template("post view.html", posts=posts.items)
+

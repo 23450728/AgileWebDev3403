@@ -34,7 +34,7 @@ p {
 }
   
   /* Add a hover effect for buttons */
-.page1 button:hover {
+.form button:hover {
     opacity: 0.8;
 }
   
