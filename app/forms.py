@@ -30,6 +30,10 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
         
 class PostForm(FlaskForm):
-    title = StringField('Your title', validators=[DataRequired()])
+    title = StringField('Your title', validators=[DataRequired(), Length(min=1, max=140)])
     post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Submit')
+
+class CommentForm(FlaskForm):
+    comment = TextAreaField("Your comment", validators=[DataRequired(), Length(min=1, max=140)] )
     submit = SubmitField('Submit')

@@ -1,0 +1,35 @@
+If we go down a social media approach. We need some of the following:
+
+A full text-search. Refer to https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvi-full-text-search
+
+
+Dynamic posts: https://stackoverflow.com/questions/63028410/flask-dynamically-generate-page-endpoints-and-content
+
+Shouldn't be too hard to implement something like this. 
+
+Post view:
+Users should be able to click on a post, it should then take them to a site where they can comment,
+like, follow the user, report the post, etc.
+
+Roles:
+Users need to have specific roles like admin, normal user, banned, restricted etc.
+If a user is banned from commenting or posting, we have to have some sort of rules.
+
+Comments:
+I would say we need another model in the database that is a one to many relationship. So posts can have many comments and comments can have comments under them. I'm not sure what the best implementation for this is. 
+
+Profile:
+Need to be able to reset password: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-x-email-support
+
+Need to be able to change username, login/logout should be done here. Saved posts, post history, liked posts
+
+
+index:
+needs a sort feature, newest posts, oldest posts, sort by date and time, sort by popularity, sort by reports for admins. 
+
+Signup:
+An email should be sent to confirm their email, prevents spam
+
+If we go down a game approach:
+Then we don't really need the much more tbh. We could have user generated riddles or something and users can submit answers. It wouldn't be hard to implement the ability to answer questions in the form. Would be easier and take less time. But I think it would be more impressive to have a working social media app thing. 
+

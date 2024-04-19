@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, PostForm
+from app.forms import LoginForm, RegistrationForm, PostForm #,CommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post
@@ -80,3 +80,15 @@ def post():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template("post.html", form=form)
+
+#
+#@app.route('/comment')
+#@login_required
+#def comment():
+#    form = CommentForm()
+#    if form.validate_on_submit():
+#        comment = Comment(comment=form.comment.data, author=current_user)
+#        db.session.add(comment)
+#        db.session.commit()
+#        return redirect(url_for)
+#    return render_template("comment.html")
