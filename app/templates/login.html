@@ -10,19 +10,25 @@
         {% if messages %}
         <ul>
             {% for message in messages %}
-            <div class="error">
-                <p>{{ message }}</p>
-            </div>
+                {% if message == 'Congratulations, you are now a registered user!' %}
+                    <div class="success">
+                        <p>{{ message }}</p>
+                    </div>
+                {% else %}
+                    <div class="error">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endif %}
             {% endfor %}
         </ul>
         {% endif %}
         {% endwith %}
 
         <p>
-            {{ form.email.label }}
+            {{ form.username.label }}
             <br>
-            {{ form.email(size=32) }}
-            {% for error in form.email.errors %}
+            {{ form.username(size=32) }}
+            {% for error in form.username.errors %}
             <div class="error">
                 <p>{{ error }}</p>
             </div>            
