@@ -4,6 +4,7 @@ from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post, Comment
+from app.models import User, Post, Comment
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
 
