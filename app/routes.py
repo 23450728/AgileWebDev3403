@@ -4,7 +4,6 @@ from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post, Comment
-from app.models import User, Post, Comment
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
 
@@ -112,6 +111,9 @@ def post():
 @app.route('/post/<int:id>')
 def SelectPost(id):
     page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).where(Post.id == id)
+    posts = db.paginate(query, page=page, per_page=1, error_out=False)
+    return render_template("post view.html", posts=posts.items)
     prev = request.args.get('prev', '/index')
     post = db.session.scalar(sa.select(Post).where(Post.id == id))
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
@@ -134,6 +136,18 @@ def AddComment(parent):
         db.session.commit()
         return redirect('/post/' + str(parent))
     return render_template("comment.html", form=form, post=post, prev=prev)
+
+@login_required
+@app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
+def AddComment(parent):
+    post = db.session.scalar(sa.select(Post).where(Post.id == parent))
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(comments=form.comment.data, author=current_user, parent=post)
+        db.session.add(comment)
+        db.session.commit()
+        flash("Your comment has been published!")
+    return render_template("comment.html", form=form, post=post)
 
 @login_required
 @app.route('/post/<int:parent>/like', methods=['GET', 'POST'])
