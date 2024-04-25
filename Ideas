@@ -1,0 +1,50 @@
+If we go down a social media approach. We need some of the following:
+
+A full text-search. Refer to https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvi-full-text-search
+- High Prior
+
+Post view:
+Users should be able to click on a post, it should then take them to a site where they can comment,
+like, follow the user, report the post, etc.
+
+https://stackoverflow.com/questions/63028410/flask-dynamically-generate-page-endpoints-and-content
+- High Prior
+
+Shouldn't be too hard to implement something like this. 
+
+Comments: - High prior
+
+Infinite Scroll - Low prior
+
+Like/Star - low Prior
+
+Image Database - Low Prior
+
+I would say we need another model in the database that is a one to many relationship. So posts can have many comments and comments can have comments under them. I'm not sure what the best implementation for this is. 
+- High prior
+
+Locking post - Medium-High Prior - Comments needs to be done first
+
+Fix security - Low prior
+
+Roles: - low prior
+Users need to have specific roles like admin, normal user, banned, restricted etc.
+If a user is banned from commenting or posting, we have to have some sort of rules.
+
+Profile: - low prior
+Need to be able to reset password: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-x-email-support
+
+Need to be able to change username, login/logout should be done here. Saved posts, post history, liked posts
+
+index: - Low Prior
+needs a sort feature, newest posts, oldest posts, sort by date and time, sort by popularity, sort by reports for admins. 
+
+Signup: - Low prior
+An email should be sent to confirm their email, prevents spam
+
+19/04/2024
+Ideas
+- Food blog, what do I do with leftovers?
+- How do I make this food taste good
+- Images
+- An ingredient - a tag - common leftovers - search term
