@@ -86,10 +86,10 @@ def SelectPst(id):
     page = request.args.get('page', 1, type=int)
     query = sa.select(Post).where(Post.id == id)
     posts = db.paginate(query, page=page, per_page=1, error_out=False)
-    form = CommentForm()
-    if form.validate_on_submit():
-        comment = Comment(comment=form.comment.data, author = current_user)
-        db.session.add(comment)
-        db.session.commit()
+    #form = CommentForm()
+    #if form.validate_on_submit():
+    #    comment = Comment(comment=form.comment.data, author = current_user)
+    #    db.session.add(comment)
+    #    db.session.commit()
     return render_template("post view.html", posts=posts.items)
 

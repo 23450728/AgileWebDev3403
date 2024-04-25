@@ -3,10 +3,11 @@
 {% block content %}
     <h1>Hi, {{ current_user.username }}!</h1>
     {% for post in posts %}
-    <div class="post">
+    <div id="div" class="post" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
         <h2>Title: {{ post.title }}</h2>
         <p>User: {{ post.author.username }}<p>
         <p>Post: {{ post.body }}</p>
     </div>
     {% endfor %}
 {% endblock %}
+
