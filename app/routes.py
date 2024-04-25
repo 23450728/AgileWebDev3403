@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, PostForm #,CommentForm
+from app.forms import LoginForm, RegistrationForm, PostForm,CommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post
@@ -86,5 +86,10 @@ def SelectPst(id):
     page = request.args.get('page', 1, type=int)
     query = sa.select(Post).where(Post.id == id)
     posts = db.paginate(query, page=page, per_page=1, error_out=False)
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(comment=form.comment.data, author = current_user)
+        db.session.add(comment)
+        db.session.commit()
     return render_template("post view.html", posts=posts.items)
 
