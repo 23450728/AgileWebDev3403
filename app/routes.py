@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, PostForm
+from app.forms import LoginForm, RegistrationForm, PostForm,CommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post
@@ -51,7 +51,6 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-
 @app.route('/logout')
 def logout():
     logout_user()
@@ -80,3 +79,17 @@ def post():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template("post.html", form=form)
+
+@login_required
+@app.route('/post/<int:id>')
+def SelectPst(id):
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).where(Post.id == id)
+    posts = db.paginate(query, page=page, per_page=1, error_out=False)
+    #form = CommentForm()
+    #if form.validate_on_submit():
+    #    comment = Comment(comment=form.comment.data, author = current_user)
+    #    db.session.add(comment)
+    #    db.session.commit()
+    return render_template("post view.html", posts=posts.items)
+
