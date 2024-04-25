@@ -17,17 +17,23 @@
     <form class="form" action="" method="post" novalidate>
         {{ form.hidden_tag() }}
 
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <div class="error">
-                        <p>{{ message }}</p>
-                    </div>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                {% if message == "Your comment has been published!" %}
+                <div class="success">
+                    <p>{{ message }}</p>
+                </div>
+                {% else %}
+                <div class="error">
+                    <p>{{ message }}</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
 
         <p>
             {{ form.comment.label }}
