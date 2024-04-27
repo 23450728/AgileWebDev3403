@@ -1,11 +1,16 @@
 h1 {
   text-align: center;
+  font-family: "verdana", sans-serif;
 }
 
 p {
   text-align: center;
+  font-family: "verdana", sans-serif;
 }
 
+h2 {
+  font-family: "verdana", sans-serif;
+}
 
 /* Bordered form */
 .form {
@@ -31,6 +36,7 @@ p {
     border: none;
     cursor: pointer;
     width: 100%;
+    font-family: "verdana", sans-serif;
 }
   
   /* Add a hover effect for buttons */
@@ -89,6 +95,7 @@ span.login {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  font-family: "verdana", sans-serif;
 }
 
 .topnav a:hover {
@@ -210,3 +217,17 @@ span.login {
  .post h2 {
   text-align:center
  }
+
+ /* "Start Cooking!" Button */
+  .button {
+  text-align: center;
+  justify-content:center;
+  }
+
+/* Create a div to center content */
+.center-container {
+  justify-content: center;
+  align-items:center;
+  display:flex;
+}
+  
