@@ -16,6 +16,10 @@ def before_request():
     g.search_form = SearchForm()
 
 @app.route('/')
+@app.route('/home')
+def home():
+    return render_template("home.html")
+
 @app.route('/index')
 def index():
     page = request.args.get('page', 1, type=int)

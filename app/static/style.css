@@ -1,9 +1,11 @@
 h1 {
   text-align: center;
+  font-family: "verdana", sans-serif;
 }
 
 p {
   text-align: center;
+  font-family: "verdana", sans-serif;
 }
 
 img {
@@ -11,6 +13,9 @@ img {
   margin-left: auto;
   margin-right: auto;
   margin-top: 4%;
+}
+h2 {
+  font-family: "verdana", sans-serif;
 }
 
 /* Bordered form */
@@ -37,6 +42,7 @@ img {
     border: none;
     cursor: pointer;
     width: 100%;
+    font-family: "verdana", sans-serif;
 }
   
   /* Add a hover effect for buttons */
@@ -95,6 +101,7 @@ span.login {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  font-family: "verdana", sans-serif;
 }
 
 .topnav a:hover {
@@ -215,9 +222,4 @@ span.login {
 
  .post h2 {
   text-align:center
- }
-
-/* Comments */
- .comment {
-  border: 3px solid #f1f1f1;
  }
