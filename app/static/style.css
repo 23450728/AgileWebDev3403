@@ -221,8 +221,18 @@ span.login {
  /* "Start Cooking!" Button */
   .button {
   text-align: center;
-  justify-content:center;
+  background-color: rgb(249, 182, 48);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
   }
+
+  /* Add a hover effect for buttons */
+  .button:hover {
+  opacity: 0.8;
+}
 
 /* Create a div to center content */
 .center-container {
@@ -230,4 +240,6 @@ span.login {
   align-items:center;
   display:flex;
 }
+
+
   
