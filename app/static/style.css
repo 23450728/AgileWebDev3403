@@ -196,6 +196,12 @@ span.login {
   color: red;
  }
 
+ /* Success Messages */
+.success {
+  text-align: center;
+  color: green;
+}
+
  /*Posts */
  .post {
   border: 3px solid #f1f1f1;
