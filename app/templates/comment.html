@@ -21,15 +21,9 @@
         {% if messages %}
         <ul>
             {% for message in messages %}
-                {% if message == "Your comment has been published!" %}
-                <div class="success">
-                    <p>{{ message }}</p>
-                </div>
-                {% else %}
                 <div class="error">
                     <p>{{ message }}</p>
                 </div>
-                {% endif %}
             {% endfor %}
         </ul>
         {% endif %}
