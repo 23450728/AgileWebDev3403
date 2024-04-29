@@ -31,9 +31,15 @@ class Post(db.Model):
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
     author: so.Mapped[User] = so.relationship(back_populates='posts')
     comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='parent')
+    
     def __repr__(self):
         return '<Post {}>'.format(self.body)
  
+    def comments_count(self):
+        query = sa.select(sa.func.count()).select_from(
+            self.comments.select().subquery())
+        return db.session.scalar(query)
+
 class Comment(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     comments: so.Mapped[str] = so.mapped_column(sa.String(140))
