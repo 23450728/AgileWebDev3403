@@ -92,9 +92,6 @@ class Post(SearchableMixin, db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
  
-    def comments_count(self):
-        return len(self.comments) if self.comments != None else 0
-
 class Comment(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     comments: so.Mapped[str] = so.mapped_column(sa.String(140))
