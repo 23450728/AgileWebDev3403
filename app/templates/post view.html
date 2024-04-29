@@ -88,5 +88,14 @@
         </div>
 
     </div>
+    {% endfor %}
+
+    {% for comment in comments %}
+    <div class="comment">
+        <p>User: {{ comment.author.username }}<p>
+        <p>Comment: {{ comment.comments }}</p>
+        <p>{{ moment(comment.timestamp).format('LLL') }}</p>
+    </div>
+    {% endfor %}
 
 {% endblock %}
