@@ -136,6 +136,11 @@ def AddComment(parent):
         db.session.commit()
         return redirect('/post/' + str(parent))
     return render_template("comment.html", form=form, post=post, prev=prev)
+    postsQuery = sa.select(Post).where(Post.id == id)
+    posts = db.paginate(postsQuery, page=page, per_page=1, error_out=False)
+    commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
+    comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
+    return render_template("post view.html", posts=posts.items, comments=comments.items)
 
 @login_required
 @app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
@@ -146,7 +151,7 @@ def AddComment(parent):
         comment = Comment(comments=form.comment.data, author=current_user, parent=post)
         db.session.add(comment)
         db.session.commit()
-        flash("Your comment has been published!")
+        return redirect('/post/' + str(parent))
     return render_template("comment.html", form=form, post=post)
 
 @login_required
