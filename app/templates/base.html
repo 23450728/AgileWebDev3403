@@ -5,21 +5,23 @@
         <link rel="stylesheet" href="/static/style.css">
     <body>
         <div class="topnav">
-            <a href="{{ url_for('index') }}">Explore</a>
+            <a href="{{ url_for('index') }}">Home</a>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}
             <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
             <a href="{{ url_for('logout') }}">Logout</a>
-            <a href="{{ url_for('post') }}">Create Post</a>
             {% endif %}
+            <a href="{{ url_for('post') }}">Create Post</a>
 
-            <div class="search-container">
-                <form>
-                    <input type="text" placeholder="Search..." name="search">
-                    <button type="submit">Search</button>            
-                </form>
-            </div>
+            {% if g.search_form %}
+                <div class="search-container">
+                    <form action="{{ url_for('search') }}" method="get" novalidate>
+                        {{ g.search_form.search(size=32, placeholder=g.search_form.search.label.text) }}
+                        {{ g.search_form.submit() }}           
+                    </form>
+                </div>
+            {% endif %}
         </div>    
 
         {% block content %}{% endblock %}
