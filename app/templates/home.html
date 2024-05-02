@@ -1,49 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="home-container">
-        <br>
-        <br>
-        <div class="text">
-            <h1>What to Cook?</h1>
-            <p>The place where no leftovers go to waste.</p>
+    <br>
+    <div class="carousel-section">
+        <div class="carousel" data-carousel>
+            <button class="carousel-button prev" data-carousel-button="prev">&#60;</button>
+            <button class="carousel-button next" data-carousel-button="next">&#62;</button>
+            <ul data-slides>
+                <li class="slide" data-active>
+                    <img src="https://source.unsplash.com/cooked-dish-on-gray-bowl--YHSwy6uqvk" alt="Food #1">
+                    <p>Description of food 1</p>
+                </li>
+                <li class="slide">
+                    <img src="https://source.unsplash.com/raspberry-cake-Mzy-OjtCI70" alt="Food #2">
+                    <p>Description of food 2</p>
+                </li>
+                <li class="slide">
+                    <img src="https://source.unsplash.com/pizza-on-chopping-board-MqT0asuoIcU" alt="Food #3">
+                    <p>Description of food 3</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+        <h1>What to Cook?</h1>
+        <p>The place where no leftovers go to waste.</p>
+        <div class="center-container">
             <button class="button" onclick="location.href=('/register' )">Start Cooking!</button>
-            <p>Have an account? <a href="{{ url_for('login') }}">Click to Login!</a></p>
         </div>
-        <div class="carousel-section">
-            <div class="carousel" data-carousel>
-                <button class="carousel-button prev" data-carousel-button="prev">&#60;</button>
-                <button class="carousel-button next" data-carousel-button="next">&#62;</button>
-                <ul data-slides>
-                    <li class="slide" data-active>
-                        <img src="https://source.unsplash.com/cooked-dish-on-gray-bowl--YHSwy6uqvk" alt="Food #1">
-                        <p><i>Made by: username1</i></p>
-                    </li>
-                    <li class="slide">
-                        <img src="https://source.unsplash.com/raspberry-cake-Mzy-OjtCI70" alt="Food #2">
-                        <p><i>Made by: username2</i></p>
-                    </li>
-                    <li class="slide">
-                        <img src="https://source.unsplash.com/pizza-on-chopping-board-MqT0asuoIcU" alt="Food #3">
-                        <p><i>Made by: username3</i></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <p>Have an account? <a href="{{ url_for('login') }}">Click to Login!</a></p>
     </div>
-    <br>
-    <br>
-    <h2>About Us</h2>
-    <div class="about-us-section">
-        <div class="about-us-text">
-            <h4>Our Aim</h3>
-            <p>At What To Cook?, we believe that every kitchen is a treasure trove of possibilities, especially when it comes to leftovers. Founded by a passionate group of food enthusiasts and home cooks, our website is dedicated to helping new chefs—particularly those who've recently branched out on their own—transform everyday leftovers into delightful, inventive meals.</p>
-        </div>
-        <div class="about-us-text">
-            <h4>What we offer</h3>
-            <p>Through our extensive recipe database, tailored cooking tips, and vibrant community forums, we empower you to cook confidently and sustainably. Join us to explore how leftover ingredients can come together in delicious and unexpected ways, helping you save money and minimize waste—one meal at a time. </p>
-        </div>
-    </div>
-    <br>
-    <br>
 {% endblock %}
