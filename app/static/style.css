@@ -302,6 +302,13 @@ span.login {
 
 /* Carousel */
 
+.container {
+  display:flex;
+  align-items: left;
+  justify-content: center;
+  background-color: rgb(255, 235, 196);
+}
+
 /* Align text and carousel to be next to each other */
 .home-container {
   display:flex;
