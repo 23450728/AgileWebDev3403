@@ -307,6 +307,7 @@ span.login {
   align-items: left;
   justify-content: center;
   background-color: rgb(255, 235, 196);
+  padding: 80px;
 }
 
 /* Align text and carousel to be next to each other */
