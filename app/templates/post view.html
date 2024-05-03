@@ -3,7 +3,7 @@
 {% block content %}
     {% for post in posts %}
     <div class="post">
-        <h2>Title: {{ post.title }}</h2>
+        <h4>Title: {{ post.title }}</h4>
         <p>User: {{ post.author.username }}<p>
         <p>Post: {{ post.body }}</p>
     </div>

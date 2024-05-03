@@ -11,6 +11,7 @@ p {
 h2 {
   font-family: "arial", sans-serif;
   text-align: center;
+  font-size:30px;
 }
 
 h3 {
@@ -19,7 +20,8 @@ h3 {
 
 /* Bordered form */
 .form {
-    border: 3px solid #f1f1f1;
+    /*border: 3px solid #f1f1f1;*/
+    padding: 10px;
 }
   
   /* Full-width inputs */
@@ -58,7 +60,7 @@ h3 {
   
   /* Add padding to containers */
 .container {
-    padding: 20px;
+    padding: 5%;
 }
   
 span.sign_up {
@@ -248,11 +250,12 @@ span.login {
 
 /* Carousel */
 
-.container {
+.home-container {
   display:flex;
   align-items: left;
   justify-content: center;
   background-color: rgb(255, 235, 196);
+  padding: 80px;
 }
 
 .carousel-section {
@@ -369,4 +372,8 @@ img {
   background-color: rgb(249, 182, 48);
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
+}
+
+#div {
+  padding:20px;
 }
