@@ -10,6 +10,11 @@ p {
 
 h2 {
   font-family: "arial", sans-serif;
+  text-align: center;
+}
+
+h3 {
+  font-family: "arial", sans-serif;
 }
 
 /* Bordered form */
@@ -336,9 +341,32 @@ img {
 }
 
 .text {
-  padding-right:200px;
-  padding-top: 100px
+  padding-right:10%;
+  padding-top: 10%;
 }
 
+.about-us-section {
+  align-items: left;
+  padding-left: 10%;
+  padding-right: 10%;
+  display:flex;
+  justify-content: space-around;
+}
 
-  
+.about-icon {
+  font-size:80px;
+  text-align: center;
+}
+
+.about-us {
+  border-radius: 25px;
+  background-color: rgb(255, 235, 196);
+}
+
+.about-us-text {
+  text-align: left;
+  padding:10%;
+  background-color: rgb(249, 182, 48);
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
