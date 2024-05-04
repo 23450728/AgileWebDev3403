@@ -5,9 +5,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post
 from urllib.parse import urlsplit
+from datetime import datetime, timezone
 
 @app.before_request
 def before_request():
+    if current_user.is_authenticated:
+        current_user.last_active = datetime.now(timezone.utc)
+        db.session.commit()
     g.search_form = SearchForm()
 
 @app.route('/')

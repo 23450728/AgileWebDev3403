@@ -5,6 +5,7 @@ import sqlalchemy.orm as so
 from app import db, login, search
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
 
 class SearchableMixin(object):
     @classmethod
@@ -53,6 +54,8 @@ class User(UserMixin, db.Model):
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+    bio: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
+    last_active: so.Mapped[Optional[datetime]] = so.mapped_column(default=lambda: datetime.now(timezone.utc))
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
 
     def __repr__(self):
@@ -63,6 +66,11 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def avatar(self, size):
+        hex = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return f'https://www.gravatar.com/avatar/{hex}?d=identicon&s={size}'
+    
 
 class Post(SearchableMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
