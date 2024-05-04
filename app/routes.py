@@ -76,6 +76,22 @@ def user(username):
         if posts.has_prev else None
     return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def EditProfile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.bio = form.bio.data
+        db.session.commit()
+        return redirect(url_for('user', username=current_user.username))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.bio.data = current_user.bio
+    return render_template('edit profile.html', form=form)
+
 @app.route('/post', methods=['GET', 'POST'])
 @login_required
 def post():
