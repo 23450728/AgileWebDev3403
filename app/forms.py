@@ -4,6 +4,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Le
 import sqlalchemy as sa
 from app import db
 from app.models import User
+from flask_login import current_user
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -41,3 +42,14 @@ class CommentForm(FlaskForm):
 class SearchForm(FlaskForm):
     search = StringField('Search', validators=[DataRequired(), Length(min=1)])
     submit = SubmitField('Search')
+
+class EditProfileForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    bio = TextAreaField('Bio', validators=[Length(min=0, max=140)])
+    submit = SubmitField('Submit')
+
+    def validate_username(self, username):
+        user = db.session.scalar(sa.select(User).where(User.username == username.data))
+        if (user is not None) and (user.username != current_user.username):
+            raise ValidationError('Please use a different username.')
+    
