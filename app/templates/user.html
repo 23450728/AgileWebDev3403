@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>User: {{ current_user.username }}</h1>
-    <h1>History: </h1>
+    <img src="{{ user.avatar(128) }}">
+    <h1>User: {{ user.username }}</h1>
+    {% if user.bio %}<p>Bio: {{ user.bio }}</p>
+    {% if user.last_active %}<p>Last Active: {{ user.last_active }}</p>
+    <h1>Posts: </h1>
     {% for post in posts %}
     <div class="post">
-        <p>
-            {{post.title}}
-            </p>
-            <p> 
-            {{post.body}}
-            </p>
+        <p>Title: {{post.title}}</p>
+        <p>Post: {{post.body}}</p>
     </div>
     {% endfor %}
 
