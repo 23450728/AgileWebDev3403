@@ -73,6 +73,10 @@ class User(UserMixin, db.Model):
         hex = md5(self.email.lower().encode('utf-8')).hexdigest()
         return f'https://www.gravatar.com/avatar/{hex}?d=identicon&s={size}'
     
+    def posts_count(self):
+        query = sa.select(sa.func.count()).select_from(
+            self.posts.select().subquery())
+        return db.session.scalar(query)
 
 class Post(SearchableMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
