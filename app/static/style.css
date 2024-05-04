@@ -1,6 +1,9 @@
+/* Text */
+
 h1 {
   text-align: left;
   font-family: "arial", sans-serif;
+  font-size: 40px;
 }
 
 p {
@@ -11,16 +14,16 @@ p {
 h2 {
   font-family: "arial", sans-serif;
   text-align: center;
-  font-size:30px;
+  font-size: 30px;
 }
 
 h3 {
   font-family: "arial", sans-serif;
 }
 
-/* Bordered form */
+/* Form */
+
 .form {
-    /*border: 3px solid #f1f1f1;*/
     padding: 10px;
 }
   
@@ -87,7 +90,7 @@ span.login {
     }
 }
 
-  /* Navigation Menu and styles*/
+/* Navigation Menu and styles*/
 
 .topnav {
   overflow: hidden;
@@ -210,21 +213,24 @@ span.login {
   color: red;
  }
 
- /* Success Messages */
+/* Success Messages */
 .success {
   text-align: center;
   color: green;
 }
 
- /*Posts */
- .post {
+/*Posts */
+.post {
   border: 3px solid #f1f1f1;
   padding: 20px;
  }
 
- .post h2 {
+.post h2 {
   text-align:center
  }
+
+
+/* Button */
 
  /* "Start Cooking!" Button */
   .button {
@@ -251,6 +257,7 @@ span.login {
 
 /* Carousel */
 
+/* Align text and carousel to be next to each other */
 .home-container {
   display:flex;
   align-items: left;
@@ -259,6 +266,7 @@ span.login {
   padding: 80px;
 }
 
+/* Set size of carousel */
 .carousel-section {
   justify-content: center;
   align-items: center;
@@ -269,6 +277,8 @@ span.login {
   width: 550px;
   height: 400px;
 }
+
+/* Center carousel */
 .carousel {
   position: absolute;
   top: 50%;
@@ -284,6 +294,7 @@ span.login {
   list-style: none;
 }
 
+/* Set transition of slides */
 .slide {
   position: absolute;
   inset: 0;
@@ -306,6 +317,7 @@ span.login {
   transition-delay: 0ms;
 }
 
+/* Style carousel buttons */
 .carousel-button {
   position: absolute;
   z-index: 2;
@@ -344,6 +356,7 @@ img {
   max-height:100%;
 }
 
+/* Add padding to text on homepage */
 .text {
   padding-right:10%;
   padding-top: 10%;
