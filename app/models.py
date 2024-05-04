@@ -57,6 +57,7 @@ class User(UserMixin, db.Model):
     bio: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
     last_active: so.Mapped[Optional[datetime]] = so.mapped_column(default=lambda: datetime.now(timezone.utc))
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
+    comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='author')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -79,11 +80,28 @@ class Post(SearchableMixin, db.Model):
     timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc)) 
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
     author: so.Mapped[User] = so.relationship(back_populates='posts')
+    comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='parent')
+    
 
     __searchable__ = ['title', 'body']
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+ 
+    def comments_count(self):
+        query = sa.select(sa.func.count()).select_from(
+            self.comments.select().subquery())
+        return db.session.scalar(query)
+
+class Comment(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    comments: so.Mapped[str] = so.mapped_column(sa.String(140))
+    timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
+    post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
+    author: so.Mapped[User] = so.relationship(back_populates='comments')
+    parent: so.Mapped[Post] = so.relationship(back_populates='comments')
+
 
 @login.user_loader
 def load_user(id):

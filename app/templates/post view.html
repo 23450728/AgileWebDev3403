@@ -6,6 +6,18 @@
         <h2>Title: {{ post.title }}</h2>
         <p>User: {{ post.author.username }}<p>
         <p>Post: {{ post.body }}</p>
+        <p>{{ moment(post.timestamp).format('LLL') }}</p>
+        <p>{{ post.comments_count() }} comments</p>
+        <button type="button" onclick="location.href=('/post/{{post.id}}/comment')">Add Comment</button>
     </div>
     {% endfor %}
+
+    {% for comment in comments %}
+    <div class="comment">
+        <p>User: {{ comment.author.username }}<p>
+        <p>Comment: {{ comment.comments }}</p>
+        <p>{{ moment(comment.timestamp).format('LLL') }}</p>
+    </div>
+    {% endfor %}
+
 {% endblock %}

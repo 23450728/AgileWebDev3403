@@ -10,6 +10,8 @@
         <h2>Title: {{ post.title }}</h2>
         <p>User: {{ post.author.username }}<p>
         <p>Post: {{ post.body }}</p>
+        <p>{{ moment(post.timestamp).format('LLL') }}</p>
+        <p>{{ post.comments_count() }} comments</p>
     </div>
     {% endfor %}
 {% endblock %}
