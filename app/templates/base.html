@@ -1,18 +1,22 @@
 <!doctype html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.4/css/all.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="/static/script.js" defer></script>
     <body>
         <div class="topnav">
-            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a>
+            <a href="{{ url_for('index') }}"><i class="far fa-compass"></i></a>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}
-            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
             {% endif %}
-            <a href="{{ url_for('post') }}">Create Post</a>
+            <a href="{{ url_for('post') }}"><i class="fas fa-plus"></i></a>
 
             {% if g.search_form %}
                 <div class="search-container">
@@ -21,7 +25,14 @@
                         {{ g.search_form.submit() }}           
                     </form>
                 </div>
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
             {% endif %}
+            <div class="search-container">
+                <form>
+                    <input type="text" placeholder="Search..." name="search">
+                    <button type="submit"><i class="fas fa-search"></i></button>            
+                </form>
+            </div>
         </div>    
 
         {% block content %}{% endblock %}
