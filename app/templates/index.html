@@ -52,27 +52,14 @@
     </div>
     <hr>
     <div class="container">
+    </div>
+    <hr>
+    <div class="container">
         {% for post in posts %}
-        <div class="post">
-            <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/index' )" style="cursor: pointer;">
-                <div class="post-text">
-                    <h4>{{ post.title }}</h4>
-                    <p><i>Posted by: <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
-                    <p>{{ post.body }}</p>
-                </div>
-                <div class="timestamp">
-                    <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
-                </div>
-            </div>
-            <div class="post-actions">
-                {% if current_user.is_anonymous != True %}
-                <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
-                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
-                {% elif current_user.is_anonymous == True %}
-                <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
-                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
-                {% endif %}
-            </div>
+        <div class="post" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+            <p>chef/{{ post.author.username }}<p>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.body }}</p>
         </div>
         <br>
         {% endfor %}
