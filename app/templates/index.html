@@ -10,10 +10,13 @@
     <hr>
     <div class="container">
         {% for post in posts %}
-        <div class="post" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+        <div id="div" class="post" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
             <p>chef/{{ post.author.username }}<p>
             <h3>{{ post.title }}</h3>
             <p>{{ post.body }}</p>
+            <p>{{ moment(post.timestamp).format('LLL') }}</p>
+            <p><i class="fas fa-thumbs-up"></i></p>
+            <p>{{ post.comments_count() }}<i class="fas fa-comment"></i></p>
         </div>
         <br>
         {% endfor %}

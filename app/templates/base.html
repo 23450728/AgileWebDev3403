@@ -15,7 +15,7 @@
             <a href="{{ url_for('user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
             <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
             {% endif %}
-            <a href="{{ url_for('post') }}">Create Post</a>
+            <a href="{{ url_for('post') }}"><i class="fas fa-plus"></i></a>
 
             {% if g.search_form %}
                 <div class="search-container">
@@ -24,6 +24,9 @@
                         {{ g.search_form.submit() }}           
                     </form>
                 </div>
+            <a href="{{ url_for('post') }}"><i class="fas fa-plus"></i></a>
+            <a href="{{ url_for('user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
             {% endif %}
         </div>    
 
