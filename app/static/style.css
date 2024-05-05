@@ -63,7 +63,7 @@ h3 {
   
   /* Add padding to containers */
 .container {
-    padding: 5%;
+    padding: 25px;
 }
   
 span.sign_up {
@@ -367,12 +367,14 @@ img {
   padding-left: 10%;
   padding-right: 10%;
   display:flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  margin: auto;
 }
 
 .about-icon {
   font-size:80px;
   text-align: center;
+  padding: -10%;
 }
 
 .about-us {
@@ -382,12 +384,16 @@ img {
 
 .about-us-text {
   text-align: left;
-  padding:10%;
+  max-width: 450px;
+  padding:25px;
   background-color: rgb(249, 182, 48);
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-radius: 25px;
 }
 
 #div {
   padding:20px;
+}
+
+hr {
+  border: 1px solid rgb(249, 182, 48)
 }

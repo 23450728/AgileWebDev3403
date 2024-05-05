@@ -10,7 +10,7 @@
     <body>
         <div class="topnav">
             <a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a>
-            <a href="{{ url_for('index') }}"><i class="far fa-lightbulb"></i></a>
+            <a href="{{ url_for('index') }}"><i class="far fa-compass"></i></a>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}
