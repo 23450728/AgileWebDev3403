@@ -5,7 +5,7 @@
     <div class="post">
         <div class="post-content">
             <div class="post-text">
-                <h4>{{ post.title }}</h4>
+                <h3>{{ post.title }}</h3>
                 <p><i>Posted by: {{ post.author.username }}</i><p>
                 <p>{{ post.body }}</p>
             </div>
@@ -17,29 +17,29 @@
     <form class="form" action="" method="post" novalidate>
         {{ form.hidden_tag() }}
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <div class="error">
-                    <p>{{ message }}</p>
-                </div>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <div class="error">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
 
-        <p>
-            {{ form.comment.label }}
-            <br>
-            <p>{{ form.comment(size=32) }}</p>
-            {% for error in form.comment.errors %}
-            <div class="error">
-                <p>{{ error }}</p>
-            </div>            
-            {% endfor %}
-        </p>
-        <button class="cancel" type="button" onclick="location.href=('/post/{{post.id}}?prev={{ prev }}')">Cancel</button>
-        <button class="submit" type="button" onclick="form.submit()">Submit</button>
-</form>
-{% endblock %}
+            <p>
+                {{ form.comment.label }}
+                <br>
+                {{ form.comment(size=32) }}
+                {% for error in form.comment.errors %}
+                <div class="error">
+                    <p>{{ error }}</p>
+                </div>            
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+    </form>
+</div>
+    {% endblock %}
