@@ -1,36 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="post">
-    <h2>Title: {{ post.title }}</h2>
-    <p>User: {{ post.author.username }}<p>
-    <p>Post: {{ post.body }}</p>
-</div>
-<form class="form" action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
+<div class="container">
+    <div class="post">
+        <div class="post-content">
+            <div class="post-text">
+                <h3>{{ post.title }}</h3>
+                <p><i>Posted by: {{ post.author.username }}</i><p>
+                <p>{{ post.body }}</p>
+            </div>
+            <div class="timestamp">
+                <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+            </div>
+        </div>
+    </div>
+    <form class="form" action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <div class="error">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <p>
+                {{ form.comment.label }}
+                <br>
+                {{ form.comment(size=32) }}
+                {% for error in form.comment.errors %}
                 <div class="error">
-                    <p>{{ message }}</p>
-                </div>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-
-        <p>
-            {{ form.comment.label }}
-            <br>
-            {{ form.comment(size=32) }}
-            {% for error in form.comment.errors %}
-            <div class="error">
-                <p>{{ error }}</p>
-            </div>            
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-</form>
-{% endblock %}
+                    <p>{{ error }}</p>
+                </div>            
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+    </form>
+</div>
+    {% endblock %}
