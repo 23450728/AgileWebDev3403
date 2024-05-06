@@ -15,24 +15,18 @@
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}
             <a href="{{ url_for('user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
-            {% endif %}
             <a href="{{ url_for('post') }}"><i class="fas fa-plus"></i></a>
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+            {% endif %}
 
             {% if g.search_form %}
                 <div class="search-container">
                     <form action="{{ url_for('search') }}" method="get" novalidate>
-                        {{ g.search_form.search(size=32, placeholder=g.search_form.search.label.text) }}
-                        {{ g.search_form.submit() }}           
+                        {{ g.search_form.search(size=20, placeholder=g.search_form.search.label.text) }}
+                        <button><i class="fas fa-search"></i></button>   
                     </form>
                 </div>
-            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
             {% endif %}
-            <div class="search-container">
-                <form>
-                    <input type="text" placeholder="Search..." name="search">
-                    <button type="submit"><i class="fas fa-search"></i></button>            
-                </form>
-            </div>
         </div>    
 
         {% block content %}{% endblock %}
