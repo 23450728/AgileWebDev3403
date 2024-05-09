@@ -4,12 +4,21 @@
 {% block content %}
     <div class="container">
         <h1>Hi, {{ current_user.username }}! What's cooking today?</h1>
-        <form class="form" action="" method="post">
+        <form class="form" action="" method="post" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.title.label }}<br>
                 {{ form.title(cols=32, rows=1) }}<br>
                 {% for error in form.title.errors %}
+                <div class="error">
+                    <p>{{ error }}</p>
+                </div>           
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.file.label }}<br>
+                {{ form.file(cols=32, rows=1) }}<br>
+                {% for error in form.file.errors %}
                 <div class="error">
                     <p>{{ error }}</p>
                 </div>           
