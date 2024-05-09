@@ -3,7 +3,7 @@ from app import app, db
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
-from app.models import User, Post, Comment
+from app.models import User, Post, Comment, Image
 from urllib.parse import urlsplit
 from werkzeug.utils import secure_filename
 import os
@@ -83,11 +83,14 @@ def user(username):
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        filename = secure_filename(form.file.data.filename)
-        form.file.data.save('app/static/images/' + filename)
         post = Post(title=form.title.data, body=form.post.data, author=current_user)
         db.session.add(post)
-        db.session.commit()
+        db.session.commit() 
+        if form.file.data.filename != "":
+            #form.file.data.save('images/' + str(post) + '.png')
+            image = Image(post_id = post.id)
+            db.session.add(image)
+            db.session.commit() 
         return redirect(url_for('index'))
     return render_template("post.html", form=form)
 

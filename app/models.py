@@ -74,7 +74,6 @@ class Post(SearchableMixin, db.Model):
     author: so.Mapped[User] = so.relationship(back_populates='posts')
     comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='parent')
     
-
     __searchable__ = ['title', 'body']
 
     def __repr__(self):
@@ -93,6 +92,10 @@ class Comment(db.Model):
     post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
     author: so.Mapped[User] = so.relationship(back_populates='comments')
     parent: so.Mapped[Post] = so.relationship(back_populates='comments')
+
+class Image(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
 
 
 @login.user_loader
