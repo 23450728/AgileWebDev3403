@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request, g
+from flask import render_template, flash, redirect, url_for, request, g, send_from_directory
 from app import app, db
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
@@ -87,8 +87,10 @@ def post():
         db.session.add(post)
         db.session.commit() 
         if form.file.data.filename != "":
-            #form.file.data.save('images/' + str(post) + '.png')
-            image = Image(post_id = post.id)
+            filename = str(post.id) + '.png'
+            print(filename)
+            form.file.data.save('images/' + filename)
+            image = Image(post_id = post.id, name = filename)
             db.session.add(image)
             db.session.commit() 
         return redirect(url_for('index'))
@@ -100,9 +102,11 @@ def SelectPost(id):
     page = request.args.get('page', 1, type=int)
     query = sa.select(Post).where(Post.id == id)
     posts = db.paginate(query, page=page, per_page=1, error_out=False)
+    imageQuery = sa.select(Image).where(Image.post_id == id)
+    image = db.paginate(imageQuery, page=page, per_page=1, error_out=False)
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
     comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
-    return render_template("post view.html", posts=posts.items, comments=comments.items)
+    return render_template("post view.html", posts=posts.items, comments=comments.items, image=image.items)
 
 @login_required
 @app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])

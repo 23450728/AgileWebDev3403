@@ -95,6 +95,7 @@ class Comment(db.Model):
 
 class Image(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    name: so.Mapped[str] = so.mapped_column(sa.String(140))
     post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
 
 
