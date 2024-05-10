@@ -25,6 +25,12 @@ h2 {
 
 h3 {
   font-family: "arial", sans-serif;
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 20px;
+  font-family: "arial", sans-serif;
 }
 
 p1 {
@@ -75,7 +81,7 @@ p1 {
   
   /* Add padding to containers */
 .container {
-    padding: 50px;
+    padding: 30px;
 }
   
 span.sign_up {
@@ -242,9 +248,6 @@ span.login {
  }
 
 /* Comments */
- .comment {
-  border: 3px solid #f1f1f1;
- }
 
 
 /* Button */
@@ -388,12 +391,6 @@ img {
   margin: auto;
 }
 
-.about-icon {
-  font-size:80px;
-  text-align: center;
-  padding: -10%;
-}
-
 .about-us {
   border-radius: 25px;
   background-color: rgb(255, 235, 196);
@@ -405,10 +402,6 @@ img {
   padding:25px;
   background-color: rgb(249, 182, 48);
   border-radius: 25px;
-}
-
-#div {
-  padding:20px;
 }
 
 hr {
