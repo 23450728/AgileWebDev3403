@@ -65,8 +65,13 @@
                 </div>
             </div>
             <div class="post-actions">
+                {% if current_user.is_anonymous != True %}
                 <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                {% elif current_user.is_anonymous == True %}
+                <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                {% endif %}
             </div>
         </div>
         <br>
