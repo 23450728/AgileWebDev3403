@@ -475,4 +475,16 @@ hr {
   padding: 10px;
 }
 
+.profile {
+  display: flex;
+  justify-content: left;
+}
+
+.profile-content {
+  margin-left: 40px;
+  align-content: center;
+}
+
+
+
 
