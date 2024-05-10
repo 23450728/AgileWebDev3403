@@ -73,18 +73,17 @@
                     class="far fa-comment comment-hover"></i></button>
             {% endif %}
         </div>
-    </div>
-    <br>
-    <!-- <h4 style="background-color: aqua;">Comments</h4> -->
-    <div class="comment-section">
-        {% for comment in comments %}
-        <div class="comment">
-            <div class="comment-content">
-                <p><b>{{ comment.author.username }}</b>: {{ comment.comments }}
-                <p>
-            </div>
-            <div class="timestamp">
-                <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
+        <br>
+        <!-- <h4 style="background-color: aqua;">Comments</h4> -->
+        <div class="comment-section">
+            {% for comment in comments %}
+            <div class="comment">
+                <div class="comment-content">
+                    <p><b>{{ comment.author.username }}</b>: {{ comment.comments }}<p>
+                </div>
+                <div class="timestamp">
+                    <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                </div>
             </div>
         </div>
         {% endfor %}
