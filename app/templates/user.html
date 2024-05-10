@@ -2,13 +2,26 @@
 
 {% block content %}
 <div class="container">
-        <h1>User: {{ current_user.username }}</h1>
-        <h1>History: </h1>
-        {% for post in posts %}
-        <div class="post">
-            <h3>{{post.title}}</h3>
-            <p> {{post.body}}</p>
-        </div>
-        {% endfor %}
- </div>
+    <img src="{{ user.avatar(128) }}">
+    <h1>User: {{ user.username }}</h1>
+    {% if user.bio %}<p>Bio: {{ user.bio }}</p>{% endif %}
+    {% if user.last_active %}<p>Last Active: {{ moment(user.last_active).format('LLL') }}</p>{% endif %}
+    <button type="button" onclick="location.href=('/edit_profile')">Edit Profile</button>
+    
+    {% if user.posts_count() == 1 %}
+    <h1>{{ user.posts_count() }} Post:</h1>
+    {% else %}
+    <h1>{{ user.posts_count() }} Posts:</h1>
+    {% endif %}
+
+    {% for post in posts %}
+    <div id="div" class="post" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+        <h2>Title: {{ post.title }}</h2>
+        <p>Post: {{ post.body }}</p>
+        <p>{{ moment(post.timestamp).format('LLL') }}</p>
+        <p>{{ post.comments_count() }} comments</p>
+    </div>
+    {% endfor %}
+</div>    
+
 {% endblock %}
