@@ -45,12 +45,56 @@
 </script>
 
 <div class="container">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var like_count = 0
+    $(document).ready(function(){
+        $(".like-click").click(
+            function() {
+                like_count += 1 
+                if (like_count % 2 == 0) {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                }
+                if (like_count % 2 == 1) {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                }
+            }
+        );
+    });
+    $(document).ready(function(){
+        $(".like-hover").hover(
+            function() {
+                if (like_count % 2 == 0) {
+                    $(this).removeClass("far fa-comment").addClass("fas fa-comment");
+                }
+            }, 
+            function() {
+                if (like_count % 2 == 0) {
+                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
+                }
+            }               
+        );
+    });
+
+    $(document).ready(function(){
+        $(".comment-hover").hover(
+            function() {
+                $(this).removeClass("far fa-comment").addClass("fas fa-comment");
+            }, 
+            function() {
+                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
+            }               
+        );
+    });
+</script>
+
+<div class="container">
     {% for post in posts %}
     <div id="div" class="post">
-        <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/search?search={{ searchInput }}' )" style="cursor: pointer;">
+        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
             <div class="post-text">
-                <h4>{{ post.title }}</h4>
-                <p><i>Posted by: <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
+                <h3>{{ post.title }}</h3>
+                <p><i>Posted by: {{ post.author.username }}</i><p>
                 <p>{{ post.body }}</p>
             </div>
             <div class="timestamp">
@@ -62,7 +106,7 @@
             <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
         </div>
     </div>
-    <br>
+</div>
     {% endfor %}
 </div>
 {% endblock %}
