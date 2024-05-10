@@ -34,7 +34,7 @@ h4 {
 }
 
 p1 {
-  font-size:15px;
+  font-size:13px;
   text-decoration-color: #505050;
   font-family: "arial", sans-serif;
 }
@@ -439,13 +439,13 @@ hr {
 }
 
 .comment-section {
-  padding: 0px
+  padding-left: 30px;
+  padding-right: 30px;
 }
-
 .comment {
   display:flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0px;
 }
 
 .profile {
