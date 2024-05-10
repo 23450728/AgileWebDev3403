@@ -144,13 +144,13 @@
                 <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
             </div>
         </div>
-        <h4>Comments</h4>
+        <br>
+        <!-- <h4 style="background-color: aqua;">Comments</h4> -->
         <div class="comment-section">
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><b>{{ comment.author.username }}</b>:<p>
-                    <p>{{ comment.comments }}</p>
+                    <p><b>{{ comment.author.username }}</b>: {{ comment.comments }}<p>
                 </div>
                 <div class="timestamp">
                     <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
