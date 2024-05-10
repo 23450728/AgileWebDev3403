@@ -452,6 +452,12 @@ hr {
   align-content: center;
 }
 
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  object-fit:contain;
+}
+
 
 
 
