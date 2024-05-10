@@ -89,7 +89,7 @@ def post():
         if form.file.data.filename != "":
             filename = str(post.id) + '.png'
             print(filename)
-            form.file.data.save('images/' + filename)
+            form.file.data.save('app/static/images/' + filename)
             image = Image(post_id = post.id, name = filename)
             db.session.add(image)
             db.session.commit() 
@@ -103,10 +103,10 @@ def SelectPost(id):
     query = sa.select(Post).where(Post.id == id)
     posts = db.paginate(query, page=page, per_page=1, error_out=False)
     imageQuery = sa.select(Image).where(Image.post_id == id)
-    image = db.paginate(imageQuery, page=page, per_page=1, error_out=False)
+    images = db.paginate(imageQuery, page=page, per_page=1, error_out=False)
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
     comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
-    return render_template("post view.html", posts=posts.items, comments=comments.items, image=image.items)
+    return render_template("post view.html", posts=posts.items, comments=comments.items, images=images.items)
 
 @login_required
 @app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])

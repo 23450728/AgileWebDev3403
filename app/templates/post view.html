@@ -50,7 +50,10 @@
             <div class="post-content">
                 <div class="post-text">
                     <h3>{{ post.title }}</h3>
-                    <p><i>Posted by: {{ post.author.username }}</i><p>     
+                    <p><i>Posted by: {{ post.author.username }}</i><p>   
+                    {% for image in images %}
+                    <img src="{{url_for('static', filename='image.name')  }}">
+                    {% endfor %}
                     <p>{{ post.body }}</p>
                 </div>
                 <div class="timestamp">
@@ -61,15 +64,6 @@
                 <button class="post-action" id="like"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
             </div>
-        </div>
-        <div>
-            {% if image %}
-            {% for i in image %}
-                <p>{{i.name}}</p>
-                <img src="images/4.png" alt="Post Image" width="200" height="200" />
-            {% endfor %}
-            <p>Testing this feature</p>
-            {% endif %}      
         </div>
         <h3>Comments</h3>
         <div class="comment-section">
