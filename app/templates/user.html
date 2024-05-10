@@ -4,7 +4,7 @@
 <div class="container">
     <div class="profile">
         <div class="profile-content">
-            <img src="{{ user.avatar(128) }}">
+            <img class="profile-picture" src="{{ user.avatar(128) }}">
         </div>
         <div class="profile-content">
             <h1>{{ user.username }}</h1>
@@ -17,9 +17,11 @@
             <button class="button" type="button" onclick="location.href=('/edit_profile')">Edit Profile</button>
         </div>
     </div>
-    
-    {% if user.posts_count() >= 1 %}
+    <br>
+    {% if user.posts_count() == 1 %}
     <h3>{{ user.posts_count() }} Post:</h3>
+    {% else %}
+    <h3>{{ user.posts_count() }} Posts:</h3>
     {% endif %}
 
     {% for post in posts %}
@@ -35,6 +37,7 @@
             </div>
         </div>
     </div>
+    <br>
     {% endfor %}
  </div>
 {% endblock %}
