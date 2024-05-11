@@ -32,5 +32,6 @@
             {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
+        <button type="button" onclick="location.href=('/post/{{post.id}}')">Cancel</button>
 </form>
 {% endblock %}
