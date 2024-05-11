@@ -2,22 +2,25 @@
 
 {% block content %}
     {% for post in posts %}
-    <div class="post">
-        <h2>Title: {{ post.title }}</h2>
-        <p>User: {{ post.author.username }}<p>
-        <p>Post: {{ post.body }}</p>
-        <p>{{ moment(post.timestamp).format('LLL') }}</p>
-        <p>{{ post.comments_count() }} comments</p>
-        <button type="button" onclick="location.href=('/post/{{post.id}}/comment')">Add Comment</button>
-    </div>
-    {% endfor %}
+        <div class="post">
+            <h2>Title: {{ post.title }}</h2>
+            <p>User: {{ post.author.username }}<p>
+            <p>Post: {{ post.body }}</p>
+            <p>{{ moment(post.timestamp).format('LLL') }}</p>
+            <p>{{ post.comments_count() }} comments</p>
+            <button type="button" onclick="location.href=('/post/{{post.id}}/comment')">Add Comment</button>
+        </div>
 
-    {% for comment in comments %}
-    <div class="comment">
-        <p>User: {{ comment.author.username }}<p>
-        <p>Comment: {{ comment.comments }}</p>
-        <p>{{ moment(comment.timestamp).format('LLL') }}</p>
-    </div>
+        {% if post.comments != None %}
+            {% for comment in post.comments %}
+            <div class="comment">
+                <p>User: {{ comment.author.username }}<p>
+                <p>Comment: {{ comment.comments }}</p>
+                <p>{{ moment(comment.timestamp).format('LLL') }}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+
     {% endfor %}
 
 {% endblock %}
