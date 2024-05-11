@@ -60,30 +60,24 @@ p1 {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
-/* Set a style for submit button in forms */
-.form .submit {
-  text-align: center;
-  background-color: rgb(249, 182, 48);
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 17px;
-  cursor: pointer;
-  margin-left:5px;
-}
-
-  /* Set a style for cancel button in forms */
-.form .cancel {
-  text-align: center;
-  background-color: rgb(222, 122, 122);
-  color: black;
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 17px;
-  cursor: pointer;
-  margin-right:5px;
+  
+  /* Set a style for all buttons in forms */
+.form button {
+    text-align: center;
+    background-color: rgb(249, 182, 48);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    /*background-color: indianred;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-family: "verdana", sans-serif;*/
 }
 
   /* Add a hover effect for buttons */
@@ -249,6 +243,7 @@ span.login {
 
 /*Error Messages and Form errors */
 .error p{
+  text-align: left;
   text-align: left;
   color: red;
  }
@@ -431,6 +426,21 @@ img {
   border-radius: 25px;
 }
 
+@media screen and (max-width: 600px) {
+  .about-us-section .about-us .about-us-text input[type=text]{
+    display: block;
+    float: none;
+    align-items: right;
+    text-align: right;
+    background-color: #f44336;
+    width: 100%;
+  }
+  .carousel {
+    display: block;
+    float: none;
+  }
+}
+
 hr {
   border: 1px solid rgb(249, 182, 48)
 }
@@ -456,13 +466,14 @@ hr {
 
 .post-action {
   text-align: center;
-  background-color: rgb(249, 182, 48);
+  background-color:white;
   border: none;
   border-radius: 10px;
   padding: 10px;
   font-size: 17px;
   cursor: pointer;
   margin-left: 10px;
+  color: rgb(249, 182, 48);
 }
 
 .comment-section {
