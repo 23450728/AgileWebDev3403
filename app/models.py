@@ -2,9 +2,51 @@ from datetime import datetime, timezone
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from app import db, login
+from app import db, login, search
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
+class SearchableMixin(object):
+    @classmethod
+    def search(cls, expression, page, per_page):
+        ids, total = search.query_index(cls.__tablename__, expression, page, per_page)
+        if total == 0:
+            return [], 0
+        when = []
+        for i in range(len(ids)):
+            when.append((ids[i], i))
+        query = sa.select(cls).where(cls.id.in_(ids)).order_by(
+            db.case(*when, value=cls.id))
+        return db.session.scalars(query), total
+
+    @classmethod
+    def before_commit(cls, session):
+        session._changes = {
+            'add': list(session.new),
+            'update': list(session.dirty),
+            'delete': list(session.deleted)
+        }
+
+    @classmethod
+    def after_commit(cls, session):
+        for obj in session._changes['add']:
+            if isinstance(obj, SearchableMixin):
+                search.add_to_index(obj.__tablename__, obj)
+        for obj in session._changes['update']:
+            if isinstance(obj, SearchableMixin):
+                search.add_to_index(obj.__tablename__, obj)
+        for obj in session._changes['delete']:
+            if isinstance(obj, SearchableMixin):
+                search.remove_from_index(obj.__tablename__, obj)
+        session._changes = None
+
+    @classmethod
+    def reindex(cls):
+        for obj in db.session.scalars(sa.select(cls)):
+            search.add_to_index(cls.__tablename__, obj)
+
+db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
+db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
@@ -23,7 +65,7 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-class Post(db.Model):
+class Post(SearchableMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(140))
     body: so.Mapped[str] = so.mapped_column(sa.String(140))
@@ -32,6 +74,9 @@ class Post(db.Model):
     author: so.Mapped[User] = so.relationship(back_populates='posts')
     comments = so.relationship("Comment", back_populates='parent')
     
+
+    __searchable__ = ['title', 'body']
+
     def __repr__(self):
         return '<Post {}>'.format(self.body)
  
@@ -46,6 +91,7 @@ class Comment(db.Model):
     post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
     author: so.Mapped[User] = so.relationship(back_populates='comments')
     parent: so.Mapped[Post] = so.relationship(back_populates='comments')
+
 
 @login.user_loader
 def load_user(id):
