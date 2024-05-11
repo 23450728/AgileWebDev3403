@@ -44,7 +44,6 @@
     });
 </script>
 
-    {% for post in posts %}
     <div class="container">
         <div class="post">
             <div class="post-content">
@@ -76,7 +75,13 @@
             </div>
             {% endfor %}
         </div>
+
+        {% if prev_url %}
+        <a href="{{ prev_url }}"><i class="fas fa-chevron-left"></i></a>
+        {% endif %}
+        {% if next_url %}
+        <a href="{{ next_url }}"><i class="fas fa-chevron-right"></i></a>
+        {% endif %}
     </div>
-    {% endfor %}
 
 {% endblock %}

@@ -23,12 +23,12 @@ def home():
 def index():
     page = request.args.get('page', 1, type=int)
     query = sa.select(Post).order_by(Post.timestamp.desc())
-    posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    posts = db.paginate(query, page=page, per_page=app.config["POSTS_PER_PAGE"], error_out=False)
     next_url = url_for('index', page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('index', page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template("index.html", posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template("index.html", posts=posts.items, next_url=next_url, prev_url=prev_url, explore=True)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -111,11 +111,14 @@ def post():
 @app.route('/post/<int:id>')
 def SelectPost(id):
     page = request.args.get('page', 1, type=int)
-    query = sa.select(Post).where(Post.id == id)
-    posts = db.paginate(query, page=page, per_page=1, error_out=False)
+    post = db.session.scalar(sa.select(Post).where(Post.id == id))
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
-    comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
-    return render_template("post view.html", posts=posts.items, comments=comments.items)
+    comments = db.paginate(commentsQuery, page=page, per_page=1, error_out=False)
+    next_url = url_for('SelectPost', id=id, page=comments.next_num) \
+        if comments.has_next else None
+    prev_url = url_for('SelectPost', id=id, page=comments.prev_num) \
+        if comments.has_prev else None
+    return render_template("post view.html", post=post, comments=comments.items, next_url=next_url, prev_url=prev_url)
 
 @login_required
 @app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
