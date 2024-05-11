@@ -90,12 +90,16 @@
     </div>
     {% endfor %}
 
-    {% for comment in comments %}
-    <div class="comment">
-        <p>User: {{ comment.author.username }}<p>
-        <p>Comment: {{ comment.comments }}</p>
-        <p>{{ moment(comment.timestamp).format('LLL') }}</p>
-    </div>
+        {% if post.comments != None %}
+            {% for comment in post.comments %}
+            <div class="comment">
+                <p>User: {{ comment.author.username }}<p>
+                <p>Comment: {{ comment.comments }}</p>
+                <p>{{ moment(comment.timestamp).format('LLL') }}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+
     {% endfor %}
 
 {% endblock %}
