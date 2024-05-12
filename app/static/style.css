@@ -19,7 +19,7 @@ h2 {
 
 h3 {
   font-family: "arial", sans-serif;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 h4 {
@@ -424,6 +424,8 @@ hr {
   border: 1px solid rgb(249, 182, 48)
 }
 
+/* Post */
+
 .post-content {
   display:flex;
   justify-content: space-between;
@@ -455,6 +457,17 @@ hr {
   color: rgb(247, 165, 0);
 }
 
+.post-author {
+  display: flex;
+  justify-content: center;
+}
+
+.author-picture {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
 .comment-section {
   padding-left: 30px;
   padding-right: 30px;
@@ -464,6 +477,8 @@ hr {
   justify-content: space-between;
   padding: 0px;
 }
+
+/* Profile page */
 
 .profile {
   display: flex;

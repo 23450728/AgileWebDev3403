@@ -55,14 +55,17 @@
         {% for post in posts %}
         <div class="post">
             <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
-                <div class="post-text">
-                    <h4>{{ post.title }}</h4>
-                    <p><i>Posted by: {{ post.author.username }}</i><p>
-                    <p>{{ post.body }}</p>
+                <div class="post-author">
+                    <img class="author-picture" src="{{ post.author.avatar(128) }}">
+                    <p><b>chef/{{ post.author.username }}</b><p>
                 </div>
                 <div class="timestamp">
                     <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
                 </div>
+            </div>
+            <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.body }}</p>
             </div>
             <div class="post-actions">
                 {% if current_user.is_anonymous != True %}

@@ -49,14 +49,17 @@
         <button class="post-action" onclick="location.href=('/index')"><i class="fas fa-arrow-left"></i></button>
         <div class="post">
             <div class="post-content">
-                <div class="post-text">
-                    <h4>{{ post.title }}</h4>
-                    <p><i>Posted by: {{ post.author.username }}</i><p>
-                    <p>{{ post.body }}</p>
+                <div class="post-author">
+                    <img class="author-picture" src="{{ post.author.avatar(128) }}">
+                    <p><b>chef/{{ post.author.username }}</b><p>
                 </div>
                 <div class="timestamp">
                     <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
                 </div>
+            </div>
+            <div class="post-text">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.body }}</p>
             </div>
             <div class="post-actions">
                 {% if current_user.is_anonymous != True %}
