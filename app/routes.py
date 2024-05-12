@@ -113,7 +113,7 @@ def SelectPost(id):
     page = request.args.get('page', 1, type=int)
     post = db.session.scalar(sa.select(Post).where(Post.id == id))
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
-    comments = db.paginate(commentsQuery, page=page, per_page=1, error_out=False)
+    comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
     next_url = url_for('SelectPost', id=id, page=comments.next_num) \
         if comments.has_next else None
     prev_url = url_for('SelectPost', id=id, page=comments.prev_num) \

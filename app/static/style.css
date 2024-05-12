@@ -449,4 +449,12 @@ hr {
   padding: 10px;
 }
 
+.pagination-buttons {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
+.arrow {
+  color:rgb(249, 182, 48)
+}

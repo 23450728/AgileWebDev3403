@@ -76,12 +76,11 @@
             {% endfor %}
         </div>
 
-        {% if prev_url %}
-        <a href="{{ prev_url }}"><i class="fas fa-chevron-left"></i></a>
-        {% endif %}
-        {% if next_url %}
-        <a href="{{ next_url }}"><i class="fas fa-chevron-right"></i></a>
-        {% endif %}
+        <div class="pagination-buttons">
+            <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left arrow"></i></a>
+            <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right arrow"></i></a>
+        </div>
+
     </div>
 
 {% endblock %}
