@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, List, Set
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db, login, search
@@ -55,6 +55,7 @@ class User(UserMixin, db.Model):
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
     comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='author')
+    liked_posts: so.Mapped[Set['Post']] = so.relationship('Post', secondary='user_likes', back_populates='liked_by')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -72,8 +73,8 @@ class Post(SearchableMixin, db.Model):
     timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc)) 
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
     author: so.Mapped[User] = so.relationship(back_populates='posts')
-    comments = so.relationship("Comment", back_populates='parent')
-    
+    comments: so.Mapped[List['Comment']] = so.relationship(back_populates='parent')
+    liked_by: so.Mapped[Set['User']] = so.relationship('User', secondary='user_likes', back_populates='liked_posts')
 
     __searchable__ = ['title', 'body']
 
@@ -82,6 +83,13 @@ class Post(SearchableMixin, db.Model):
  
     def comments_count(self):
         return len(self.comments) if self.comments != None else 0
+    
+    def likes_count(self):
+        return len(self.liked_by) if self.liked_by != None else 0
+
+user_likes = db.Table('user_likes',
+                      db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+                      db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True))
 
 class Comment(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
