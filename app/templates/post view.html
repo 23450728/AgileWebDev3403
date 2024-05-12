@@ -77,7 +77,7 @@
                     <p><b>{{ comment.author.username }}</b>: {{ comment.comments }}<p>
                 </div>
                 <div class="timestamp">
-                    <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                    <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
                 </div>
             </div>
             {% endfor %}

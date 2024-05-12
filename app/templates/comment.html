@@ -33,7 +33,7 @@
             <p>
                 {{ form.comment.label }}
                 <br>
-                {{ form.comment(size=32) }}
+                <p>{{ form.comment(size=32) }}</p>
                 {% for error in form.comment.errors %}
                 <div class="error">
                     <p>{{ error }}</p>
