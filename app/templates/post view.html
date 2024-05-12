@@ -7,8 +7,19 @@
             <p>User: {{ post.author.username }}<p>
             <p>Post: {{ post.body }}</p>
             <p>{{ moment(post.timestamp).format('LLL') }}</p>
-            <p>{{ post.comments_count() }} comments</p>
-            <button type="button" onclick="location.href=('/post/{{post.id}}/comment')">Add Comment</button>
+            <p>{{ post.comments_count() }} comments, {{ post.likes_count() }} likes</p>
+
+            {% if current_user.is_authenticated %}
+                <button type="button" onclick="location.href=('/post/{{post.id}}/comment')">Add Comment</button>
+
+                {% if current_user.is_authenticated %}
+                    <button type="button" onclick="location.href=('/post/{{post.id}}/like')">
+                        Like{% if current_user in post.liked_by %}d{% endif %}
+                    </button>
+                {% endif %}
+            {% else %}
+                <button type="button" onclick="location.href=('/login?next=post/{{post.id}}')">Login to Comment and Like</button>
+            {% endif %}
         </div>
 
         {% if post.comments != None %}

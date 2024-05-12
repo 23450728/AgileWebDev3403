@@ -11,7 +11,7 @@
         <p>User: {{ post.author.username }}<p>
         <p>Post: {{ post.body }}</p>
         <p>{{ moment(post.timestamp).format('LLL') }}</p>
-        <p>{{ post.comments_count() }} comments</p>
+        <p>{{ post.comments_count() }} comments, {{ post.likes_count() }} likes</p>
     </div>
     {% endfor %}
 {% endblock %}
