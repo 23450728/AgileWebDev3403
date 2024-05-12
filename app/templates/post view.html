@@ -46,10 +46,11 @@
 
     {% for post in posts %}
     <div class="container">
+        <button class="post-action" onclick="location.href=('/index')"><i class="fas fa-arrow-left"></i></button>
         <div class="post">
             <div class="post-content">
                 <div class="post-text">
-                    <h3>{{ post.title }}</h3>
+                    <h4>{{ post.title }}</h4>
                     <p><i>Posted by: {{ post.author.username }}</i><p>
                     <p>{{ post.body }}</p>
                 </div>
@@ -58,20 +59,25 @@
                 </div>
             </div>
             <div class="post-actions">
-                <button class="post-action" id="like"><i class="far fa-thumbs-up like-click like-hover"></i></button>
+                {% if current_user.is_anonymous != True %}
+                <button class="post-action" style="justify-content: left;"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                {% elif current_user.is_anonymous == True %}
+                <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                {% endif %}
             </div>
         </div>
-        <h3>Comments</h3>
+        <br>
+        <!-- <h4 style="background-color: aqua;">Comments</h4> -->
         <div class="comment-section">
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><b>{{ comment.author.username }}</b>:<p>
-                    <p>{{ comment.comments }}</p>
+                    <p><b>{{ comment.author.username }}</b>: {{ comment.comments }}<p>
                 </div>
                 <div class="timestamp">
-                    <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                    <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
                 </div>
             </div>
             {% endfor %}

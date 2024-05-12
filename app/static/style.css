@@ -19,10 +19,16 @@ h2 {
 
 h3 {
   font-family: "arial", sans-serif;
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 20px;
+  font-family: "arial", sans-serif;
 }
 
 p1 {
-  font-size:15px;
+  font-size:13px;
   text-decoration-color: #505050;
   font-family: "arial", sans-serif;
 }
@@ -45,14 +51,21 @@ p1 {
   
   /* Set a style for all buttons in forms */
 .form button {
-    background-color: indianred;
+    text-align: center;
+    background-color: rgb(249, 182, 48);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    /*background-color: indianred;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
-    font-family: "verdana", sans-serif;
+    font-family: "verdana", sans-serif;*/
 }
   
   /* Add a hover effect for buttons */
@@ -69,7 +82,7 @@ p1 {
   
   /* Add padding to containers */
 .container {
-    padding: 50px;
+    padding: 30px;
 }
   
 span.sign_up {
@@ -215,7 +228,7 @@ span.login {
 
 /*Error Messages and Form errors */
 .error p{
-  text-align: center;
+  text-align: left;
   color: red;
  }
 
@@ -236,9 +249,6 @@ span.login {
  }
 
 /* Comments */
- .comment {
-  border: 3px solid #f1f1f1;
- }
 
 
 /* Button */
@@ -382,12 +392,6 @@ img {
   margin: auto;
 }
 
-.about-icon {
-  font-size:80px;
-  text-align: center;
-  padding: -10%;
-}
-
 .about-us {
   border-radius: 25px;
   background-color: rgb(255, 235, 196);
@@ -401,8 +405,19 @@ img {
   border-radius: 25px;
 }
 
-#div {
-  padding:20px;
+@media screen and (max-width: 600px) {
+  .about-us-section .about-us .about-us-text input[type=text]{
+    display: block;
+    float: none;
+    align-items: right;
+    text-align: right;
+    background-color: #f44336;
+    width: 100%;
+  }
+  .carousel {
+    display: block;
+    float: none;
+  }
 }
 
 hr {
@@ -430,23 +445,42 @@ hr {
 
 .post-action {
   text-align: center;
-  background-color: rgb(249, 182, 48);
+  background-color:white;
   border: none;
   border-radius: 10px;
   padding: 10px;
   font-size: 17px;
   cursor: pointer;
   margin-left: 10px;
+  color: rgb(247, 165, 0);
 }
 
 .comment-section {
-  padding: 0px
+  padding-left: 30px;
+  padding-right: 30px;
 }
-
 .comment {
   display:flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0px;
 }
+
+.profile {
+  display: flex;
+  justify-content: left;
+}
+
+.profile-content {
+  margin-left: 40px;
+  align-content: center;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  object-fit:contain;
+}
+
+
 
 
