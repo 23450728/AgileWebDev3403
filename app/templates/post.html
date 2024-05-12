@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Hi, {{ current_user.username }}! What's cooking today?</h1>
+        <h3>Hi, {{ current_user.username }}! What's cooking today?</h3>
         <form class="form" action="" method="post">
             {{ form.hidden_tag() }}
             <p>
@@ -24,8 +24,8 @@
                 </div>           
                 {% endfor %}
             </p>
-            <p>{{ form.submit() }}</p>
             <button class="cancel" type="button" onclick="location.href=('/index')">Cancel</button>
+            <button class="button" onclick="form.submit()">Submit</button>
         </form>
     </div>
 {% endblock %}

@@ -19,10 +19,16 @@ h2 {
 
 h3 {
   font-family: "arial", sans-serif;
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 20px;
+  font-family: "arial", sans-serif;
 }
 
 p1 {
-  font-size:15px;
+  font-size:13px;
   text-decoration-color: #505050;
   font-family: "arial", sans-serif;
 }
@@ -42,7 +48,18 @@ p1 {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-  
+
+/* Set a style for submit button in forms */
+.form .submit {
+  text-align: center;
+  background-color: rgb(249, 182, 48);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
   /* Set a style for cancel button in forms */
 .form .cancel {
   text-align: center;
@@ -55,7 +72,7 @@ p1 {
   cursor: pointer;
   width: 90px;
 }
-  
+
   /* Add a hover effect for buttons */
 .form button:hover {
     opacity: 0.8;
@@ -70,7 +87,7 @@ p1 {
   
   /* Add padding to containers */
 .container {
-    padding: 50px;
+    padding: 30px;
 }
   
 span.sign_up {
@@ -216,7 +233,7 @@ span.login {
 
 /*Error Messages and Form errors */
 .error p{
-  text-align: center;
+  text-align: left;
   color: red;
  }
 
@@ -237,9 +254,6 @@ span.login {
  }
 
 /* Comments */
- .comment {
-  border: 3px solid #f1f1f1;
- }
 
 
 /* Button */
@@ -383,12 +397,6 @@ img {
   margin: auto;
 }
 
-.about-icon {
-  font-size:80px;
-  text-align: center;
-  padding: -10%;
-}
-
 .about-us {
   border-radius: 25px;
   background-color: rgb(255, 235, 196);
@@ -402,8 +410,19 @@ img {
   border-radius: 25px;
 }
 
-#div {
-  padding:20px;
+@media screen and (max-width: 600px) {
+  .about-us-section .about-us .about-us-text input[type=text]{
+    display: block;
+    float: none;
+    align-items: right;
+    text-align: right;
+    background-color: #f44336;
+    width: 100%;
+  }
+  .carousel {
+    display: block;
+    float: none;
+  }
 }
 
 hr {
@@ -431,19 +450,20 @@ hr {
 
 .post-action {
   text-align: center;
-  background-color: rgb(249, 182, 48);
+  background-color:white;
   border: none;
   border-radius: 10px;
   padding: 10px;
   font-size: 17px;
   cursor: pointer;
   margin-left: 10px;
+  color: rgb(247, 165, 0);
 }
 
 .comment-section {
-  padding: 0px
+  padding-left: 30px;
+  padding-right: 30px;
 }
-
 .comment {
   display:flex;
   justify-content: space-between;
@@ -456,6 +476,15 @@ hr {
   margin-top: 20px;
 }
 
-.arrow {
-  color:rgb(249, 182, 48)
+/* Pagination left and right arrows */
+.left-arrow {
+  color:rgb(249, 182, 48);
+  margin-left: 20px;
+  font-size: 17px;
+}
+
+.right-arrow {
+  color:rgb(249, 182, 48);
+  margin-right: 20px;
+  font-size: 17px;
 }

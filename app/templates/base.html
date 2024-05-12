@@ -21,12 +21,12 @@
             {% endif %}
 
             {% if (g.search_form and explore) %}
-            <div class="search-container">
-                <form>
-                    <input type="text" placeholder="Search..." name="search">
-                    <button type="submit"><i class="fas fa-search"></i></button>            
-                </form>
-            </div>
+                <div class="search-container">
+                    <form action="{{ url_for('search') }}" method="get" novalidate>
+                        {{ g.search_form.search(size=20, placeholder=g.search_form.search.label.text) }}
+                        <button onclick="g.search_form.submit()"><i class="fas fa-search"></i></button>   
+                    </form>
+                </div>
             {% endif %}
         </div>    
 
