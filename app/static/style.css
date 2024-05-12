@@ -58,19 +58,20 @@ p1 {
   padding: 10px;
   font-size: 17px;
   cursor: pointer;
+  margin-left:5px;
 }
 
   /* Set a style for cancel button in forms */
 .form .cancel {
   text-align: center;
-  background-color: indianred;
-  color: white;
+  background-color: rgb(222, 122, 122);
+  color: black;
   border: none;
   border-radius: 10px;
   padding: 10px;
   font-size: 17px;
   cursor: pointer;
-  width: 90px;
+  margin-right:5px;
 }
 
   /* Add a hover effect for buttons */
