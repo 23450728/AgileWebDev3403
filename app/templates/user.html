@@ -1,17 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>User: {{ current_user.username }}</h1>
-    <h1>History: </h1>
-    {% for post in posts %}
-    <div class="post">
-        <p>
-            {{post.title}}
-            </p>
-            <p> 
-            {{post.body}}
-            </p>
+<div class="container">
+    <div class="profile">
+        <div class="profile-content">
+            <img class="profile-picture" src="{{ user.avatar(128) }}">
+        </div>
+        <div class="profile-content">
+            <h1>{{ user.username }}</h1>
+            {% if user.bio %}
+            <p>{{ user.bio }}</p>
+            {% endif %}
+            {% if user.last_active %}
+            <p><i>Last Active: {{ moment(user.last_active).format('LLL') }}</i></p>
+            {% endif %}
+            <button class="button" type="button" onclick="location.href=('/edit_profile')">Edit Profile</button>
+        </div>
     </div>
-    {% endfor %}
+    <br>
+    {% if user.posts_count() == 1 %}
+    <h3>{{ user.posts_count() }} Post:</h3>
+    {% else %}
+    <h3>{{ user.posts_count() }} Posts:</h3>
+    {% endif %}
 
+    {% for post in posts %}
+    <div id="div" class="post" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+        <div class="post-content">
+            <div class="post-text">
+                <h4>{{ post.title }}</h4>
+                <p><i>Posted by: {{ post.author.username }}</i><p>
+                <p>{{ post.body }}</p>
+            </div>
+            <div class="timestamp">
+                <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+ </div>
 {% endblock %}

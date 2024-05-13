@@ -5,12 +5,20 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post, Comment
 from urllib.parse import urlsplit
+from datetime import datetime, timezone
 
 @app.before_request
 def before_request():
+    if current_user.is_authenticated:
+        current_user.last_active = datetime.now(timezone.utc)
+        db.session.commit()
     g.search_form = SearchForm()
 
 @app.route('/')
+@app.route('/home')
+def home():
+    return render_template("home.html")
+
 @app.route('/index')
 def index():
     page = request.args.get('page', 1, type=int)
@@ -71,6 +79,22 @@ def user(username):
     prev_url = url_for('user', username=user.username, page=posts.prev_num) \
         if posts.has_prev else None
     return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def EditProfile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.bio = form.bio.data
+        db.session.commit()
+        return redirect(url_for('user', username=current_user.username))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.bio.data = current_user.bio
+    return render_template('edit profile.html', form=form)
 
 @app.route('/post', methods=['GET', 'POST'])
 @login_required

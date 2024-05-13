@@ -2,27 +2,29 @@
 
 
 {% block content %}
-<h1>Hi, {{ current_user.username }}!</h1>
-<form class="form" action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.title.label }}<br>
-        {{ form.title(cols=32, rows=1) }}<br>
-        {% for error in form.title.errors %}
-        <div class="error">
-            <p>{{ error }}</p>
-        </div>           
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.post.label }}<br>
-        {{ form.post(cols=32, rows=4) }}<br>
-        {% for error in form.post.errors %}
-        <div class="error">
-            <p>{{ error }}</p>
-        </div>           
-        {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
+    <div class="container">
+        <h3>Hi, {{ current_user.username }}! What's cooking today?</h3>
+        <form class="form" action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.title.label }}<br>
+                {{ form.title(cols=32, rows=1) }}<br>
+                {% for error in form.title.errors %}
+                <div class="error">
+                    <p>{{ error }}</p>
+                </div>           
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.post.label }}<br>
+                {{ form.post(cols=32, rows=4) }}<br>
+                {% for error in form.post.errors %}
+                <div class="error">
+                    <p>{{ error }}</p>
+                </div>           
+                {% endfor %}
+            </p>
+            <button class="button" onclick="form.submit()">Submit</button>
+        </form>
+    </div>
 {% endblock %}
