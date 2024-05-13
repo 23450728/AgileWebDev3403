@@ -112,6 +112,7 @@ class Comment(db.Model):
     author: so.Mapped[User] = so.relationship(back_populates='comments')
     parent: so.Mapped[Post] = so.relationship(back_populates='comments')
 
+
 @login.user_loader
 def load_user(id):
     return db.session.get(User, int(id))
