@@ -125,7 +125,7 @@ def SelectPost(id):
 @app.route('/post/<int:parent>/like', methods=['GET', 'POST'])
 def LikePost(parent):
     post = db.session.scalar(sa.select(Post).where(Post.id == parent))
-    if not current_user.is_authenticated:
+    if current_user.is_anonymous:
         return redirect('/login?next=/post/' + str(parent))
 
     if current_user in post.liked_by:
@@ -134,7 +134,7 @@ def LikePost(parent):
     else:
         post.liked_by.add(current_user)
         db.session.commit()
-    return redirect('post/' + str(parent))
+    return redirect('/post/' + str(parent))
 
 @app.route('/search')
 def search():
