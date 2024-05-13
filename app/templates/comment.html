@@ -39,7 +39,7 @@
             </div>            
             {% endfor %}
         </p>
-        <button class="cancel" type="button" onclick="location.href=('/post/{{post.id}}')">Cancel</button>
+        <button class="cancel" type="button" onclick="location.href=('/post/{{post.id}}?prev={{ prev }}')">Cancel</button>
         <button class="submit" type="button" onclick="form.submit()">Submit</button>
 </form>
 {% endblock %}

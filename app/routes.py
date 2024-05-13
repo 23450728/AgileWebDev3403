@@ -111,7 +111,7 @@ def post():
 @app.route('/post/<int:id>')
 def SelectPost(id):
     page = request.args.get('page', 1, type=int)
-    prev = request.args.get('prev')
+    prev = request.args.get('prev', '/index')
     post = db.session.scalar(sa.select(Post).where(Post.id == id))
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
     comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
@@ -125,13 +125,14 @@ def SelectPost(id):
 @app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
 def AddComment(parent):
     post = db.session.scalar(sa.select(Post).where(Post.id == parent))
+    prev = prev = request.args.get('prev', '/index')
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(comments=form.comment.data, author=current_user, parent=post)
         db.session.add(comment)
         db.session.commit()
         return redirect('/post/' + str(parent))
-    return render_template("comment.html", form=form, post=post)
+    return render_template("comment.html", form=form, post=post, prev=prev)
 
 @app.route('/search')
 def search():
