@@ -33,6 +33,16 @@ p1 {
   font-family: "arial", sans-serif;
 }
 
+a {
+  font-family: "arial", sans-serif;
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color:rgb(249, 182, 48);
+}
+
 /* Form */
 
 .form {
@@ -48,26 +58,32 @@ p1 {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-  
-  /* Set a style for all buttons in forms */
-.form button {
-    text-align: center;
-    background-color: rgb(249, 182, 48);
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 17px;
-    cursor: pointer;
-    /*background-color: indianred;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    font-family: "verdana", sans-serif;*/
+
+/* Set a style for submit button in forms */
+.form .submit {
+  text-align: center;
+  background-color: rgb(249, 182, 48);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-left:5px;
 }
-  
+
+  /* Set a style for cancel button in forms */
+.form .cancel {
+  text-align: center;
+  background-color: rgb(222, 122, 122);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-right:5px;
+}
+
   /* Add a hover effect for buttons */
 .form button:hover {
     opacity: 0.8;
@@ -462,25 +478,24 @@ hr {
 .comment {
   display:flex;
   justify-content: space-between;
-  padding: 0px;
+  padding: 10px;
 }
 
-.profile {
-  display: flex;
-  justify-content: left;
+.pagination-buttons {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-.profile-content {
-  margin-left: 40px;
-  align-content: center;
+/* Pagination left and right arrows */
+.left-arrow {
+  color:rgb(249, 182, 48);
+  margin-left: 20px;
+  font-size: 17px;
 }
 
-.profile-picture {
-  width: 150px;
-  height: 150px;
-  object-fit:contain;
+.right-arrow {
+  color:rgb(249, 182, 48);
+  margin-right: 20px;
+  font-size: 17px;
 }
-
-
-
-
