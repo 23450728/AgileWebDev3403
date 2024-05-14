@@ -1,7 +1,5 @@
 /* Text */
 
-/* Text */
-
 h1 {
   text-align: left;
   font-family: "arial", sans-serif;
@@ -23,6 +21,7 @@ p1 {
   text-decoration-color: #505050;
   font-family: "arial", sans-serif;
 }
+
 h2 {
   font-family: "arial", sans-serif;
   text-align: center;
