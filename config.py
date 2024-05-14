@@ -7,7 +7,7 @@ class Config:
     # -e discovery.type=single-node -e xpack.security.enabled=false \
     # -t docker.elastic.co/elasticsearch/elasticsearch:8.13.0
 
-    # export ELASTICSEARCH_URL=http://localhost:9200
+    #export ELASTICSEARCH_URL=http://localhost:9200
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'

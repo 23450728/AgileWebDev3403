@@ -43,16 +43,15 @@
         );
     });
 </script>
-
     {% for post in posts %}
     <div class="container">
         <div class="post">
             <div class="post-content">
-                <div class="post-text">
+                <div class="post-text" data-active>
                     <h3>{{ post.title }}</h3>
                     <p><i>Posted by: {{ post.author.username }}</i><p>   
                     {% for image in images %}
-                    <img src="{{url_for('static', filename='image.name')  }}">
+                    <img src="/static/images/{{image.name}}">
                     {% endfor %}
                     <p>{{ post.body }}</p>
                 </div>

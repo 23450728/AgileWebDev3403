@@ -15,18 +15,25 @@ def before_request():
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("home.html")
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).order_by(Post.id.desc())
+    posts = db.paginate(query, page=page, per_page=4, error_out=False)
+    imageQuery = sa.select(Image).order_by(Image.id.desc())
+    images = db.paginate(imageQuery, page=page, per_page=4, error_out=False)
+    return render_template("home.html", posts=posts.items, images=images.items)
 
 @app.route('/index')
 def index():
     page = request.args.get('page', 1, type=int)
-    query = sa.select(Post).order_by(Post.timestamp.desc())
+    query = sa.select(Post).order_by(Post.id.desc())
     posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    imageQuery = sa.select(Image).order_by(Image.post_id.desc())
+    images = db.paginate(imageQuery, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
     next_url = url_for('index', page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('index', page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template("index.html", posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template("index.html", posts=posts.items, images=images.items, next_url=next_url, prev_url=prev_url)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -88,7 +95,6 @@ def post():
         db.session.commit() 
         if form.file.data.filename != "":
             filename = str(post.id) + '.png'
-            print(filename)
             form.file.data.save('app/static/images/' + filename)
             image = Image(post_id = post.id, name = filename)
             db.session.add(image)
@@ -112,22 +118,22 @@ def SelectPost(id):
 @app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
 def AddComment(parent):
     post = db.session.scalar(sa.select(Post).where(Post.id == parent))
+    page = request.args.get('page', 1, type=int)
+    imageQuery = sa.select(Image).where(Image.post_id == parent)
+    images = db.paginate(imageQuery, page=page, per_page=1, error_out=False)    
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(comments=form.comment.data, author=current_user, parent=post)
         db.session.add(comment)
         db.session.commit()
         return redirect('/post/' + str(parent))
-    return render_template("comment.html", form=form, post=post)
+    return render_template("comment.html", form=form, post=post, images=images.items)
 
 @app.route('/search')
 def search():
     searchInput = request.args.get('search')
-
     Post.reindex()
-
     results, total = Post.search(searchInput, 1, 5)
-    
     posts = []
     if total != 0:
         posts = results.all()
