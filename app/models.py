@@ -88,7 +88,7 @@ class Post(SearchableMixin, db.Model):
     comments: so.Mapped[List['Comment']] = so.relationship(back_populates='parent')
     liked_by: so.Mapped[Set['User']] = so.relationship('User', secondary='user_likes', back_populates='liked_posts')
 
-    __searchable__ = ['title', 'body']
+    __searchable__ = ['title', 'body', 'author.username']
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
