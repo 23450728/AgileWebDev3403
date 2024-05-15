@@ -465,13 +465,24 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  float: inline;
+}
+
+.comment-author {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.comment-author-content{
+  display: flex;
+  align-items: center;
 }
 
 .author-picture-comment {
   width: 30px;
   height: 30px;
   margin-right: 10px;
+  align-items: center;
 }
 
 .author-picture {
@@ -484,6 +495,7 @@ hr {
   padding-left: 30px;
   padding-right: 30px;
 }
+
 .comment {
   display:flex;
   padding: 0px;
@@ -491,13 +503,11 @@ hr {
 }
 
 .comment-text {
-  display: absolute;
   margin-left: 20px;
 }
 
 .comment-timestamp{
   text-align: right;
-  justify-content: flex-end;
 }
 
 .comment-content{

@@ -76,9 +76,11 @@
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <div class="post-author">
-                        <img class="author-picture-comment" src="{{ post.author.avatar(128) }}">
-                        <p><b>{{ comment.author.username }}</b>:<p>
+                    <div class="comment-author">
+                        <div class="comment-author-content">
+                            <img class="author-picture-comment" src="{{ post.author.avatar(128) }}">
+                            <p><b>{{ comment.author.username }}</b>:<p>
+                        </div>
                     </div>
                     <div class="comment-text">
                         <pre>{{ comment.comments }}</pre>
