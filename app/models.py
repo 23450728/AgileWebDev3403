@@ -106,6 +106,10 @@ class Comment(db.Model):
     author: so.Mapped[User] = so.relationship(back_populates='comments')
     parent: so.Mapped[Post] = so.relationship(back_populates='comments')
 
+class Image(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    name: so.Mapped[str] = so.mapped_column(sa.String(140))
+    post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
 
 @login.user_loader
 def load_user(id):
