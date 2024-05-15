@@ -59,7 +59,7 @@
             </div>
             <div class="post-text">
                 <h3>{{ post.title }}</h3>
-                <p>{{ post.body }}</p>
+                <pre>{{ post.body }}</pre>
             </div>
             <div class="post-actions">
                 {% if current_user.is_anonymous != True %}
@@ -77,7 +77,8 @@
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><b>{{ comment.author.username }}</b>: {{ comment.comments }}<p>
+                    <p><b>{{ comment.author.username }}</b>:<p>
+                    <pre>{{ comment.comments }}</pre>
                 </div>
                 <div class="timestamp">
                     <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>

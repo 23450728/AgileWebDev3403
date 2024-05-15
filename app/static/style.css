@@ -33,6 +33,10 @@ p1 {
   font-family: "arial", sans-serif;
 }
 
+pre {
+  font-family: "arial", "sans-serif";
+}
+
 /* Form */
 
 .form {
