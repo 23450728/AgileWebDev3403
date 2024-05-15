@@ -1,18 +1,13 @@
 from flask import render_template, flash, redirect, url_for, request, g
-from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post, Comment
 from urllib.parse import urlsplit
-from datetime import datetime, timezone
 
 @app.before_request
 def before_request():
-    if current_user.is_authenticated:
-        current_user.last_active = datetime.now(timezone.utc)
-        db.session.commit()
     g.search_form = SearchForm()
 
 @app.route('/')
@@ -112,9 +107,6 @@ def post():
 @app.route('/post/<int:id>')
 def SelectPost(id):
     page = request.args.get('page', 1, type=int)
-    query = sa.select(Post).where(Post.id == id)
-    posts = db.paginate(query, page=page, per_page=1, error_out=False)
-    return render_template("post view.html", posts=posts.items)
     prev = request.args.get('prev', '/index')
     post = db.session.scalar(sa.select(Post).where(Post.id == id))
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
@@ -137,38 +129,21 @@ def AddComment(parent):
         db.session.commit()
         return redirect('/post/' + str(parent))
     return render_template("comment.html", form=form, post=post, prev=prev)
-    postsQuery = sa.select(Post).where(Post.id == id)
-    posts = db.paginate(postsQuery, page=page, per_page=1, error_out=False)
-    commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
-    comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
-    return render_template("post view.html", posts=posts.items, comments=comments.items)
 
 @login_required
-@app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
-def AddComment(parent):
-    post = db.session.scalar(sa.select(Post).where(Post.id == parent))
-    form = CommentForm()
-    if form.validate_on_submit():
-        comment = Comment(comments=form.comment.data, author=current_user, parent=post)
-        db.session.add(comment)
-        db.session.commit()
-        return redirect('/post/' + str(parent))
-    return render_template("comment.html", form=form, post=post)
-
-@login_required
-@app.route('/post/<int:parent>/like', methods=['GET', 'POST'])
-def LikePost(parent):
-    post = db.session.scalar(sa.select(Post).where(Post.id == parent))
+@app.route('/post/<int:id>/like', methods=['GET', 'POST'])
+def LikePost(id):
+    post = db.session.scalar(sa.select(Post).where(Post.id == id))
     if current_user.is_anonymous:
-        return redirect('/login?next=/post/' + str(parent))
+        return redirect('/login?next=/post/' + str(id))
 
     if current_user in post.liked_by:
         post.liked_by.remove(current_user)
-        db.session.commit()
     else:
         post.liked_by.add(current_user)
-        db.session.commit()
-    return redirect('/post/' + str(parent))
+
+    db.session.commit()
+    return redirect('/post/' + str(id))
 
 @app.route('/search')
 def search():

@@ -256,13 +256,10 @@ span.login {
 
 /*Posts */
 .post {
-/*Posts */
-.post {
   border: 3px solid #f1f1f1;
   padding: 30px;
  }
 
-.post h2 {
 .post h2 {
   text-align:center
  }
