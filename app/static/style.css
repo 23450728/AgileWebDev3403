@@ -464,6 +464,14 @@ hr {
 .post-author {
   display: flex;
   justify-content: center;
+  align-items: center;
+  float: inline;
+}
+
+.author-picture-comment {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .author-picture {
@@ -478,8 +486,22 @@ hr {
 }
 .comment {
   display:flex;
-  justify-content: space-between;
   padding: 0px;
+  justify-content: space-between;
+}
+
+.comment-text {
+  display: absolute;
+  margin-left: 20px;
+}
+
+.comment-timestamp{
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.comment-content{
+  display: flex;
 }
 
 /* Profile page */

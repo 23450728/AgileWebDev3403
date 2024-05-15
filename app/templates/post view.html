@@ -72,15 +72,19 @@
             </div>
         </div>
         <br>
-        <!-- <h4 style="background-color: aqua;">Comments</h4> -->
         <div class="comment-section">
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><b>{{ comment.author.username }}</b>:<p>
-                    <pre>{{ comment.comments }}</pre>
+                    <div class="post-author">
+                        <img class="author-picture-comment" src="{{ post.author.avatar(128) }}">
+                        <p><b>{{ comment.author.username }}</b>:<p>
+                    </div>
+                    <div class="comment-text">
+                        <pre>{{ comment.comments }}</pre>
+                    </div>
                 </div>
-                <div class="timestamp">
+                <div class="comment-timestamp">
                     <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
                 </div>
             </div>
