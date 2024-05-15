@@ -1,5 +1,7 @@
 /* Text */
 
+/* Text */
+
 h1 {
   text-align: left;
   font-family: "arial", sans-serif;
@@ -11,6 +13,12 @@ p {
   font-family: "arial", sans-serif;
 }
 
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+}
 h2 {
   font-family: "arial", sans-serif;
   text-align: center;
@@ -293,6 +301,14 @@ span.login {
 } 
 
 /* Carousel */
+
+.container {
+  display:flex;
+  align-items: left;
+  justify-content: center;
+  background-color: rgb(255, 235, 196);
+  padding: 80px;
+}
 
 /* Align text and carousel to be next to each other */
 .home-container {

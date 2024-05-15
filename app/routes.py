@@ -1,4 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request, g
+from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
@@ -133,6 +134,36 @@ def AddComment(parent):
         db.session.commit()
         return redirect('/post/' + str(parent))
     return render_template("comment.html", form=form, post=post, prev=prev)
+
+@login_required
+@app.route('/post/<int:parent>/like', methods=['GET', 'POST'])
+def LikePost(parent):
+    post = db.session.scalar(sa.select(Post).where(Post.id == parent))
+    if current_user.is_anonymous:
+        return redirect('/login?next=/post/' + str(parent))
+
+    if current_user in post.liked_by:
+        post.liked_by.remove(current_user)
+        db.session.commit()
+    else:
+        post.liked_by.add(current_user)
+        db.session.commit()
+    return redirect('/post/' + str(parent))
+
+@login_required
+@app.route('/post/<int:parent>/like', methods=['GET', 'POST'])
+def LikePost(parent):
+    post = db.session.scalar(sa.select(Post).where(Post.id == parent))
+    if current_user.is_anonymous:
+        return redirect('/login?next=/post/' + str(parent))
+
+    if current_user in post.liked_by:
+        post.liked_by.remove(current_user)
+        db.session.commit()
+    else:
+        post.liked_by.add(current_user)
+        db.session.commit()
+    return redirect('/post/' + str(parent))
 
 @app.route('/search')
 def search():
