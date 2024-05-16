@@ -476,6 +476,7 @@ hr {
 .comment-author-content{
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .author-picture-comment {
@@ -483,6 +484,7 @@ hr {
   height: 30px;
   margin-right: 10px;
   align-items: center;
+  min-width: 30px;
 }
 
 .author-picture {
@@ -500,18 +502,45 @@ hr {
   display:flex;
   padding: 0px;
   justify-content: space-between;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .comment-text {
   margin-left: 20px;
+  word-wrap: break-word;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .comment-timestamp{
   text-align: right;
+  max-width: 100%;
+  word-wrap:normal;
+  overflow:unset;
+  min-width: 120px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .comment-content{
   display: flex;
+  word-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+  /*max-width: 1000px;*/
+}
+
+.comment-text-content{
+  white-space: pre-wrap; /* Allows text to wrap and preserves formatting */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 1300px) {
+  .comment-timestamp {
+    display: none; /* Hide author to save space */
+  }
 }
 
 /* Profile page */
