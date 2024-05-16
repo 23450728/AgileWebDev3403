@@ -49,6 +49,10 @@ class SearchableMixin(object):
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
+user_likes = db.Table('user_likes',
+                      db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+                      db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True))
+
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
@@ -99,9 +103,8 @@ class Post(SearchableMixin, db.Model):
     def likes_count(self):
         return len(self.liked_by) if self.liked_by != None else 0
 
-user_likes = db.Table('user_likes',
-                      db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-                      db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True))
+    def get_searchable(self):
+        return self.author.username
 
 class Comment(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
