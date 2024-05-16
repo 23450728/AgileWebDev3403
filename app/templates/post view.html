@@ -76,7 +76,8 @@
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><a href="{{ url_for('user', username=comment.author.username) }}"><b>{{ comment.author.username }}</b></a>: {{ comment.comments }}<p>
+                    <p><a href="{{ url_for('user', username=comment.author.username) }}"><b>{{ comment.author.username }}</b></a>:
+                    <p> {{ comment.comments }}</p>
                 </div>
                 <div class="timestamp">
                     <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>

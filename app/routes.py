@@ -111,8 +111,9 @@ def post():
         post = Post(title=form.title.data, body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit() 
-        if form.file.data.name != "":
+        if form.file.data.filename != "":
             filename = str(post.id) + '.png'
+            print(filename)
             form.file.data.save('app/static/images/' + filename)
             image = Image(post_id = post.id, name = filename)
             db.session.add(image)
