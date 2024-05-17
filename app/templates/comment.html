@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Create a Comment page</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -6,11 +13,11 @@
     <div class="post">
         <div class="post-content">
             <div class="post-author">
-                <img class="author-picture" src="{{ post.author.avatar(128) }}">
+                <img class="author-picture" src="{{ post.author.avatar(128) }}" alt="Profile picture">
                 <p><b>chef/{{ post.author.username }}</b><p>
             </div>
             <div class="timestamp">
-                <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
         </div>
         <div class="post-text">
@@ -18,29 +25,22 @@
             <pre>{{ post.body }}</pre>
         </div>
     </div>
-    <form class="form" action="" method="post" novalidate>
+    <form class="form" method="post" novalidate>
         {{ form.hidden_tag() }}
 
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             <ul>
                 {% for message in messages %}
-                    <div class="error">
-                        <p>{{ message }}</p>
-                    </div>
+                    <p class="error">{{ message }}</p>
                 {% endfor %}
             </ul>
             {% endif %}
             {% endwith %}
-
-            <p>
-                {{ form.comment.label }}
-                <br>
+                <p>{{ form.comment.label }}</p>
                 <p>{{ form.comment(size=32) }}</p>
                 {% for error in form.comment.errors %}
-                <div class="error">
-                    <p>{{ error }}</p>
-                </div>            
+                    <p class="error">{{ error }}</p>                     
                 {% endfor %}
             </p>
             <button class="button" type="button" onclick="form.submit()">Submit</button>
