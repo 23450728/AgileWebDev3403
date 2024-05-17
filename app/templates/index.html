@@ -57,7 +57,7 @@
             <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/index' )" style="cursor: pointer;">
                 <div class="post-text">
                     <h4>{{ post.title }}</h4>
-                    <p><i>Posted by: <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
+                    <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
                     <p>{{ post.body }}</p>
                 </div>
                 <div class="timestamp">
@@ -71,6 +71,10 @@
                 {% elif current_user.is_anonymous == True %}
                 <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                {% endif %}
+                {% if ADMIN %}
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Ban user</p> </button>
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Delete post</p> </button>
                 {% endif %}
             </div>
         </div>

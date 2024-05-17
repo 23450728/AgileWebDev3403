@@ -43,14 +43,13 @@
         );
     });
 </script>
-
     <div class="container">
         <button class="post-action" onclick="location.href=('{{ prev }}')"><i class="fas fa-arrow-left"></i></button>
         <div class="post">
             <div class="post-content">
                 <div class="post-text">
                     <h4>{{ post.title }}</h4>
-                    <p><i>Posted by: <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
+                    <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
                     <p>{{ post.body }}</p>
                 </div>
                 <div class="timestamp">
@@ -73,7 +72,7 @@
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><a href="{{ url_for('user', username=comment.author.username) }}"><b>{{ comment.author.username }}</b></a>: {{ comment.comments }}<p>
+                    <p><a href="{{ url_for('main.user', username=comment.author.username) }}"><b>{{ comment.author.username }}</b></a>: {{ comment.comments }}<p>
                 </div>
                 <div class="timestamp">
                     <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
@@ -86,7 +85,5 @@
             <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
             <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
         </div>
-
     </div>
-
 {% endblock %}

@@ -58,7 +58,6 @@ class User(UserMixin, db.Model):
     last_active: so.Mapped[Optional[datetime]] = so.mapped_column(default=lambda: datetime.now(timezone.utc))
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
     comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='author')
-
     def __repr__(self):
         return '<User {}>'.format(self.username)
     
@@ -76,7 +75,7 @@ class User(UserMixin, db.Model):
         query = sa.select(sa.func.count()).select_from(
             self.posts.select().subquery())
         return db.session.scalar(query)
-
+    
 class Post(SearchableMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(140))
@@ -85,8 +84,6 @@ class Post(SearchableMixin, db.Model):
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
     author: so.Mapped[User] = so.relationship(back_populates='posts')
     comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='parent')
-    
-
     __searchable__ = ['title', 'body']
 
     def __repr__(self):
