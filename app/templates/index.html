@@ -57,7 +57,6 @@
             <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/index' )" style="cursor: pointer;">
                 <div class="post-text">
                     <h4>{{ post.title }}</h4>
-                    <p><i>Posted by: <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
                     {% if post.file %}
                         <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
                     {% endif %}

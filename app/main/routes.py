@@ -22,9 +22,9 @@ def before_request():
 @bp.route('/home/')
 def home():   
     page = request.args.get('page', 1, type=int)
-    query = sa.select(Post).order_by(Post.id.desc())
+    query = sa.select(Post).where(Post.file != "").order_by(Post.id.desc())
     posts = db.paginate(query, page=page, per_page=4, error_out=False)
-    return render_template("home.html")#, posts=posts.items)
+    return render_template("home.html", posts=posts.items)
 
 @bp.route('/index')
 def index():
@@ -111,7 +111,7 @@ def post():
         if form.file.data.filename != "":
             filename = secure_filename(form.file.data.filename)
             file_ext = os.path.splitext(filename)[1]
-            if file_ext not in current_app.config['UPLOAD_EXTENSIONS']:
+            if file_ext not in [".jpg",".png","jpeg"]:
                 abort(400)
             filename = str(uuid.uuid4()) + filename
             form.file.data.save(os.path.join('app/static/images/', filename))

@@ -80,7 +80,7 @@ class Post(SearchableMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(140))
     body: so.Mapped[str] = so.mapped_column(sa.String(140))
-    file: so.Mapped[str] = so.mapped_column(sa.String(256))
+    file: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc)) 
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
     author: so.Mapped[User] = so.relationship(back_populates='posts')
