@@ -18,7 +18,10 @@ def before_request():
 @bp.route('/')
 @bp.route('/home/')
 def home():
-    return render_template("home.html")
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).order_by(Post.id.desc())
+    posts = db.paginate(query, page=page, per_page=4, error_out=False)
+    return render_template("new home.html", posts=posts.items)
 
 @bp.route('/index')
 def index():
@@ -102,7 +105,16 @@ def EditProfile():
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, body=form.post.data, author=current_user)
+        if form.file.data.filename != "":
+            filename = secure_filename(form.file.data.filename)
+            file_ext = os.path.splitext(filename)[1]
+            if file_ext not in current_app.config['UPLOAD_EXTENSIONS']:
+                abort(400)
+            filename = str(uuid.uuid4()) + filename
+            form.file.data.save(os.path.join('app/static/images/', filename))
+            post = Post(title=form.title.data, body=form.post.data, author=current_user, file = filename)
+        else:
+            post = Post(title=form.title.data, body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('main.index'))
@@ -126,6 +138,7 @@ def SelectPost(id):
 def AddComment(parent):
     post = db.session.scalar(sa.select(Post).where(Post.id == parent))
     prev = prev = request.args.get('prev', '/index')
+    page = request.args.get('page', 1, type=int)
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(comments=form.comment.data, author=current_user, parent=post)

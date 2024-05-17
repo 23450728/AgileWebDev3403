@@ -6,6 +6,9 @@
         <div class="post-content">
             <div class="post-text">
                 <h4>{{ post.title }}</h4>
+                {% if post.file %}
+                  <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
                 <p><i>Posted by: {{ post.author.username }}</i><p>
                 <p>{{ post.body }}</p>
             </div>

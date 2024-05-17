@@ -7,6 +7,7 @@ from flask_moment import Moment
 from elasticsearch import Elasticsearch
 from config import Config
 
+app = Flask(__name__)
 login = LoginManager()
 login.login_view = 'login'
 db = SQLAlchemy()
@@ -27,4 +28,7 @@ def create_app(config_class=Config):
 
     return app
 
+with app.app_context():
+    #db.drop_all()
+    db.create_all()
 from app import models  

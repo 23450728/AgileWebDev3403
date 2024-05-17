@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FileField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 import sqlalchemy as sa
 from app.models import User
@@ -33,6 +33,7 @@ class RegistrationForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('Your title', validators=[DataRequired(), Length(min=1, max=140)])
     post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])
+    file = FileField("Image")
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
