@@ -23,7 +23,7 @@ def home():
     page = request.args.get('page', 1, type=int)
     query = sa.select(Post).order_by(Post.id.desc())
     posts = db.paginate(query, page=page, per_page=4, error_out=False)
-    return render_template("home.html", posts=posts.items)
+    return render_template("new home.html", posts=posts.items)
 
 @app.route('/index')
 def index():

@@ -499,3 +499,49 @@ hr {
   margin-right: 20px;
   font-size: 17px;
 }
+
+/* New Homepage */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.top-row-left-column {
+  float: right;
+  flex: 50%;
+  background-color: rgb(255, 235, 196);
+}
+
+.top-row-right-column {
+  justify-content: flex-start;
+  flex: 50%;
+  background-color: rgb(255, 235, 196);
+}
+
+.bottom-row-left-column {
+  flex: 50%;
+  background-color: white;
+  padding: 50px;
+}
+
+.bottom-row-right-column {
+  flex: 50%;
+  background-color: white;
+  padding: 50px;
+}
+
+
+@media (max-width: 900px) {
+  .row {
+    flex-direction: column;
+  }
+}
