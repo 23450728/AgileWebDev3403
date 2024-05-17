@@ -49,10 +49,6 @@ class SearchableMixin(object):
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
-user_likes = db.Table('user_likes',
-                      db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-                      db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True))
-
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
@@ -88,11 +84,11 @@ class Post(SearchableMixin, db.Model):
     body: so.Mapped[str] = so.mapped_column(sa.String(140))
     timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc)) 
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
-    author: so.Mapped['User'] = so.relationship(back_populates='posts')
+    author: so.Mapped[User] = so.relationship(back_populates='posts')
     comments: so.Mapped[List['Comment']] = so.relationship(back_populates='parent')
-    liked_by: so.Mapped[Set['User']] = so.relationship(secondary='user_likes', back_populates='liked_posts')
+    liked_by: so.Mapped[Set['User']] = so.relationship('User', secondary='user_likes', back_populates='liked_posts')
 
-    __searchable__ = ['title', 'body', 'author.username']
+    __searchable__ = ['title', 'body']
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
@@ -103,8 +99,9 @@ class Post(SearchableMixin, db.Model):
     def likes_count(self):
         return len(self.liked_by) if self.liked_by != None else 0
 
-    def get_searchable(self):
-        return self.author.username
+user_likes = db.Table('user_likes',
+                      db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+                      db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True))
 
 class Comment(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
