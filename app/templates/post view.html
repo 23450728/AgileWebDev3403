@@ -3,11 +3,11 @@
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $(".active").removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
 
         $(".like-click").click(
-            function () {
+            function() {
                 if ($(this).hasClass("active")) {
                     $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
                 } else {
@@ -44,7 +44,6 @@
     });
 </script>
 
-{% for post in posts %}
 <div class="container">
     <button class="post-action" onclick="location.href=('{{ prev }}')"><i class="fas fa-arrow-left"></i></button>
     <div class="post">
@@ -78,14 +77,13 @@
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><a href="{{ url_for('user', username=comment.author.username) }}"><b>{{ comment.author.username }}</b></a>: {{ comment.comments }}<p>
+                    <p><b>{{ comment.author.username }}</b>: {{ comment.comments }}<p>
                 </div>
                 <div class="timestamp">
                     <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
 </div>
 {% endfor %}

@@ -5,7 +5,28 @@
         <h1>Sign In</h1>
         <form class="form" action="" method="post" novalidate>
             {{ form.hidden_tag() }}
+    <div class="container">
+        <h1>Sign In</h1>
+        <form class="form" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
 
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    {% if message == 'Congratulations, you are now a registered user!' %}
+                        <div class="success">
+                            <p>{{ message }}</p>
+                        </div>
+                    {% else %}
+                        <div class="error">
+                            <p>{{ message }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             <ul>
@@ -48,6 +69,8 @@
             <button class="button" onclick="form.submit()">Submit</button>
         </form>
 
+        <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+    </div>
         <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
     </div>
 

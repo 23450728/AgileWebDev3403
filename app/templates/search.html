@@ -3,6 +3,94 @@
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    var like_count = 0
+    $(document).ready(function(){
+        $(".like-click").click(
+            function() {
+                if ($(this).hasClass("active")) {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                }
+                if (like_count % 2 == 1) {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                }
+            }
+        );
+    });
+    $(document).ready(function(){
+        $(".like-hover").hover(
+            function() {
+                if (like_count % 2 == 0) {
+                    $(this).removeClass("far fa-comment").addClass("fas fa-comment");
+                }
+            }, 
+            function() {
+                if (like_count % 2 == 0) {
+                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
+                }
+            }               
+        );
+    });
+
+    $(document).ready(function(){
+        $(".comment-hover").hover(
+            function() {
+                $(this).removeClass("far fa-comment").addClass("fas fa-comment");
+            }, 
+            function() {
+                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
+            }               
+        );
+    });
+</script>
+
+<div class="container">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".active").removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+
+        $(".like-click").click(
+            function() {
+                like_count += 1 
+                if (like_count % 2 == 0) {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                } else {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                }
+            }
+        );
+
+        $(".like-hover").hover(
+            function () {
+                if ($(this).hasClass("active")) {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                } else {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                }
+            },
+            function () {
+                if ($(this).hasClass("active")) {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                } else {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                }
+            }
+        );
+
+        $(".comment-hover").hover(
+            function() {
+                $(this).removeClass("far fa-comment").addClass("fas fa-comment");
+            }, 
+            function() {
+                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
+            }               
+        );
+    });
+</script>
+
+<div class="container">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
     $(document).ready(function () {
         $(".active").removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
 
