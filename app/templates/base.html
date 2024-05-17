@@ -9,11 +9,11 @@
         <script src="/static/script.js" defer></script>
     </head>
     <body>
-        <div class="topnav">
+        <div id="topnav" class="topnav">
             <a href="{{ url_for('main.home') }}"><i class="fas fa-home"></i></a>
             <a href="{{ url_for('main.index') }}"><i class="far fa-compass"></i></a>
             {% if current_user.is_anonymous %}
-            <a href="{{ url_for('main.login') }}">Login</a>
+            <a id="login" href="{{ url_for('main.login') }}">Login</a>
             {% else %}
             <a href="{{ url_for('main.user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
             <a href="{{ url_for('main.post') }}"><i class="fas fa-plus"></i></a>

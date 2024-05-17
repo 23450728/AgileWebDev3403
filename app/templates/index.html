@@ -46,9 +46,9 @@
 
     <div class="container">
         {% if current_user.is_anonymous != True %}
-        <h2>Hi, {{ current_user.username }}!</h2>
+        <h2 id="hello">Hi, {{ current_user.username }}!</h2>
         {% endif %}
-        <h2>What would you like to cook?</h2>
+        <h2 id="question">What would you like to cook?</h2>
     </div>
     <hr>
     <div class="container">

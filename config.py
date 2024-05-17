@@ -16,3 +16,8 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     ADMINS = ['admin@gmail.com']
     POSTS_PER_PAGE = 25
+
+class TestConfig(Config):
+    #References to  Miguel Grinberg https://github.com/miguelgrinberg/microblog/blob/v0.23/tests.py
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
