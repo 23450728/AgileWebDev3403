@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="top-row-left-column">
+        <br>
+        <br>
+        <div class="text">
+            <h1>What to Cook?</h1>
+            <p>The place where no leftovers go to waste.</p>
+            <button class="button" onclick="location.href=('/register' )">Start Cooking!</button>
+            <p>Have an account? <a href="{{ url_for('login') }}">Click to Login!</a></p>
+        </div>
+    </div>
+    <div class="top-row-right-column">
+        <div class="carousel-section">
+            <div class="carousel" data-carousel>
+                <button class="carousel-button prev" data-carousel-button="prev">&#60;</button>
+                <button class="carousel-button next" data-carousel-button="next">&#62;</button>
+                <ul data-slides>
+                    {% for post in posts %}
+                    {% if post.file %}
+                    <li class="slide" data-active onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+                        <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                        <p><i>chef/{{post.author.username}}</i></p>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="bottom-row-left-column">
+        <div class="about-us-section">
+            <div class="about-us-text">
+                <h4>Our Aim</h3>
+                <p>At What To Cook?, we believe that every kitchen is a treasure trove of possibilities, especially when it comes to leftovers. Founded by a passionate group of food enthusiasts and home cooks, our website is dedicated to helping new chefs—particularly those who've recently branched out on their own—transform everyday leftovers into delightful, inventive meals.</p>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-row-right-column">
+        <div class="about-us-section">
+            <div class="about-us-text">
+                <h4>What we offer</h3>
+                <p>Through our extensive recipe database, tailored cooking tips, and vibrant community forums, we empower you to cook confidently and sustainably. Join us to explore how leftover ingredients can come together in delicious and unexpected ways, helping you save money and minimize waste—one meal at a time. </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
