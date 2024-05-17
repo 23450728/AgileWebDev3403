@@ -72,6 +72,9 @@
             </div>
             <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
                 <h3>{{ post.title }}</h3>
+                {% if post.file %}
+                    <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
                 <pre>{{ post.body }}</pre>
             </div>
             <div class="post-actions">
@@ -82,10 +85,18 @@
                 <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% endif %}
+                {% if ADMIN %}
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Ban user</p> </button>
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Delete post</p> </button>
+                {% endif %}
             </div>
         </div>
         <br>
         {% endfor %}
+        <div class="pagination-buttons">
+            <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
+            <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
+        </div>
     </div>
 {% endblock %}
 

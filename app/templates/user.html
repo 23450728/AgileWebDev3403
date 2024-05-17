@@ -78,8 +78,9 @@
     <div id="div" class="post" style="cursor: pointer;">
         <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" >
             <div class="post-text">
-                <h3>{{ post.title }}</h3>
-                <pre>{{ post.body }}</pre>
+                <h4>{{ post.title }}</h4>
+                <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
+                <p>{{ post.body }}</p>
             </div>
             <div class="timestamp">
                 <p style="font-size: 13px"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>

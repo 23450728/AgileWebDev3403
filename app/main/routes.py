@@ -1,86 +1,93 @@
-from flask import render_template, flash, redirect, url_for, request, g
-from app import app, db
-from app.forms import *
+from flask import render_template, flash, redirect, url_for, request, g, current_app, abort
+from app.main.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post, Comment
+import os
+import uuid
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
+from app.main import bp
+from app import db
+from werkzeug.utils import secure_filename
 
-@app.before_request
+@bp.before_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_active = datetime.now(timezone.utc)
         db.session.commit()
     g.search_form = SearchForm()
 
-@app.route('/')
-@app.route('/home')
-def home():
-    return render_template("home.html")
+@bp.route('/')
+@bp.route('/home/')
+def home():   
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).where(Post.file != "").order_by(Post.id.desc())
+    posts = db.paginate(query, page=page, per_page=4, error_out=False)
+    return render_template("home.html", posts=posts.items)
 
-@app.route('/index')
+@bp.route('/index')
 def index():
     page = request.args.get('page', 1, type=int)
     query = sa.select(Post).order_by(Post.timestamp.desc())
-    posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    posts = db.paginate(query, page=page, per_page=current_app.config["POSTS_PER_PAGE"], error_out=False)
     next_url = url_for('index', page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('index', page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template("index.html", posts=posts.items, next_url=next_url, prev_url=prev_url)
+    if current_user.is_authenticated and current_user.email in current_app.config["ADMINS"]:
+        return render_template("index.html", posts=posts.items, next_url=next_url, prev_url=prev_url, explore=True, ADMIN=True)
+    return render_template("index.html", posts=posts.items, next_url=next_url, prev_url=prev_url, explore=True)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = db.session.scalar(sa.select(User).where(User.username == form.username.data))
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('login'))
+            return redirect(url_for('main.login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or urlsplit(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('main.index')
         return redirect(next_page)
     return render_template('login.html', form=form)
 
-@app.route('/register', methods=['GET', 'POST'])
+@bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login'))
+        return redirect(url_for('main.login'))
     return render_template('register.html', form=form)
 
-@app.route('/logout')
+@bp.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
-@app.route('/user/<username>')
-@login_required
+@bp.route('/user/<username>')
 def user(username):
     user = db.first_or_404(sa.select(User).where(User.username == username))
     page = request.args.get('page', 1, type=int)
     query = user.posts.select().order_by(Post.timestamp.desc())
-    posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    posts = db.paginate(query, page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
     next_url = url_for('user', username=user.username, page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('user', username=user.username, page=posts.prev_num) \
         if posts.has_prev else None
     return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
-@app.route('/edit_profile', methods=['GET', 'POST'])
+@bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def EditProfile():
     form = EditProfileForm()
@@ -89,47 +96,62 @@ def EditProfile():
         current_user.email = form.email.data
         current_user.bio = form.bio.data
         db.session.commit()
-        return redirect(url_for('user', username=current_user.username))
+        return redirect(url_for('main.user', username=current_user.username))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
         form.bio.data = current_user.bio
     return render_template('edit profile.html', form=form)
 
-@app.route('/post', methods=['GET', 'POST'])
+@bp.route('/post', methods=['GET', 'POST'])
 @login_required
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, body=form.post.data, author=current_user)
+        if form.file.data.filename != "":
+            filename = secure_filename(form.file.data.filename)
+            file_ext = os.path.splitext(filename)[1]
+            if file_ext not in [".jpg",".png","jpeg"]:
+                abort(400)
+            filename = str(uuid.uuid4()) + filename
+            form.file.data.save(os.path.join('app/static/images/', filename))
+            post = Post(title=form.title.data, body=form.post.data, author=current_user, file = filename)
+        else:
+            post = Post(title=form.title.data, body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     return render_template("post.html", form=form)
 
-@login_required
-@app.route('/post/<int:id>')
+@bp.route('/post/<int:id>')
 def SelectPost(id):
     page = request.args.get('page', 1, type=int)
-    query = sa.select(Post).where(Post.id == id)
-    posts = db.paginate(query, page=page, per_page=1, error_out=False)
+    prev = request.args.get('prev', '/index')
+    post = db.session.scalar(sa.select(Post).where(Post.id == id))
     commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
     comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
-    return render_template("post view.html", posts=posts.items, comments=comments.items)
+    next_url = url_for('SelectPost', id=id, page=comments.next_num) \
+        if comments.has_next else None
+    prev_url = url_for('SelectPost', id=id, page=comments.prev_num) \
+        if comments.has_prev else None
+    return render_template("post view.html", post=post, comments=comments.items, next_url=next_url, prev_url=prev_url, prev=prev)
 
+@bp.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
 @login_required
-@app.route('/post/<int:parent>/comment', methods=['GET', 'POST'])
 def AddComment(parent):
     post = db.session.scalar(sa.select(Post).where(Post.id == parent))
+    prev = prev = request.args.get('prev', '/index')
+    page = request.args.get('page', 1, type=int)
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(comments=form.comment.data, author=current_user, parent=post)
         db.session.add(comment)
         db.session.commit()
         return redirect('/post/' + str(parent))
-    return render_template("comment.html", form=form, post=post)
+    return render_template("comment.html", form=form, post=post, prev=prev)
 
-@app.route('/search')
+@bp.route('/search')
+@login_required
 def search():
     searchInput = request.args.get('search')
 
@@ -147,4 +169,4 @@ def search():
 
     print(posts)
 
-    return render_template("search.html", posts=posts)
+    return render_template("search.html", posts=posts, search=True, searchInput=searchInput)
