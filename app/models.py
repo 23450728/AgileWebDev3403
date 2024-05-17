@@ -81,6 +81,7 @@ class Post(SearchableMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(140))
     body: so.Mapped[str] = so.mapped_column(sa.String(140))
+    file: so.Mapped[str] = so.mapped_column(sa.String(256))
     timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc)) 
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
     author: so.Mapped[User] = so.relationship(back_populates='posts')
@@ -105,11 +106,6 @@ class Comment(db.Model):
     post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
     author: so.Mapped[User] = so.relationship(back_populates='comments')
     parent: so.Mapped[Post] = so.relationship(back_populates='comments')
-
-class Image(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    name: so.Mapped[str] = so.mapped_column(sa.String(140))
-    post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
 
 @login.user_loader
 def load_user(id):

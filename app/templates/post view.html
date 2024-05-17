@@ -51,9 +51,9 @@
                 <div class="post-text">
                     <h4>{{ post.title }}</h4>
                     <p><i>Posted by: <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
-                    {% for image in images %}
-                        <img src="/static/images/{{image.name}}">
-                    {% endfor %}
+                    {% if post.file %}
+                        <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                    {% endif %}
                     <p>{{ post.body }}</p>
                 </div>
                 <div class="timestamp">

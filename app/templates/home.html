@@ -16,15 +16,12 @@
                 <button class="carousel-button next" data-carousel-button="next">&#62;</button>
                 <ul data-slides>
                     {% for post in posts %}
+                    {% if post.file %}
                     <li class="slide" data-active onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
-                            {% set postid = post.id %}
-                            {% for image in images %}
-                                {%if image.post_id == postid %}
-                                    <img src="/static/images/{{ image.name }}" alt="Image for post {{post.title}}">
-                                    <p><i>chef/{{post.author.username}}</i></p>
-                                {% endif %}
-                            {% endfor %}
+                        <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                        <p><i>chef/{{post.author.username}}</i></p>
                     </li>
+                    {% endif %}
                     {% endfor %}
                 </ul>
             </div>
