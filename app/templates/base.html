@@ -8,17 +8,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="/static/script.js" defer></script>
     </head>
-        
     <body>
         <div class="topnav">
             <a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a>
             <a href="{{ url_for('index') }}"><i class="far fa-compass"></i></a>
             {% if current_user.is_anonymous %}
-                <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('login') }}">Login</a>
             {% else %}
-                <a href="{{ url_for('post') }}"><i class="fas fa-plus"></i></a>
-                <a href="{{ url_for('user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
-                <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="{{ url_for('user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
+            <a href="{{ url_for('post') }}"><i class="fas fa-plus"></i></a>
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
             {% endif %}
 
             {% if (g.search_form and (explore or search)) %}
