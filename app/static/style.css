@@ -27,12 +27,6 @@ h4 {
   font-family: "arial", sans-serif;
 }
 
-p1 {
-  font-size:13px;
-  text-decoration-color: #505050;
-  font-family: "arial", sans-serif;
-}
-
 pre {
   font-family: "arial", "sans-serif";
 }
@@ -86,7 +80,7 @@ pre {
   
   /* Add padding to containers */
 .container {
-    padding: 30px;
+    padding: 40px;
 }
   
 span.sign_up {
@@ -231,7 +225,7 @@ span.login {
 }
 
 /*Error Messages and Form errors */
-.error p{
+.error {
   text-align: left;
   color: red;
  }
@@ -251,8 +245,6 @@ span.login {
 .post h2 {
   text-align:center
  }
-
-/* Comments */
 
 
 /* Button */
@@ -467,6 +459,8 @@ hr {
   align-items: center;
 }
 
+/* Comments */
+
 .comment-author {
   display: flex;
   justify-content: center;
@@ -532,14 +526,14 @@ hr {
 }
 
 .comment-text-content{
-  white-space: pre-wrap; /* Allows text to wrap and preserves formatting */
+  white-space: pre-wrap; 
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 @media (max-width: 1300px) {
   .comment-timestamp {
-    display: none; /* Hide author to save space */
+    display: none; /* Hide timestamp when the screen is smaller */
   }
 }
 
@@ -558,7 +552,7 @@ hr {
 .profile-picture {
   width: 150px;
   height: 150px;
-  object-fit:contain;
+  object-fit: contain;
 }
 
 

@@ -75,8 +75,8 @@
     {% endif %}
 
     {% for post in posts %}
-    <div id="div" class="post" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
-        <div class="post-content">
+    <div id="div" class="post" style="cursor: pointer;">
+        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" >
             <div class="post-text">
                 <h3>{{ post.title }}</h3>
                 <pre>{{ post.body }}</pre>

@@ -33,16 +33,17 @@
                     <p>{{ error }}</p>
                 </div>
                 {% endfor %}
-            </p>
-            <p>
-                {{ form.password2.label }}<br>
-                {{ form.password2(size=32) }}<br>
+            <p>{{ form.password2.label }}</p>
+            <p>{{ form.password2(size=32) }}</p>
                 {% for error in form.password2.errors %}
                 <div class="error">
                     <p>{{ error }}</p>
                 </div>
                 {% endfor %}
+<<<<<<< HEAD
             </p>
+=======
+>>>>>>> 828a851a8cbb5b9bb21fba36890ef77728415b08
             <button onclick="form.submit()" class="button">Submit</button>
         </form>
         <p>Have an account? <a href="{{ url_for('login') }}">Click to Login!</a></p>

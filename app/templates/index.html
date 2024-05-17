@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Index page</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -60,7 +67,7 @@
                     <p><b>chef/{{ post.author.username }}</b><p>
                 </div>
                 <div class="timestamp">
-                    <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                    <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
                 </div>
             </div>
             <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
