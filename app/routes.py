@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request, g
+from flask import render_template, flash, redirect, url_for, request, g, abort
 from app import app, db
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
@@ -6,6 +6,9 @@ import sqlalchemy as sa
 from app.models import User, Post, Comment
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
+from werkzeug.utils import secure_filename
+import os
+import uuid
 
 @app.before_request
 def before_request():
@@ -17,12 +20,15 @@ def before_request():
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("home.html")
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).order_by(Post.id.desc())
+    posts = db.paginate(query, page=page, per_page=4, error_out=False)
+    return render_template("home.html", posts=posts.items)
 
 @app.route('/index')
 def index():
     page = request.args.get('page', 1, type=int)
-    query = sa.select(Post).order_by(Post.timestamp.desc())
+    query = sa.select(Post).order_by(Post.id.desc())
     posts = db.paginate(query, page=page, per_page=app.config["POSTS_PER_PAGE"], error_out=False)
     next_url = url_for('index', page=posts.next_num) \
         if posts.has_next else None
@@ -101,9 +107,19 @@ def EditProfile():
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, body=form.post.data, author=current_user)
+        if form.file.data.filename != "":
+            filename = secure_filename(form.file.data.filename)
+            file_ext = os.path.splitext(filename)[1]
+            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                abort(400)
+            filename = str(uuid.uuid4()) + filename
+            form.file.data.save(os.path.join('app/static/images/', filename))
+            post = Post(title=form.title.data, body=form.post.data, author=current_user, file = filename)
+        else:
+            post = Post(title=form.title.data, body=form.post.data, author=current_user)
         db.session.add(post)
-        db.session.commit()
+        db.session.commit() 
+        
         return redirect(url_for('index'))
     return render_template("post.html", form=form)
 
@@ -126,6 +142,7 @@ def SelectPost(id):
 def AddComment(parent):
     post = db.session.scalar(sa.select(Post).where(Post.id == parent))
     prev = prev = request.args.get('prev', '/index')
+    page = request.args.get('page', 1, type=int)
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(comments=form.comment.data, author=current_user, parent=post)

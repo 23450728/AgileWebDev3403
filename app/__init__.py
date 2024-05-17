@@ -7,6 +7,8 @@ from flask_moment import Moment
 from elasticsearch import Elasticsearch
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
 login = LoginManager(app)
 login.login_view = 'login'
 app.config.from_object(Config)
@@ -16,3 +18,7 @@ migrate = Migrate(app, db)
 moment = Moment(app)
 
 from app import routes, models
+
+with app.app_context():
+    #db.drop_all()
+    db.create_all()
