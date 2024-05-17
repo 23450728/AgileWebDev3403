@@ -1,12 +1,16 @@
-from flask import render_template, flash, redirect, url_for, request, g, current_app
+from flask import render_template, flash, redirect, url_for, request, g, current_app, abort
 from app.main.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, Post, Comment
+import os
+import uuid
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
 from app.main import bp
 from app import db
+from werkzeug.security import secure_filename
+
 
 @bp.before_request
 def before_request():
@@ -18,10 +22,10 @@ def before_request():
 @bp.route('/')
 @bp.route('/home/')
 def home():
-    page = request.args.get('page', 1, type=int)
-    query = sa.select(Post).order_by(Post.id.desc())
-    posts = db.paginate(query, page=page, per_page=4, error_out=False)
-    return render_template("new home.html", posts=posts.items)
+    #page = request.args.get('page', 1, type=int)
+    #query = sa.select(Post).order_by(Post.id.desc())
+    #posts = db.paginate(query, page=page, per_page=4, error_out=False)
+    return render_template("home.html")#, posts=posts.items)
 
 @bp.route('/index')
 def index():

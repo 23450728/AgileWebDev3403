@@ -28,7 +28,4 @@ def create_app(config_class=Config):
 
     return app
 
-with app.app_context():
-    #db.drop_all()
-    db.create_all()
 from app import models  
