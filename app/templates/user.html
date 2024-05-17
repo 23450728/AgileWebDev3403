@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Profile Page</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -47,7 +54,7 @@
 <div class="container">
     <div class="profile">
         <div class="profile-content">
-            <img class="profile-picture" src="{{ user.avatar(128) }}">
+            <img class="profile-picture" src="{{ user.avatar(128) }}" alt="Profile picture">
         </div>
         <div class="profile-content">
             <h1>{{ user.username }}</h1>
@@ -75,7 +82,7 @@
                 <pre>{{ post.body }}</pre>
             </div>
             <div class="timestamp">
-                <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                <p style="font-size: 13px"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
         </div>
         <div class="post-actions">

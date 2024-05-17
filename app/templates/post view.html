@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Post View</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -87,7 +94,7 @@
                     </div>
                 </div>
                 <div class="comment-timestamp">
-                    <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
+                    <p style="font-size: 13px;"><i>{{ moment(comment.timestamp).format('LLL') }}</i></p>
                 </div>
             </div>
             {% endfor %}
