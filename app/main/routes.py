@@ -22,10 +22,10 @@ def before_request():
 @bp.route('/')
 @bp.route('/home/')
 def home():
-    #page = request.args.get('page', 1, type=int)
-    #query = sa.select(Post).order_by(Post.id.desc())
-    #posts = db.paginate(query, page=page, per_page=4, error_out=False)
-    return render_template("home.html")#, posts=posts.items)
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).order_by(Post.id.desc())
+    posts = db.paginate(query, page=page, per_page=4, error_out=False)
+    return render_template("home.html", posts=posts.items)
 
 @bp.route('/index')
 def index():
