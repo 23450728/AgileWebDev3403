@@ -18,16 +18,16 @@
             {% if current_user.is_anonymous %}
             <a id="login" href="{{ url_for('main.login') }}">Login</a>
             {% else %}
-            <a href="{{ url_for('main.user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
-            <a href="{{ url_for('main.post') }}"><i class="fas fa-plus"></i></a>
-            <a href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+            <a id="profile" href="{{ url_for('main.user', username=current_user.username) }}"><i class="fas fa-user"></i></a>
+            <a id="make-post" href="{{ url_for('main.post') }}"><i class="fas fa-plus"></i></a>
+            <a id="logout" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i></a>
             {% endif %}
 
             {% if (g.search_form and (explore or search)) %}
                 <div class="search-container">
                     <form action="{{ url_for('main.search') }}" method="get" novalidate>
                         {{ g.search_form.search(size=20, placeholder=g.search_form.search.label.text) }}
-                        <button onclick="g.search_form.submit()"><i class="fas fa-search"></i></button>   
+                        <button id="submit-search" onclick="g.search_form.submit()"><i class="fas fa-search"></i></button>   
                     </form>
                 </div>
             {% endif %}
