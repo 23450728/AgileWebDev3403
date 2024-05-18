@@ -374,9 +374,10 @@ img {
 }
 
 /* Add padding to text on homepage */
-.text {
-  padding-right:10%;
-  padding-top: 10%;
+.home-text {
+  /*padding-right:10%;
+  padding-top: 10%;*/
+  padding: 15%;
 }
 
 .about-us-section {
@@ -384,8 +385,9 @@ img {
   padding-left: 10%;
   padding-right: 10%;
   display:flex;
-  justify-content: space-evenly;
+  /*justify-content: center;*/
   margin: auto;
+  margin-right: 20px;
 }
 
 .about-us {

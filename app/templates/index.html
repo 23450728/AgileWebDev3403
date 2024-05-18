@@ -61,10 +61,10 @@
     <div class="container">
         {% for post in posts %}
         <div class="post">
-            <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+            <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/index' )" style="cursor: pointer;">
                 <div class="post-author">
                     <img class="author-picture" src="{{ post.author.avatar(128) }}">
-                    <p><b>chef/{{ post.author.username }}</b><p>
+                    <p><b><a href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
                 </div>
                 <div class="timestamp">
                     <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
