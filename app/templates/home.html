@@ -37,7 +37,7 @@
                     {% if post.file %}
                     <li class="slide" data-active onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
                         <img src="/static/images/{{post.file }}" alt="Image for post {{post.title}}">
-                        <p><i>chef/{{post.author.username}}</i></p>
+                        <p><i>Made by: chef/{{post.author.username}}</i></p>
                     </li>
                     {% endif %}
                     {% endfor %}
