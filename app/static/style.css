@@ -19,7 +19,7 @@ h2 {
 
 h3 {
   font-family: "arial", sans-serif;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 h4 {
@@ -27,20 +27,8 @@ h4 {
   font-family: "arial", sans-serif;
 }
 
-p1 {
-  font-size:13px;
-  text-decoration-color: #505050;
-  font-family: "arial", sans-serif;
-}
-
-a {
-  font-family: "arial", sans-serif;
-  color: black;
-  text-decoration: none;
-}
-
-a:hover {
-  color:rgb(249, 182, 48);
+pre {
+  font-family: "arial", "sans-serif";
 }
 
 /* Form */
@@ -58,32 +46,26 @@ a:hover {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
-/* Set a style for submit button in forms */
-.form .submit {
-  text-align: center;
-  background-color: rgb(249, 182, 48);
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 17px;
-  cursor: pointer;
-  margin-left:5px;
+  
+  /* Set a style for all buttons in forms */
+.form button {
+    text-align: center;
+    background-color: rgb(249, 182, 48);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    /*background-color: indianred;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-family: "verdana", sans-serif;*/
 }
-
-  /* Set a style for cancel button in forms */
-.form .cancel {
-  text-align: center;
-  background-color: rgb(222, 122, 122);
-  color: black;
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 17px;
-  cursor: pointer;
-  margin-right:5px;
-}
-
+  
   /* Add a hover effect for buttons */
 .form button:hover {
     opacity: 0.8;
@@ -98,7 +80,7 @@ a:hover {
   
   /* Add padding to containers */
 .container {
-    padding: 30px;
+    padding: 40px;
 }
   
 span.sign_up {
@@ -243,7 +225,7 @@ span.login {
 }
 
 /*Error Messages and Form errors */
-.error p{
+.error {
   text-align: left;
   color: red;
  }
@@ -263,8 +245,6 @@ span.login {
 .post h2 {
   text-align:center
  }
-
-/* Comments */
 
 
 /* Button */
@@ -394,9 +374,10 @@ img {
 }
 
 /* Add padding to text on homepage */
-.text {
-  padding-right:10%;
-  padding-top: 10%;
+.home-text {
+  /*padding-right:10%;
+  padding-top: 10%;*/
+  padding: 15%;
 }
 
 .about-us-section {
@@ -404,8 +385,9 @@ img {
   padding-left: 10%;
   padding-right: 10%;
   display:flex;
-  justify-content: space-evenly;
+  /*justify-content: center;*/
   margin: auto;
+  margin-right: 20px;
 }
 
 .about-us {
@@ -440,6 +422,8 @@ hr {
   border: 1px solid rgb(249, 182, 48)
 }
 
+/* Post */
+
 .post-content {
   display:flex;
   justify-content: space-between;
@@ -471,27 +455,68 @@ hr {
   color: rgb(247, 165, 0);
 }
 
+.post-author {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Comments */
+
+.comment-author {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.comment-author-content{
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.author-picture-comment {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  align-items: center;
+  min-width: 30px;
+}
+
+.author-picture {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
 .comment-section {
   padding-left: 30px;
   padding-right: 30px;
 }
+
 .comment {
   display:flex;
+  padding: 0px;
   justify-content: space-between;
-  padding: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.pagination-buttons {
-  display:flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-/* Pagination left and right arrows */
-.left-arrow {
-  color:rgb(249, 182, 48);
+.comment-text {
   margin-left: 20px;
-  font-size: 17px;
+  word-wrap: break-word;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.comment-timestamp{
+  text-align: right;
+  max-width: 100%;
+  word-wrap:normal;
+  overflow:unset;
+  min-width: 120px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .right-arrow {
@@ -545,3 +570,44 @@ body {
     flex-direction: column;
   }
 }
+.comment-content{
+  display: flex;
+  word-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+  /*max-width: 1000px;*/
+}
+
+.comment-text-content{
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 1300px) {
+  .comment-timestamp {
+    display: none; /* Hide timestamp when the screen is smaller */
+  }
+}
+
+/* Profile page */
+
+.profile {
+  display: flex;
+  justify-content: left;
+}
+
+.profile-content {
+  margin-left: 40px;
+  align-content: center;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+
+
+

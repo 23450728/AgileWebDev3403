@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Search results page/title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -46,16 +53,19 @@
 
 <div class="container">
     {% for post in posts %}
-    <div id="div" class="post">
-        <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/search?search={{ searchInput }}' )" style="cursor: pointer;">
-            <div class="post-text">
-                <h4>{{ post.title }}</h4>
-                <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
-                <p>{{ post.body }}</p>
+    <div class="post">
+        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+            <div class="post-author">
+                <img class="author-picture" src="{{ post.author.avatar(128) }}">
+                <p><b><a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></b><p>
             </div>
             <div class="timestamp">
-                <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
+        </div>
+        <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+            <h3>{{ post.title }}</h3>
+            <pre>{{ post.body }}</pre>
         </div>
         <div class="post-actions">
             <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>

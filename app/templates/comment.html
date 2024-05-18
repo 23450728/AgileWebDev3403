@@ -2,46 +2,48 @@
 
 {% block content %}
 <div class="container">
+    <button class="post-action" onclick="location.href=('/post/{{post.id}}')"><i class="fas fa-arrow-left"></i></button>
     <div class="post">
         <div class="post-content">
-            <div class="post-text">
-                <h4>{{ post.title }}</h4>
-                {% if post.file %}
-                  <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                {% endif %}
-                <p><i>Posted by: {{ post.author.username }}</i><p>
-                <p>{{ post.body }}</p>
+            <div class="post-author">
+                <img class="author-picture" src="{{ post.author.avatar(128) }}" alt="Profile picture">
+                <p><b>chef/{{ post.author.username }}</b><p>
             </div>
             <div class="timestamp">
-                <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
         </div>
+        <div class="post-text">
+            <h3>{{ post.title }}</h3>
+            {% if post.file %}
+                <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+            {% endif %}
+            <pre>{{ post.body }}</pre>
+        </div>
     </div>
-    <form class="form" action="" method="post" novalidate>
+    <form class="form" method="post" novalidate>
         {{ form.hidden_tag() }}
 
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             <ul>
                 {% for message in messages %}
-                    <div class="error">
-                        <p>{{ message }}</p>
-                    </div>
+                    <p class="error">{{ message }}</p>
                 {% endfor %}
             </ul>
             {% endif %}
             {% endwith %}
-        <p>
-            {{ form.comment.label }}
-            <br>
-            <p>{{ form.comment(size=32) }}</p>
-            {% for error in form.comment.errors %}
-            <div class="error">
-                <p>{{ error }}</p>
-            </div>            
-            {% endfor %}
-        </p>
-        <button class="cancel" type="button" onclick="location.href=('/post/{{post.id}}?prev={{ prev }}')">Cancel</button>
-        <button class="submit" type="button" onclick="form.submit()">Submit</button>
-</form>
-{% endblock %}
+
+            <p>
+                {{ form.comment.label }}
+                <br>
+                <p>{{ form.comment(size=32) }}</p>
+                {% for error in form.comment.errors %}
+                <div class="error">
+                    <p>{{ error }}</p>
+                </div>            
+                {% endfor %}
+            <button class="button" type="button" onclick="form.submit()">Submit</button>
+    </form>
+</div>
+    {% endblock %}

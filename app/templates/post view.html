@@ -1,6 +1,14 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Post View</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     var like_count = 0
@@ -43,27 +51,30 @@
         );
     });
 </script>
+
     <div class="container">
         <button class="post-action" onclick="location.href=('{{ prev }}')"><i class="fas fa-arrow-left"></i></button>
         <div class="post">
             <div class="post-content">
-                <div class="post-text">
-                    <h4>{{ post.title }}</h4>
-                    <p><i>Posted by: <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
-                    {% if post.file %}
-                        <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                    {% endif %}
-                    <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
-                    <p>{{ post.body }}</p>
+                <div class="post-author">
+                    <img class="author-picture" src="{{ post.author.avatar(128) }}">
+                    <p><b><a href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
                 </div>
                 <div class="timestamp">
-                    <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                    <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
                 </div>
+            </div>
+            <div class="post-text">
+                <h3>{{ post.title }}</h3>
+                {% if post.file %}
+                <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
+                <pre>{{ post.body }}</pre>
             </div>
             <div class="post-actions">
                 {% if current_user.is_anonymous != True %}
                 <button class="post-action" style="justify-content: left;"><i class="far fa-thumbs-up like-click like-hover"></i></button>
-                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% elif current_user.is_anonymous == True %}
                 <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
@@ -71,25 +82,26 @@
             </div>
         </div>
         <br>
-        <!-- <h4 style="background-color: aqua;">Comments</h4> -->
         <div class="comment-section">
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-content">
-                    <p><a href="{{ url_for('user', username=comment.author.username) }}"><b>{{ comment.author.username }}</b></a>:
-                    <p> {{ comment.comments }}</p>
-                    <p><a href="{{ url_for('main.user', username=comment.author.username) }}"><b>{{ comment.author.username }}</b></a>: {{ comment.comments }}<p>
+                    <div class="comment-author">
+                        <div class="comment-author-content">
+                            <img class="author-picture-comment" src="{{ post.author.avatar(128) }}">
+                            <p><b>{{ comment.author.username }}</b>:<p>
+                        </div>
+                    </div>
+                    <div class="comment-text">
+                        <pre class="comment-text-content">{{ comment.comments }}</pre>
+                    </div>
                 </div>
-                <div class="timestamp">
-                    <p1><i>{{ moment(comment.timestamp).format('LLL') }}</i></p1>
+                <div class="comment-timestamp">
+                    <p style="font-size: 13px;"><i>{{ moment(comment.timestamp).format('LLL') }}</i></p>
                 </div>
             </div>
             {% endfor %}
         </div>
-
-        <div class="pagination-buttons">
-            <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
-            <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
-        </div>
     </div>
+
 {% endblock %}
