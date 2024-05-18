@@ -44,6 +44,7 @@
                 </div>            
                 {% endfor %}
             <button id="submit-comment" class="button" type="button" onclick="form.submit()">Submit</button>
+            <button class="cancel" type="button" onclick="location.href=('/post/{{post.id}}')">Cancel</button>
     </form>
 </div>
     {% endblock %}
