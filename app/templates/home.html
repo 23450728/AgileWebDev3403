@@ -10,19 +10,24 @@
 
 {% block content %}
 <div class="row">
-    <div class="top-row-left-column">
+    <div class="top-row-left-column" style="background-color: red;">
         <br>
         <br>
-        <div class="home-text">
+        <div class="home-text" style="background-color: blue; justify-content: center;">
+            <br>
+            <br>
+            <br>
+            <br>
             <h1>What to Cook?</h1>
             <p>The place where no leftovers go to waste.</p>
             <button id="start-cooking" class="button" onclick="location.href=('/register' )">Start Cooking!</button>
             <p>Have an account? <a href="{{ url_for('main.login') }}">Click to Login!</a></p>
             <br>
-            <br>
         </div>
     </div>
     <div class="top-row-right-column">
+        <br>
+        <br>
         <div class="carousel-section">
             <div class="carousel" data-carousel>
                 <button class="carousel-button prev" data-carousel-button="prev">&#60;</button>
@@ -42,9 +47,10 @@
         </div>
     </div>
 </div>
+<h2>About us</h2>
 <div class="row">
-    <div class="bottom-row-left-column">
-        <div class="about-us-section">
+    <div class="bottom-row-left-column" style="background-color: red;">
+        <div class="about-us-section" style="background-color: blue;">
             <div class="about-us-text">
                 <h4>Our Aim</h3>
                 <p>At What To Cook?, we believe that every kitchen is a treasure trove of possibilities, especially when it comes to leftovers. Founded by a passionate group of food enthusiasts and home cooks, our website is dedicated to helping new chefs—particularly those who've recently branched out on their own—transform everyday leftovers into delightful, inventive meals.</p>
@@ -52,7 +58,7 @@
         </div>
     </div>
     <div class="bottom-row-right-column">
-        <div class="about-us-section">
+        <div class="about-us-section-2">
             <div class="about-us-text">
                 <h4>What we offer</h3>
                 <p>Through our extensive recipe database, tailored cooking tips, and vibrant community forums, we empower you to cook confidently and sustainably. Join us to explore how leftover ingredients can come together in delicious and unexpected ways, helping you save money and minimize waste—one meal at a time. </p>

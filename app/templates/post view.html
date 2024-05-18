@@ -99,9 +99,9 @@
                         <pre id="{{comment.id}}-comment-text" class="comment-text-content">{{ comment.comments }}</pre>
                     </div>
                 </div>
-                <div class="comment-timestamp">
-                    <p id="{{comment.id}}-comment-timestamp" style="font-size: 13px;"><i>{{ moment(comment.timestamp).format('LLL') }}</i></p>
-                </div>
+            </div>
+            <div class="comment-timestamp" style="justify-content:right; display:flex; margin:-10px;">
+                <p style="font-size: 13px;"><i>{{ moment(comment.timestamp).format('LLL') }}</i></p>
             </div>
             {% endfor %}
         </div>

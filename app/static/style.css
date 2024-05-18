@@ -29,6 +29,9 @@ h4 {
 
 pre {
   font-family: "arial", "sans-serif";
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
 }
 
 /* Form */
@@ -61,17 +64,18 @@ pre {
 
 
   /* Set a style for cancel button in forms */
-.form .cancel {
-  text-align: center;
-  background-color: rgb(222, 122, 122);
-  color: black;
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 17px;
-  cursor: pointer;
-  margin-right:5px;
-}
+
+.cancel {
+    text-align: center;
+    background-color: rgb(222, 122, 122);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right:5px;
+  }
   
   /* Add a hover effect for buttons */
 .form button:hover {
@@ -389,12 +393,14 @@ img {
 
 .about-us-section {
   align-items: left;
-  padding-left: 10%;
-  padding-right: 10%;
   display:flex;
-  /*justify-content: center;*/
-  margin: auto;
-  margin-right: 20px;
+  justify-content: right;
+}
+
+.about-us-section-2 {
+  align-items: left;
+  display:flex;
+  justify-content: left;
 }
 
 .about-us {
@@ -406,23 +412,34 @@ img {
   text-align: left;
   max-width: 450px;
   padding:25px;
+
   background-color: rgb(249, 182, 48);
   border-radius: 25px;
 }
 
-@media screen and (max-width: 600px) {
-  .about-us-section .about-us .about-us-text input[type=text]{
-    display: block;
-    float: none;
-    align-items: right;
-    text-align: right;
-    background-color: #f44336;
-    width: 100%;
+@media (max-width: 900px) {
+  .row {
+    flex-direction: column;
   }
-  .carousel {
-    display: block;
-    float: none;
+
+  .about-us-section {
+    align-items: left;
+    display:flex;
+    justify-content: center;
   }
+
+  .about-us-section-2 {
+    align-items: left;
+    display:flex;
+    justify-content: center;
+  }
+
+  .top-row-left-column{
+    align-items: left;
+    display:flex;
+    justify-content: center;
+  }
+  
 }
 
 hr {
@@ -483,8 +500,8 @@ hr {
   justify-content: center;
   border-radius: 15px;
   overflow: hidden;
-  margin-right: 30px;
-  margin-left: 30px;
+  /*margin-right: 50px;
+  margin-left: 50px;*/
 }
 
 .post-img-section img:first-child {
@@ -496,16 +513,15 @@ hr {
   max-height: 500px;  /* Make images fill the container */
   z-index: 1;   /* Lower z-index, this is the background */
   border-radius: 15px;
-  opacity: 50%;
-  filter: blur(15px);
+  filter: blur(30px) brightness(40%);
   margin: -1px;
   padding: 1px;
 }
 
 .post-img-main {
   justify-content: center;
-  max-height: 500px;
-  max-width: 1140px;
+  max-height: 400px;
+  max-width: 1120px;
   height: 100%;
   width: 100%;
   object-fit: contain;
@@ -595,6 +611,8 @@ body {
   float: right;
   flex: 50%;
   background-color: rgb(255, 235, 196);
+  justify-content: right;
+  display: flex;
 }
 
 .top-row-right-column {
@@ -606,21 +624,19 @@ body {
 .bottom-row-left-column {
   flex: 50%;
   background-color: white;
-  padding: 50px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 20px;
 }
 
 .bottom-row-right-column {
   flex: 50%;
   background-color: white;
-  padding: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
 }
 
-
-@media (max-width: 900px) {
-  .row {
-    flex-direction: column;
-  }
-}
 .comment-content{
   display: flex;
   word-wrap: break-word;
@@ -635,11 +651,11 @@ body {
   overflow-wrap: break-word;
 }
 
-@media (max-width: 1300px) {
+/*@media (max-width: 1300px) {
   .comment-timestamp {
-    display: none; /* Hide timestamp when the screen is smaller */
+    display: none; /* Hide timestamp when the screen is smaller
   }
-}
+}*/
 
 /* Profile page */
 
