@@ -111,7 +111,7 @@ def post():
         if form.file.data.filename != "":
             filename = secure_filename(form.file.data.filename)
             file_ext = os.path.splitext(filename)[1]
-            if file_ext not in [".jpg",".png","jpeg"]:
+            if file_ext not in [".jpg",".png",".jpeg"]:
                 abort(400)
             filename = str(uuid.uuid4()) + filename
             form.file.data.save(os.path.join('app/static/images/', filename))
