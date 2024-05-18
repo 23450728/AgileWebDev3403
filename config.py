@@ -16,3 +16,8 @@ class Config:
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+
+class TestConfig(Config):
+    #References to  Miguel Grinberg https://github.com/miguelgrinberg/microblog/blob/v0.23/tests.py
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
