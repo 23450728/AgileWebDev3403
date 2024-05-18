@@ -39,6 +39,12 @@ pre {
 .form {
     padding: 10px;
 }
+
+.comment-form {
+  margin-left: 140px;
+  margin-right: 140px;
+}
+
   
   /* Full-width inputs */
 .form input[type=text], input[type=password], input[type=email], textarea {
@@ -92,6 +98,12 @@ pre {
   /* Add padding to containers */
 .container {
     padding: 40px;
+}
+
+/* Container for posts in index */
+.posts-container {
+  padding: 40px;
+  background-color: rgb(244, 244, 244);
 }
   
 span.sign_up {
@@ -249,9 +261,17 @@ span.login {
 
 /*Posts */
 .post {
-  border: 3px solid #f1f1f1;
   padding: 30px;
+  margin-left: 140px;
+  margin-right: 140px;
+  background-color: white;
  }
+
+@media (max-width: 850px) {
+  .post {
+    margin:0px;
+  }
+}
 
 .post h2 {
   text-align:center
@@ -446,6 +466,13 @@ hr {
   border: 1px solid rgb(249, 182, 48)
 }
 
+.chef-icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px;
+  height: 180px
+}
 /* Post */
 
 .post-content {
@@ -477,6 +504,18 @@ hr {
   font-size: 17px;
   cursor: pointer;
   margin-left: 10px;
+  color: rgb(247, 165, 0);
+}
+
+.back-button {
+  text-align: center;
+  background-color:rgb(244, 244, 244);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-left: 20px;
   color: rgb(247, 165, 0);
 }
 
@@ -513,7 +552,7 @@ hr {
   max-height: 500px;  /* Make images fill the container */
   z-index: 1;   /* Lower z-index, this is the background */
   border-radius: 15px;
-  filter: blur(30px) brightness(40%);
+  filter: blur(30px) brightness(50%);
   margin: -1px;
   padding: 1px;
 }
@@ -559,6 +598,8 @@ hr {
 .comment-section {
   padding-left: 30px;
   padding-right: 30px;
+  margin-left: 110px;
+  margin-right: 110px;
 }
 
 .comment {
@@ -567,6 +608,7 @@ hr {
   justify-content: space-between;
   max-width: 100%;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .comment-text {
@@ -584,6 +626,7 @@ hr {
   min-width: 120px;
   white-space: nowrap;
   flex-shrink: 0;
+  background-color: white;
 }
 
 .right-arrow {
@@ -642,6 +685,7 @@ body {
   word-wrap: break-word;
   max-width: 100%;
   box-sizing: border-box;
+  padding:10px;
   /*max-width: 1000px;*/
 }
 

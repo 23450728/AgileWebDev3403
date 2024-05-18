@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <button class="post-action" onclick="location.href=('/post/{{post.id}}')"><i class="fas fa-arrow-left"></i></button>
+<div class="posts-container">
+    <button class="back-button" onclick="location.href=('/post/{{post.id}}')"><i class="fas fa-arrow-left"></i></button>
     <div class="post">
         <div class="post-content">
             <div class="post-author">
@@ -24,7 +24,7 @@
             <pre>{{ post.body }}</pre>
         </div>
     </div>
-    <form class="form" method="post" novalidate>
+    <form class="comment-form" method="post" novalidate>
         {{ form.hidden_tag() }}
 
             {% with messages = get_flashed_messages() %}

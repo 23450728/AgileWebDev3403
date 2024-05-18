@@ -52,8 +52,8 @@
     });
 </script>
 
-    <div class="container">
-        <button class="post-action" onclick="location.href=('{{ prev }}')"><i class="fas fa-arrow-left"></i></button>
+    <div class="posts-container">
+        <button class="back-button" onclick="location.href=('{{ prev }}')"><i class="fas fa-arrow-left"></i></button>
         <div class="post">
             <div class="post-content">
                 <div class="post-author">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="comment-timestamp" style="justify-content:right; display:flex; margin:-10px;">
+            <div class="comment-timestamp" style="justify-content:right; display:flex; padding-right:10px">
                 <p style="font-size: 13px;"><i>{{ moment(comment.timestamp).format('LLL') }}</i></p>
             </div>
             {% endfor %}
