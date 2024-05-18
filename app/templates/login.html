@@ -9,8 +9,8 @@
 
 {% block content %}
     <div class="container">
-        <h1>Sign In</h1>
-        <form class="form" method="post" novalidate>
+        <h1 id="sign-in">Sign In</h1>
+        <form class="form" action="" method="post" novalidate>
             {{ form.hidden_tag() }}
 
             {% with messages = get_flashed_messages() %}
@@ -46,10 +46,10 @@
                 {% endfor %}
             </p>
             <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-            <button class="button" onclick="form.submit()">Submit</button>
+            <button id="submit-credentials" class="button" onclick="form.submit()">Submit</button>
         </form>
 
-        <p>New User? <a href="{{ url_for('main.register') }}">Click to Register!</a></p>
+        <p>New User? <a id="register" href="{{ url_for('main.register') }}">Click to Register!</a></p>
     </div>
 
 {% endblock %}

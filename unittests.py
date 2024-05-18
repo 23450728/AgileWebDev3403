@@ -81,7 +81,6 @@ class UserModelCase(unittest.TestCase):
         now = datetime.now(timezone.utc)
         p2 = Post(title="title", body="post from susan", file="test.png", author=u1, timestamp=now + timedelta(seconds=1))        
         db.session.add(p2)
-
         self.assertTrue(p1.file == None)
         self.assertTrue(p2.file != "")
 
