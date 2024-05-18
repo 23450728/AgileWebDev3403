@@ -75,18 +75,17 @@ a:hover {
 
 
   /* Set a style for cancel button in forms */
-
-.cancel {
-    text-align: center;
-    background-color: rgb(222, 122, 122);
-    color: black;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 17px;
-    cursor: pointer;
-    margin-right:5px;
-  }
+.form .cancel {
+  text-align: center;
+  background-color: rgb(222, 122, 122);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-right:5px;
+}
   
   /* Add a hover effect for buttons */
 .form button:hover {
@@ -575,7 +574,7 @@ hr {
   position: relative;
   display: flex;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 15px;
   overflow: hidden;
   margin-right: 30px;
   margin-left: 30px;
@@ -589,7 +588,7 @@ hr {
   height: 100%;
   max-height: 500px;  /* Make images fill the container */
   z-index: 1;   /* Lower z-index, this is the background */
-  border-radius: 20px;
+  border-radius: 15px;
   opacity: 50%;
   filter: blur(15px);
   margin: -1px;
@@ -600,6 +599,9 @@ hr {
   justify-content: center;
   max-height: 500px;
   max-width: 1140px;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
   z-index: 2;   /* Higher z-index, this is the foreground */
 }
 

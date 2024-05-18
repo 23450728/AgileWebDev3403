@@ -65,11 +65,14 @@
                 </div>
             </div>
             <div class="post-text">
-                <h3 id="{{post.id}}-post-title">{{ post.title }}</h3>
-                {% if post.file %}
-                <img id="{{post.id}}-image" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                {% endif %}
-                <pre id="{{post.id}}-post-body">{{ post.body }}</pre>
+                <h3>{{ post.title }}</h3>
+                <div class="post-img-section">
+                    {% if post.file %}
+                    <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                    <img  class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                    {% endif %}
+                </div>
+                <pre>{{ post.body }}</pre>
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">
                 {% if current_user.is_anonymous != True %}

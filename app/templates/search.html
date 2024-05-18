@@ -66,8 +66,8 @@
                 <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
         </div>
-        <div class="post-text" onclick="location.href=('/post/{{post.id}}?prev=/search?search={{ searchInput }}' )" style="cursor: pointer;">
-            <h3 id="{{post.id}}-post-title">{{ post.title }}</h3>
+        <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+            <h3>{{ post.title }}</h3>
             <div class="post-img-section">
                 {% if post.file %}
                 <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
