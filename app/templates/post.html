@@ -27,6 +27,9 @@
                 {{ form.post.label }}<br>
                 {{ form.post(cols=32, rows=4) }}<br>
                 {% for error in form.post.errors %}
+                {{ form.post.label }}<br>
+                {{ form.post(cols=32, rows=4) }}<br>
+                {% for error in form.post.errors %}
                 <div class="error">
                     <p>{{ error }}</p>
                 </div>           
@@ -36,13 +39,16 @@
                 {{ form.file.label }}<br>
                 {{ form.file(cols=32, rows=1) }}<br>
                 {% for error in form.file.errors %}
+                {{ form.file.label }}<br>
+                {{ form.file(cols=32, rows=1) }}<br>
+                {% for error in form.file.errors %}
                 <div class="error">
                     <p>{{ error }}</p>
                 </div>           
                 {% endfor %}
             </p>
             <button class="cancel" type="button" onclick="location.href=('/index')">Cancel</button>
-            <button id="submit-post" class="button" onclick="form.submit()">Submit</button>
+            <button class="button" onclick="form.submit()">Submit</button>
         </form>
     </div>
 {% endblock %}
