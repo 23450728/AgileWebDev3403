@@ -575,10 +575,10 @@ hr {
   position: relative;
   display: flex;
   justify-content: center;
-  border-radius: 15px;
+  border-radius: 20px;
   overflow: hidden;
-  /*margin-right: 50px;
-  margin-left: 50px;*/
+  margin-right: 30px;
+  margin-left: 30px;
 }
 
 .post-img-section img:first-child {
@@ -589,19 +589,17 @@ hr {
   height: 100%;
   max-height: 500px;  /* Make images fill the container */
   z-index: 1;   /* Lower z-index, this is the background */
-  border-radius: 15px;
-  filter: blur(30px) brightness(40%);
+  border-radius: 20px;
+  opacity: 50%;
+  filter: blur(15px);
   margin: -1px;
   padding: 1px;
 }
 
 .post-img-main {
   justify-content: center;
-  max-height: 400px;
-  max-width: 1120px;
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
+  max-height: 500px;
+  max-width: 1140px;
   z-index: 2;   /* Higher z-index, this is the foreground */
 }
 
