@@ -42,7 +42,8 @@
             </div>         
             {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <button class="cancel" type="button" onclick="location.href=('/user/{{current_user.username}}')">Cancel</button>
+        <button class="button" type="button" onclick="form.submit()">Submit</button>
     </form>
 </div>
 {% endblock %}
