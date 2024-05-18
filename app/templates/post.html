@@ -10,7 +10,7 @@
 
 {% block content %}
     <div class="container">
-        <h3>Hi, {{ current_user.username }}! What's cooking today?</h3>
+        <h3 id="greeting">Hi, {{ current_user.username }}! What's cooking today?</h3>
         <form class="form" action="" method="post" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <p>
@@ -40,7 +40,7 @@
                 </div>           
                 {% endfor %}
             </p>
-            <button class="button" onclick="form.submit()">Submit</button>
+            <button id="submit-post" class="button" onclick="form.submit()">Submit</button>
         </form>
     </div>
 {% endblock %}
