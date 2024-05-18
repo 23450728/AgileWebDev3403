@@ -1,9 +1,16 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Edit Profile</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
 <div class="container">
     <h1>Edit Profile</h1>
-    <form class="form" action="" method="post">
+    <form method="post">
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}
@@ -35,8 +42,7 @@
             </div>         
             {% endfor %}
         </p>
-        <button class="cancel" type="button" onclick="location.href=('/user/{{ current_user.username }}')">Cancel</button>
-        <button class="submit" onclick="form.submit()">Submit</button>
+        <p>{{ form.submit() }}</p>
     </form>
 </div>
 {% endblock %}

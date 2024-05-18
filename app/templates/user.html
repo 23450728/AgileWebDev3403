@@ -1,10 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Profile Page</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var like_count = 0
+    $(document).ready(function(){
+        $(".like-click").click(
+            function() {
+                like_count += 1 
+                if (like_count % 2 == 0) {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                }
+                if (like_count % 2 == 1) {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                }
+            }
+        );
+    });
+    $(document).ready(function(){
+        $(".like-hover").hover(
+            function() {
+                if (like_count % 2 == 0) {
+                    $(this).removeClass("far fa-comment").addClass("fas fa-comment");
+                }
+            }, 
+            function() {
+                if (like_count % 2 == 0) {
+                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
+                }
+            }               
+        );
+    });
+
+    $(document).ready(function(){
+        $(".comment-hover").hover(
+            function() {
+                $(this).removeClass("far fa-comment").addClass("fas fa-comment");
+            }, 
+            function() {
+                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
+            }               
+        );
+    });
+</script>
+
 <div class="container">
     <div class="profile">
         <div class="profile-content">
-            <img class="profile-picture" src="{{ user.avatar(128) }}">
+            <img class="profile-picture" src="{{ user.avatar(128) }}" alt="Profile picture">
         </div>
         <div class="profile-content">
             <h1>{{ user.username }}</h1>
@@ -14,9 +64,7 @@
             {% if user.last_active %}
             <p><i>Last Active: {{ moment(user.last_active).format('LLL') }}</i></p>
             {% endif %}
-            {% if current_user.username == user.username %}
             <button class="button" type="button" onclick="location.href=('/edit_profile')">Edit Profile</button>
-            {% endif %}
         </div>
     </div>
     <br>
@@ -27,24 +75,23 @@
     {% endif %}
 
     {% for post in posts %}
-    <div id="div" class="post" onclick="location.href=('/post/{{ post.id }}?prev=/user/{{ user.username }}' )" style="cursor: pointer;">
-        <div class="post-content">
+    <div id="div" class="post" style="cursor: pointer;">
+        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" >
             <div class="post-text">
                 <h4>{{ post.title }}</h4>
                 <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
                 <p>{{ post.body }}</p>
             </div>
             <div class="timestamp">
-                <p1><i>{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                <p style="font-size: 13px"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
+        </div>
+        <div class="post-actions">
+            <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
+            <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
         </div>
     </div>
     <br>
     {% endfor %}
-    <div class="pagination-buttons">
-        <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
-        <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
-    </div>
-</div>    
-
+ </div>
 {% endblock %}

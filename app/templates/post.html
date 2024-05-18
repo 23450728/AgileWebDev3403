@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Create a Post page</title>
+</head>
+
 {% extends "base.html" %}
 
 
@@ -33,8 +40,7 @@
                 </div>           
                 {% endfor %}
             </p>
-            <button class="cancel" type="button" onclick="location.href=('/index')">Cancel</button>
-            <button class="submit" onclick="form.submit()">Submit</button>
+            <button class="button" onclick="form.submit()">Submit</button>
         </form>
     </div>
 {% endblock %}

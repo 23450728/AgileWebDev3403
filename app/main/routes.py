@@ -31,9 +31,9 @@ def index():
     page = request.args.get('page', 1, type=int)
     query = sa.select(Post).order_by(Post.timestamp.desc())
     posts = db.paginate(query, page=page, per_page=current_app.config["POSTS_PER_PAGE"], error_out=False)
-    next_url = url_for('index', page=posts.next_num) \
+    next_url = url_for('main.index', page=posts.next_num) \
         if posts.has_next else None
-    prev_url = url_for('index', page=posts.prev_num) \
+    prev_url = url_for('main.index', page=posts.prev_num) \
         if posts.has_prev else None
     if current_user.is_authenticated and current_user.email in current_app.config["ADMINS"]:
         return render_template("index.html", posts=posts.items, next_url=next_url, prev_url=prev_url, explore=True, ADMIN=True)
