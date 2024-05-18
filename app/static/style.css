@@ -574,8 +574,8 @@ hr {
   justify-content: center;
   border-radius: 15px;
   overflow: hidden;
-  margin-right: 30px;
-  margin-left: 30px;
+  /*margin-right: 50px;
+  margin-left: 50px;*/
 }
 
 .post-img-section img:first-child {
@@ -587,16 +587,15 @@ hr {
   max-height: 500px;  /* Make images fill the container */
   z-index: 1;   /* Lower z-index, this is the background */
   border-radius: 15px;
-  opacity: 50%;
-  filter: blur(15px);
+  filter: blur(30px) brightness(40%);
   margin: -1px;
   padding: 1px;
 }
 
 .post-img-main {
   justify-content: center;
-  max-height: 500px;
-  max-width: 1140px;
+  max-height: 400px;
+  max-width: 1120px;
   height: 100%;
   width: 100%;
   object-fit: contain;
