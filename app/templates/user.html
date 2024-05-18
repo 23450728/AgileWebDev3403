@@ -55,21 +55,16 @@
     <div class="profile">
         <div class="profile-content">
             <img id="profile-picture" class="profile-picture" src="{{ user.avatar(128) }}" alt="Profile picture">
-            <img id="profile-picture" class="profile-picture" src="{{ user.avatar(128) }}" alt="Profile picture">
         </div>
         <div class="profile-content">
             <h1 id="user-username">{{ user.username }}</h1>
-            <h1 id="user-username">{{ user.username }}</h1>
             {% if user.bio %}
-            <p id="user-bio">{{ user.bio }}</p>
             <p id="user-bio">{{ user.bio }}</p>
             {% endif %}
             {% if user.last_active %}
             <p><i id="user-lastactive">Last Active: {{ moment(user.last_active).format('LLL') }}</i></p>
             {% endif %}
-            {% if current_user.username == user.username %}
             <button id="edit-profile" class="button" type="button" onclick="location.href=('/edit_profile')">Edit Profile</button>
-            {% endif %}
         </div>
     </div>
     <br>
