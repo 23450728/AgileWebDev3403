@@ -75,16 +75,25 @@
     {% endif %}
 
     {% for post in posts %}
-    <div id="div" class="post" style="cursor: pointer;">
-        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" >
-            <div class="post-text">
-                <h4>{{ post.title }}</h4>
-                <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
-                <p>{{ post.body }}</p>
+    <div class="post">
+        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+            <div class="post-author">
+                <img class="author-picture" src="{{ post.author.avatar(128) }}">
+                <p><b><a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></b><p>
             </div>
             <div class="timestamp">
-                <p style="font-size: 13px"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
+                <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
+        </div>
+        <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+            <h3>{{ post.title }}</h3>
+            <div class="post-img-section">
+                {% if post.file %}
+                <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                <img  class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
+            </div>
+            <pre>{{ post.body }}</pre>
         </div>
         <div class="post-actions">
             <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
@@ -93,5 +102,9 @@
     </div>
     <br>
     {% endfor %}
+    <div class="pagination-buttons">
+        <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
+        <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
+    </div>   
  </div>
 {% endblock %}
