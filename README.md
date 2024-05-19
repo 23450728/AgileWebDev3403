@@ -22,7 +22,7 @@ flask run
 If you would like to enable email support, type the following into your terminal:
 export MAIL_SERVER=localhost
 export MAIL_PORT=8025
-export MAIL_SERVER=smtp.googlemail.com
+export MAIL_SERVER=smtp.googlemail.com<br />
 export MAIL_PORT=587
 export MAIL_USE_TLS=1
 export MAIL_USERNAME=<your-gmail-username>
