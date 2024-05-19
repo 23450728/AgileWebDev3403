@@ -19,6 +19,11 @@ docker run --name elasticsearch -d --rm -p 9200:9200 --memory="2GB" -e discovery
 export ELASTICSEARCH_URL=http://localhost:9200/<br />
 flask run<br />
 
+Running the DB for the first time:<br/>
+flask db upgrade<br/>
+flask db migrate<br/>
+flask db upgrade<br/>
+
 If you would like to enable email support, type the following into your terminal:<br />
 export MAIL_SERVER=localhost<br />
 export MAIL_PORT=8025<br />
