@@ -1,10 +1,3 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <title>Register</title>
-</head>
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -12,32 +5,42 @@
         <h1>Register</h1>
         <form class="form" method="post">
             {{ form.hidden_tag() }}
-            <p>{{ form.username.label }}</p>
-            <p>{{ form.username(size=32) }}</p>
+            <p>
+                {{ form.username.label }}
+                <br>
+                {{ form.username(size=32) }}
                 {% for error in form.username.errors %}
                 <div class="error">
-                    <p>{{ error }}</p>
+                    {{ error }}
                 </div>       
                 {% endfor %}
-            <p>{{ form.email.label }}</p>
-            <p>{{ form.email(size=64) }}</p>
+            </p>
+            <p>
+                {{ form.email.label }}
+                <br>
+                {{ form.email(size=64) }}
                 {% for error in form.email.errors %}
                 <div class="error">
-                    <p>{{ error }}</p>
+                    {{ error }}
                 </div>                  
                 {% endfor %}
-            <p>{{ form.password.label }}</p>
-            <p>{{ form.password(size=32) }}</p>
+            </p>
+            <p>
+                {{ form.password.label }}
+                <br>
+                {{ form.password(size=32) }}
                 {% for error in form.password.errors %}
                 <div class="error">
-                    <p>{{ error }}</p>
+                    {{ error }}
                 </div>
                 {% endfor %}
-            <p>{{ form.password2.label }}</p>
-            <p>{{ form.password2(size=32) }}</p>
+            <p>
+                {{ form.password2.label }}
+                <br>
+                {{ form.password2(size=32) }}
                 {% for error in form.password2.errors %}
                 <div class="error">
-                    <p>{{ error }}</p>
+                    {{ error }}
                 </div>
                 {% endfor %}
             </p>

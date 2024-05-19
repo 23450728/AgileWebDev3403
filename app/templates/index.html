@@ -1,10 +1,3 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <title>Index page</title>
-</head>
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -63,7 +56,7 @@
         <div id="{{post.id}}-post" class="post">
             <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/index' )" style="cursor: pointer;">
                 <div class="post-author">
-                    <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}">
+                    <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}" alt="{{ post.author.username }}">
                     <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
                 </div>
                 <div class="timestamp">
