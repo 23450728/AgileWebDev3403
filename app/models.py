@@ -1,3 +1,4 @@
+from flask import current_app
 from datetime import datetime, timezone
 from typing import Optional, Set
 import sqlalchemy as sa
@@ -6,6 +7,8 @@ from app import db, login, search
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
+from time import time
+import jwt
 
 class SearchableMixin(object):
     @classmethod
@@ -81,6 +84,21 @@ class User(UserMixin, db.Model):
         query = sa.select(sa.func.count()).select_from(
             self.posts.select().subquery())
         return db.session.scalar(query)
+    
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            current_app.config['SECRET_KEY'], algorithm='HS256')
+    
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, current_app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return db.session.get(User, id)
+    
     
 class Post(SearchableMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

@@ -29,14 +29,35 @@ h4 {
 
 pre {
   font-family: "arial", "sans-serif";
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+}
+
+
+a {
+  font-family: "arial", sans-serif;
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color:rgb(249, 182, 48);
 }
 
 /* Form */
 
+/*
 .form {
     padding: 10px;
+} */
+
+
+.form {
+  margin-left: 140px;
+  margin-right: 140px;
 }
-  
+
   /* Full-width inputs */
 .form input[type=text], input[type=password], input[type=email], textarea {
     width: 50%;
@@ -48,27 +69,41 @@ pre {
 }
   
   /* Set a style for all buttons in forms */
-.form button {
+.form .submit {
+  text-align: center;
+  background-color: rgb(249, 182, 48);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-left:5px;
+}
+
+
+  /* Set a style for cancel button in forms */
+
+.cancel {
     text-align: center;
-    background-color: rgb(249, 182, 48);
+    background-color: rgb(222, 122, 122);
+    color: black;
     border: none;
     border-radius: 10px;
     padding: 10px;
     font-size: 17px;
     cursor: pointer;
-    /*background-color: indianred;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    font-family: "verdana", sans-serif;*/
-}
+    margin-right:5px;
+  }
   
   /* Add a hover effect for buttons */
 .form button:hover {
-    opacity: 0.8;
+    opacity: 0.8;  
+}
+
+.pagination-buttons {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
   
   /* Extra style for the cancel button (red) */
@@ -81,6 +116,13 @@ pre {
   /* Add padding to containers */
 .container {
     padding: 40px;
+    background-color: white;
+}
+
+/* Container for posts in index */
+.grey-container {
+  padding: 40px;
+  background-color: rgb(244, 244, 244);
 }
   
 span.sign_up {
@@ -177,6 +219,8 @@ span.login {
   .topnav input[type=text] {
     border: 1px solid #ccc;  
   }
+
+
 }
 
 
@@ -238,9 +282,17 @@ span.login {
 
 /*Posts */
 .post {
-  border: 3px solid #f1f1f1;
   padding: 30px;
+  margin-left: 140px;
+  margin-right: 140px;
+  background-color: white;
  }
+
+@media (max-width: 850px) {
+  .post, .form {
+    margin:0px;
+  }
+}
 
 .post h2 {
   text-align:center
@@ -382,12 +434,14 @@ img {
 
 .about-us-section {
   align-items: left;
-  padding-left: 10%;
-  padding-right: 10%;
   display:flex;
-  /*justify-content: center;*/
-  margin: auto;
-  margin-right: 20px;
+  justify-content: right;
+}
+
+.about-us-section-2 {
+  align-items: left;
+  display:flex;
+  justify-content: left;
 }
 
 .about-us {
@@ -399,22 +453,91 @@ img {
   text-align: left;
   max-width: 450px;
   padding:25px;
+
   background-color: rgb(249, 182, 48);
   border-radius: 25px;
 }
 
-@media screen and (max-width: 600px) {
-  .about-us-section .about-us .about-us-text input[type=text]{
-    display: block;
-    float: none;
-    align-items: right;
-    text-align: right;
-    background-color: #f44336;
-    width: 100%;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.top-row-left-column {
+  float: right;
+  flex: 50%;
+  background-color: rgb(255, 235, 196);
+  justify-content: right;
+  display: flex;
+}
+
+.top-row-right-column {
+  flex: 50%;
+  background-color: rgb(255, 235, 196);
+  justify-content: left; 
+  display: flex;
+  align-items: center;
+}
+
+.bottom-row-left-column {
+  flex: 50%;
+  background-color: rgb(244, 244, 244);
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 20px;
+}
+
+.bottom-row-right-column {
+  flex: 50%;
+  background-color: rgb(244, 244, 244);
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 1150px) {
+  .top-row-left-column {
+    justify-content: center;
   }
-  .carousel {
-    display: block;
-    float: none;
+
+  .home-text, .home-text p{
+    text-align: center;
+  }
+
+  .top-row-right-column {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .about-us-section {
+    align-items: left;
+    display:flex;
+    justify-content: center;
+  }
+
+  .about-us-section-2 {
+    align-items: left;
+    display:flex;
+    justify-content: center;
+  }
+
+  .top-row-left-column{
+    align-items: left;
+    display:flex;
+    justify-content: center;
+  }
+  
+}
+
+@media (max-width: 600px) {
+  .carousel, .carousel-section {
+    width: 450px;
+    height: 328px;
   }
 }
 
@@ -422,6 +545,30 @@ hr {
   border: 1px solid rgb(249, 182, 48)
 }
 
+.chef-icon-index {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px;
+  height: 180px
+}
+
+.chef-icon-form {
+  width: 180px;
+  height: 180px;
+  margin-left:140px;
+}
+
+.chef-message-form {
+  text-align: left;
+  margin-left: 140px
+}
+
+@media (max-width:850px) {
+  .chef-icon-form, .chef-message-form {
+    margin-left: 0px;
+  }
+}
 /* Post */
 
 .post-content {
@@ -435,6 +582,7 @@ hr {
 
 .post-text {
   text-align: left;
+  word-wrap: break-word;
 }
 
 .post-actions {
@@ -455,10 +603,64 @@ hr {
   color: rgb(247, 165, 0);
 }
 
+.back-button {
+  text-align: center;
+  background-color:rgb(244, 244, 244);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-left: 20px;
+  color: rgb(247, 165, 0);
+}
+
 .post-author {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/*.post-img {
+  max-height: 500px;
+  max-width: 100px;
+  min-width: 600px;
+  justify-content: center;
+  display: flex;
+}*/
+
+.post-img-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+  /*margin-right: 50px;
+  margin-left: 50px;*/
+}
+
+.post-img-section img:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;   /* Make images fill the container */
+  height: 100%;
+  max-height: 500px;  /* Make images fill the container */
+  z-index: 1;   /* Lower z-index, this is the background */
+  border-radius: 15px;
+  filter: blur(30px) brightness(50%);
+  margin: -1px;
+  padding: 1px;
+}
+
+.post-img-main {
+  justify-content: center;
+  max-height: 400px;
+  max-width: 1120px;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  z-index: 2;   /* Higher z-index, this is the foreground */
 }
 
 /* Comments */
@@ -490,8 +692,14 @@ hr {
 }
 
 .comment-section {
-  padding-left: 30px;
-  padding-right: 30px;
+  margin-left: 140px;
+  margin-right: 140px;
+}
+
+@media (max-width:850px) {
+  .comment-section {
+    margin:0px;
+  }
 }
 
 .comment {
@@ -500,6 +708,7 @@ hr {
   justify-content: space-between;
   max-width: 100%;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .comment-text {
@@ -517,6 +726,7 @@ hr {
   min-width: 120px;
   white-space: nowrap;
   flex-shrink: 0;
+  background-color: white;
 }
 
 .right-arrow {
@@ -533,48 +743,15 @@ hr {
 
 body {
   margin: 0;
+  background-color: rgb(244, 244, 244);
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.top-row-left-column {
-  float: right;
-  flex: 50%;
-  background-color: rgb(255, 235, 196);
-}
-
-.top-row-right-column {
-  justify-content: flex-start;
-  flex: 50%;
-  background-color: rgb(255, 235, 196);
-}
-
-.bottom-row-left-column {
-  flex: 50%;
-  background-color: white;
-  padding: 50px;
-}
-
-.bottom-row-right-column {
-  flex: 50%;
-  background-color: white;
-  padding: 50px;
-}
-
-
-@media (max-width: 900px) {
-  .row {
-    flex-direction: column;
-  }
-}
 .comment-content{
   display: flex;
   word-wrap: break-word;
   max-width: 100%;
   box-sizing: border-box;
+  padding:10px;
   /*max-width: 1000px;*/
 }
 
@@ -584,17 +761,18 @@ body {
   overflow-wrap: break-word;
 }
 
-@media (max-width: 1300px) {
+/*@media (max-width: 1300px) {
   .comment-timestamp {
-    display: none; /* Hide timestamp when the screen is smaller */
+    display: none; /* Hide timestamp when the screen is smaller
   }
-}
+}*/
 
 /* Profile page */
 
 .profile {
   display: flex;
   justify-content: left;
+  padding: 10px;
 }
 
 .profile-content {
@@ -602,10 +780,31 @@ body {
   align-content: center;
 }
 
+.pagination-buttons {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 .profile-picture {
   width: 150px;
   height: 150px;
   object-fit: contain;
+}
+
+/* Pagination left and right arrows */
+.left-arrow {
+  color:rgb(249, 182, 48);
+  margin-left: 20px;
+  font-size: 17px;
+  background-color: rgb(244, 244, 244);
+}
+
+.right-arrow {
+  color:rgb(249, 182, 48);
+  margin-right: 20px;
+  font-size: 17px;
+  background-color: rgb(244, 244, 244);
 }
 
 

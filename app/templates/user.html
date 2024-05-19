@@ -54,44 +54,64 @@
 <div class="container">
     <div class="profile">
         <div class="profile-content">
-            <img class="profile-picture" src="{{ user.avatar(128) }}" alt="Profile picture">
+            <img id="profile-picture" class="profile-picture" src="{{ user.avatar(128) }}" alt="Profile picture">
         </div>
         <div class="profile-content">
-            <h1>{{ user.username }}</h1>
+            <h1 id="user-username">{{ user.username }}</h1>
             {% if user.bio %}
-            <p>{{ user.bio }}</p>
+            <p id="user-bio">{{ user.bio }}</p>
             {% endif %}
             {% if user.last_active %}
-            <p><i>Last Active: {{ moment(user.last_active).format('LLL') }}</i></p>
+            <p><i id="user-lastactive">Last Active: {{ moment(user.last_active).format('LLL') }}</i></p>
             {% endif %}
-            <button class="button" type="button" onclick="location.href=('/edit_profile')">Edit Profile</button>
+            {% if current_user.username == user.username %}
+            <button id="edit-profile" class="button" type="button" onclick="location.href=('/edit_profile')">Edit Profile</button>
+            {% endif %}
         </div>
     </div>
     <br>
-    {% if user.posts_count() == 1 %}
-    <h3>{{ user.posts_count() }} Post:</h3>
-    {% else %}
-    <h3>{{ user.posts_count() }} Posts:</h3>
-    {% endif %}
-
-    {% for post in posts %}
-    <div id="div" class="post" style="cursor: pointer;">
-        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" >
-            <div class="post-text">
-                <h4>{{ post.title }}</h4>
-                <p><i>Posted by: <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></i></p>
-                <p>{{ post.body }}</p>
+    <div class="profile">
+        <div class="profile-content">
+        {% if user.posts_count() == 1 %}
+            <h3 id="post-count">{{ user.posts_count() }} Post:</h3>
+        {% else %}
+            <h3>{{ user.posts_count() }} Posts:</h3>
+        {% endif %}
+        </div>
+    </div>
+ </div>
+<div class="grey-container">
+{% for post in posts %}
+    <div class="post">
+        <div class="post-content" onclick="location.href=('/post/{{ post.id }}?prev=/user/{{ user.username }}')" style="cursor: pointer;">
+            <div class="post-author">
+                <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}">
+                <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></b><p>
             </div>
             <div class="timestamp">
-                <p style="font-size: 13px"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
+                <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
         </div>
-        <div class="post-actions">
+        <div class="post-text" onclick="location.href=('/post/{{ post.id }}?prev=/user/{{ user.username }}' )" style="cursor: pointer;">
+            <h3 id="{{post.id}}-post-title">{{ post.title }}</h3>
+            <div class="post-img-section">
+                {% if post.file %}
+                <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                <img id="{{post.id}}-image" class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
+            </div>
+            <pre id="{{post.id}}-post-body">{{ post.body }}</pre>
+        </div>
+        <div id="{{post.id}}-post-actions" class="post-actions">
             <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
             <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
         </div>
     </div>
     <br>
-    {% endfor %}
- </div>
+{% endfor %}
+<div class="pagination-buttons">
+    <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
+    <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
+</div>  
+</div> 
 {% endblock %}

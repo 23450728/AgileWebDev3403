@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Search results page/title>
+    <title>Search results page</title>
 </head>
 
 {% extends "base.html" %}
@@ -51,10 +51,13 @@
     });
 </script>
 
-<div class="container">
+<div class="grey-container">
+    {% if not posts %}
+    <p>No results found!</p>
+    {% else %}
     {% for post in posts %}
     <div class="post">
-        <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+        <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/search?search={{ searchInput }}' )" style="cursor: pointer;">
             <div class="post-author">
                 <img class="author-picture" src="{{ post.author.avatar(128) }}">
                 <p><b><a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></b><p>
@@ -63,8 +66,14 @@
                 <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
         </div>
-        <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
-            <h3>{{ post.title }}</h3>
+        <div class="post-text" onclick="location.href=('/post/{{post.id}}?prev=/search?search={{ searchInput }}' )" style="cursor: pointer;">
+            <h3 id="{{post.id}}-post-title">{{ post.title }}</h3>
+            <div class="post-img-section">
+                {% if post.file %}
+                <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                <img  class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
+            </div>
             <pre>{{ post.body }}</pre>
         </div>
         <div class="post-actions">
@@ -74,5 +83,6 @@
     </div>
     <br>
     {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}
