@@ -39,7 +39,8 @@ a:hover {
 /* Form */
 
 .form {
-  padding: 10px;
+  margin-left: 140px;
+  margin-right: 140px;
 }
 
 .form input[type=text], input[type=password], input[type=email], textarea {
@@ -99,6 +100,7 @@ a:hover {
   color:rgb(249, 182, 48);
   margin-right: 20px;
   font-size: 17px;
+  background-color: rgb(244, 244, 244);
 }
 
 .pagination-buttons {
@@ -110,6 +112,12 @@ a:hover {
 /* Add padding to containers */
 .container {
     padding: 40px;
+}
+
+/* Container for posts in index */
+.grey-container {
+  padding: 40px;
+  background-color: rgb(244, 244, 244);
 }
   
 span.sign_up {
@@ -253,8 +261,16 @@ span.login {
 
 /*Posts */
 .post {
-  border: 3px solid #f1f1f1;
   padding: 30px;
+  margin-left: 140px;
+  margin-right: 140px;
+  background-color: white;
+ }
+
+@media (max-width: 850px) {
+  .post, .form {
+    margin:0px;
+  }
 }
 
 .post h2 {
@@ -486,6 +502,30 @@ hr {
   border: 1px solid rgb(249, 182, 48)
 }
 
+.chef-icon-index {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px;
+  height: 180px
+}
+
+.chef-icon-form {
+  width: 180px;
+  height: 180px;
+  margin-left:140px;
+}
+
+.chef-message-form {
+  text-align: left;
+  margin-left: 140px
+}
+
+@media (max-width:850px) {
+  .chef-icon-form, .chef-message-form {
+    margin-left: 0px;
+  }
+}
 /* Post */
 
 .post-content {
@@ -520,6 +560,18 @@ hr {
   color: rgb(247, 165, 0);
 }
 
+.back-button {
+  text-align: center;
+  background-color:rgb(244, 244, 244);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-left: 20px;
+  color: rgb(247, 165, 0);
+}
+
 .post-author {
   display: flex;
   justify-content: center;
@@ -549,7 +601,7 @@ hr {
   max-height: 500px; 
   z-index: 1; /* Lower z-index indicates it is the background */
   border-radius: 15px;
-  filter: blur(30px) brightness(40%); /* Add blur effect and make it darker */
+  filter: blur(30px) brightness(50%);
   margin: -1px;
   padding: 1px;
 }
@@ -587,8 +639,14 @@ hr {
 } /* Set size for comment profile pictures */
 
 .comment-section {
-  padding-left: 30px;
-  padding-right: 30px;
+  margin-left: 140px;
+  margin-right: 140px;
+}
+
+@media (max-width:850px) {
+  .comment-section {
+    margin:0px;
+  }
 }
 
 .comment {
@@ -597,6 +655,7 @@ hr {
   justify-content: space-between;
   max-width: 100%;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .comment-text {
@@ -614,6 +673,7 @@ hr {
   min-width: 120px;
   white-space: nowrap;
   flex-shrink: 0;
+  background-color: white;
 }
 
 .comment-content{
@@ -621,6 +681,8 @@ hr {
   word-wrap: break-word;
   max-width: 100%;
   box-sizing: border-box;
+  padding:10px;
+  /*max-width: 1000px;*/
 }
 
 .comment-text-content{
@@ -647,6 +709,7 @@ hr {
   height: 150px;
   object-fit: contain;
 }
+
 
 
 

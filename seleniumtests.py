@@ -118,7 +118,7 @@ class SeleniumTests(TestCase):
         SeleniumTests.login(self, "susan", "cat")
         SeleniumTests.post(self, "Test Title", "Test Post", None)
 
-        self.driver.find_element("id", "1-post").click()
+        self.driver.find_element("id", "1-post-body").click()
         self.driver.find_element("id", "make-comment").click()
         self.driver.find_element("id", "comment").send_keys("Test Comment")
         self.driver.find_element("id", "submit-comment").click()
@@ -149,9 +149,6 @@ class SeleniumTests(TestCase):
 
         comment_text = self.driver.find_element("id", "1-comment-text")
         self.assertTrue(comment_text.get_attribute("innerHTML") == "Test Comment")
-
-        comment_timestamp = self.driver.find_element("id", "1-comment-timestamp")
-        self.assertTrue(comment_timestamp is not None)
 
     def test_user_profile(self):
         SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")

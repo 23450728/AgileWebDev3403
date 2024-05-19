@@ -2,8 +2,12 @@
 
 {% block content %}
 <div class="container">
-    <h1>Edit Profile</h1>
+    <img class="chef-icon-form" src="/static/images/female-chef.svg" alt="chef-icon">
+    <h2 class="chef-message-form">Tell other chefs about yourself!</h2>
+ </div>
+<div class="grey-container">
     <form class="form" method="post">
+        <h1>Edit Profile</h1>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}
@@ -36,7 +40,7 @@
             {% endfor %}
         </p>
         <button class="cancel" type="button" onclick="location.href=('/user/{{current_user.username}}')">Cancel</button>
-        <button class="button" type="button" onclick="form.submit()">Submit</button>
+        <button id="submit-profile" class="button" type="button" onclick="form.submit()">Submit</button>
     </form>
 </div>
 {% endblock %}

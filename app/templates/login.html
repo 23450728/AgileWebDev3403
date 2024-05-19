@@ -1,48 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
+<div class="container">
+    <form class="form" method="post" novalidate>
         <h1 id="sign-in">Sign In</h1>
-        <form class="form" method="post" novalidate>
-            {{ form.hidden_tag() }}
+        {{ form.hidden_tag() }}
 
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-                {% for message in messages %}
-                        <div class="error">
-                            <p>{{ message }}</p>
-                        </div>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                    <div class="error">
+                        <p>{{ message }}</p>
+                    </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
 
-            <p>
-                {{ form.username.label }}
-                <br>
-                {{ form.username(size=32) }}
-                {% for error in form.username.errors %}
-                <div class="error">
-                    <p>{{ error }}</p>
-                </div>            
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.password.label }}
-                <br>
-                {{ form.password(size=32) }}
-                {% for error in form.password.errors %}
-                <div class="error">
-                    <p>{{ error }}</p>
-                </div>         
-                {% endfor %}
-            </p>
-            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-            <button id="submit-credentials" class="button" onclick="form.submit()">Submit</button>
-        </form>
-
+        <p>
+            {{ form.username.label }}
+            <br>
+            {{ form.username(size=32) }}
+            {% for error in form.username.errors %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>            
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}
+            <br>
+            {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>         
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <button id="submit-credentials" class="button" onclick="form.submit()">Submit</button>
+        <br>
+        <br>
         <p>New User? <a id="register" href="{{ url_for('main.register') }}">Click to Register!</a></p>
-    </div>
+    </form>
+</div>
 
 {% endblock %}

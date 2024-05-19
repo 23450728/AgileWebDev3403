@@ -45,8 +45,8 @@
     });
 </script>
 
-    <div class="container">
-        <button class="post-action" onclick="location.href=('{{ prev }}')"><i class="fas fa-arrow-left"></i></button>
+    <div class="grey-container">
+        <button class="back-button" onclick="location.href=('{{ prev }}')"><i class="fas fa-arrow-left"></i></button>
         <div class="post">
             <div class="post-content">
                 <div class="post-author">
@@ -70,7 +70,7 @@
             <div id="{{post.id}}-post-actions" class="post-actions">
                 {% if current_user.is_anonymous != True %}
                 <button class="post-action" style="justify-content: left;"><i class="far fa-thumbs-up like-click like-hover"></i></button>
-                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                <button id="make-comment" class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% elif current_user.is_anonymous == True %}
                 <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div>
-            <div class="comment-timestamp" style="justify-content:right; display:flex; margin:-10px;">
+            <div class="comment-timestamp" style="justify-content:right; display:flex; padding-right:10px">
                 <p style="font-size: 13px;"><i>{{ moment(comment.timestamp).format('LLL') }}</i></p>
             </div>
             {% endfor %}
