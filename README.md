@@ -25,8 +25,8 @@ export MAIL_PORT=8025<br />
 export MAIL_SERVER=smtp.googlemail.com<br />
 export MAIL_PORT=587<br />
 export MAIL_USE_TLS=1<br />
-export MAIL_USERNAME=<your-gmail-username><br />
-export MAIL_PASSWORD=<your-gmail-password><br />
+export MAIL_USERNAME=your-gmail-username<br />
+export MAIL_PASSWORD=your-gmail-password<br />
 
 If you would like to enable testing:<br />
 python -m unittest seleniumtests.py<br />
