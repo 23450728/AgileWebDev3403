@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request, g, current
 from app.main.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
-from app.models import User, Post, Comment
+from app.models import User, Post, Comment, user_likes
 import os
 import uuid
 from urllib.parse import urlsplit
@@ -150,8 +150,23 @@ def AddComment(parent):
         return redirect('/post/' + str(parent))
     return render_template("comment.html", form=form, post=post, prev=prev)
 
+@bp.route('/post/<int:id>/like', methods=['GET', 'POST'])
+def LikePost(id):
+    post = db.session.scalar(sa.select(Post).where(Post.id == id))
+
+    if current_user.is_anonymous:
+        return redirect('/login?next=/post/' + str(id))
+
+    if current_user in post.liked_by:
+        statement = user_likes.delete().where(user_likes.c.post_id == post.id, user_likes.c.user_id == current_user.id)
+    else:
+        statement = user_likes.insert().values(post_id=post.id, user_id=current_user.id)
+
+    db.session.execute(statement)
+    db.session.commit()
+    return redirect('/post/' + str(id))
+
 @bp.route('/search')
-@login_required
 def search():
     searchInput = request.args.get('search')
 

@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, Set
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db, login, search
@@ -49,6 +49,10 @@ class SearchableMixin(object):
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
+user_likes = db.Table('user_likes',
+                       db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+                       db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True))
+
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
@@ -57,7 +61,9 @@ class User(UserMixin, db.Model):
     bio: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
     last_active: so.Mapped[Optional[datetime]] = so.mapped_column(default=lambda: datetime.now(timezone.utc))
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
+    liked_posts: so.Mapped[Set['Post']] = so.relationship('Post', secondary='user_likes', back_populates='liked_by')
     comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='author')
+    
     def __repr__(self):
         return '<User {}>'.format(self.username)
     
@@ -85,7 +91,9 @@ class Post(SearchableMixin, db.Model):
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
     author: so.Mapped[User] = so.relationship(back_populates='posts')
     comments: so.WriteOnlyMapped['Comment'] = so.relationship(back_populates='parent')
-    __searchable__ = ['title', 'body']
+    liked_by: so.Mapped[Set['User']] = so.relationship(secondary='user_likes', back_populates='liked_posts')
+
+    __searchable__ = ['title', 'body', 'author.username']
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
@@ -94,6 +102,9 @@ class Post(SearchableMixin, db.Model):
         query = sa.select(sa.func.count()).select_from(
             self.comments.select().subquery())
         return db.session.scalar(query)
+    
+    def likes_count(self):
+        return len(self.liked_by) if self.liked_by != None else 0
 
 class Comment(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
