@@ -74,7 +74,7 @@
     </div>
     <br>
     {% if user.posts_count() == 1 %}
-    <h3>{{ user.posts_count() }} Post:</h3>
+    <h3 id="post-count">{{ user.posts_count() }} Post:</h3>
     {% else %}
     <h3>{{ user.posts_count() }} Posts:</h3>
     {% endif %}
@@ -83,11 +83,11 @@
     <div id="div" class="post">
         <div class="post-content" onclick="location.href=('/post/{{ post.id }}?prev=/user/{{ user.username }}' )" style="cursor: pointer;">
             <div class="post-author">
-                <img class="author-picture" src="{{ post.author.avatar(128) }}">
-                <p><b><a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></b><p>
+                <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}">
+                <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a></b><p>
             </div>
             <div class="timestamp">
-                <p style="font-size: 13px;"><i>{{ moment(post.timestamp).format('LLL') }}</i></p>
+                <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p>
             </div>
             <pre>{{ post.body }}</pre>
         </div>
@@ -96,12 +96,12 @@
             <div class="post-img-section">
                 {% if post.file %}
                 <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                <img  class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                <img id="{{post.id}}-image" class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
                 {% endif %}
             </div>
-            <pre>{{ post.body }}</pre>
+            <pre id="{{post.id}}-post-body">{{ post.body }}</pre>
         </div>
-        <div class="post-actions">
+        <div id="{{post.id}}-post-actions" class="post-actions">
             <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
             <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
         </div>

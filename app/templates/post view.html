@@ -79,6 +79,7 @@
                 {% if current_user.is_anonymous != True %}
                 <button class="post-action" style="justify-content: left;"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% elif current_user.is_anonymous == True %}
                 <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
@@ -108,6 +109,10 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+        <div class="pagination-buttons">
+            <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
+            <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
         </div>
         <div class="pagination-buttons">
             <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
