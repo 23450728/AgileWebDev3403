@@ -64,8 +64,28 @@ class SeleniumTests(TestCase):
     def test_register(self):
         SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
         topnav = self.driver.find_element("id", "topnav")
+
+    def login(self, username, password):
+        self.driver.find_element("id", "username").send_keys(username)
+        self.driver.find_element("id", "password").send_keys(password)
+        self.driver.find_element("id", "submit-credentials").click()
+
+    def post(self, title, text, image_file):
+        self.driver.find_element("id", "make-post").click()
+        self.driver.find_element("id", "title").send_keys(title)
+
+        if image_file is not None:
+            self.driver.find_element("id", "file").send_keys(os.path.abspath(image_file))
+
+        self.driver.find_element("id", "post").send_keys(text)
+        self.driver.find_element("id", "submit-post").click()
+        
+    def test_register(self):
+        SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
+        topnav = self.driver.find_element("id", "topnav")
         login_title = self.driver.find_element("id", "sign-in")
 
+        self.assertTrue(topnav is not None)
         self.assertTrue(topnav is not None)
         self.assertTrue(login_title.get_attribute("innerHTML") == "Sign In")
 
@@ -73,9 +93,14 @@ class SeleniumTests(TestCase):
         SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
         SeleniumTests.login(self, "susan", "cat")
         topnav = self.driver.find_element("id", "topnav")
+    def test_login(self):
+        SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
+        SeleniumTests.login(self, "susan", "cat")
+        topnav = self.driver.find_element("id", "topnav")
         hello = self.driver.find_element("id", "hello")
         question = self.driver.find_element("id", "question")
         
+        self.assertTrue(topnav is not None)
         self.assertTrue(topnav is not None)
         self.assertTrue(hello.get_attribute("innerHTML") == "Hi, susan!")
         self.assertTrue(question.get_attribute("innerHTML") == "What would you like to cook?")
@@ -202,7 +227,7 @@ class SeleniumTests(TestCase):
 
         bio = self.driver.find_element("id", "user-bio")
         self.assertTrue(bio.get_attribute("innerHTML") == "Test bio")
-    
+
     def test_search(self):
         SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
         SeleniumTests.login(self, "susan", "cat")
@@ -216,10 +241,7 @@ class SeleniumTests(TestCase):
         self.assertTrue(len(results) == 1)
         result_title = results[0].find_element("id", "1-post-title")
         self.assertTrue(result_title.get_attribute("innerHTML") == "Test1")
-
-
-
-
+        
 
 
 
@@ -235,9 +257,6 @@ class SeleniumTests(TestCase):
 
 
 
-
-        #Plan
-        #Kelly - make tests for posts, comments, user profile page and edit profile, search
 
 
 

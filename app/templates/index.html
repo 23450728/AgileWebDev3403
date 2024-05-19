@@ -66,12 +66,9 @@
             </div>
             <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
                 <h3 id="{{post.id}}-post-title">{{ post.title }}</h3>
-                <div class="post-img-section">
-                    {% if post.file %}
-                    <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                    <img id="{{post.id}}-image" class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                    {% endif %}
-                </div>
+                {% if post.file %}
+                    <img id="{{post.id}}-image" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
                 <pre id="{{post.id}}-post-body">{{ post.body }}</pre>
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">

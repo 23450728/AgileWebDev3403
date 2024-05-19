@@ -60,12 +60,9 @@
             </div>
             <div class="post-text">
                 <h3 id="{{post.id}}-post-title">{{ post.title }}</h3>
-                <div class="post-img-section">
-                    {% if post.file %}
-                    <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                    <img id="{{post.id}}-image" class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                    {% endif %}
-                </div>
+                {% if post.file %}
+                <img id="{{post.id}}-image" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                {% endif %}
                 <pre id="{{post.id}}-post-body">{{ post.body }}</pre>
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">
@@ -98,6 +95,10 @@
                 <p style="font-size: 13px;"><i>{{ moment(comment.timestamp).format('LLL') }}</i></p>
             </div>
             {% endfor %}
+        </div>
+        <div class="pagination-buttons">
+            <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
+            <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
         </div>
         <div class="pagination-buttons">
             <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>

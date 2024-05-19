@@ -93,16 +93,17 @@ a:hover {
   height: 180px;
   margin-left:140px;
 }
-
-.chef-message-form {
-  text-align: left;
-  margin-left: 140px
+  
+  /* Add padding to containers */
+.container {
+    padding: 40px;
+    background-color: white;
 }
 
-@media (max-width:850px) {
-  .chef-icon-form, .chef-message-form {
-    margin-left: 0px;
-  }
+/* Container for posts in index */
+.grey-container {
+  padding: 40px;
+  background-color: rgb(244, 244, 244);
 }
 
 span.sign_up {
@@ -441,11 +442,21 @@ body {
 
 .top-row-right-column {
   justify-content: left; 
+  display: flex;
+  align-items: center;
+}
+
+.bottom-row-left-column {
+  flex: 50%;
+  background-color: rgb(244, 244, 244);
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 20px;
 }
 
 .bottom-column {
   flex: 50%;
-  background-color: white;
+  background-color: rgb(244, 244, 244);
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 20px;
@@ -637,6 +648,23 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
   background-color: white;
+}
+
+.right-arrow {
+  color:rgb(249, 182, 48);
+  margin-right: 20px;
+  font-size: 17px;
+}
+
+/* New Homepage */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(244, 244, 244);
 }
 
 .comment-content{
