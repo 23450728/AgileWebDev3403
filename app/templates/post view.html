@@ -3,6 +3,7 @@
 {% block content %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
     var like_count = 0
     $(document).ready(function(){
@@ -84,8 +85,8 @@
                 <div class="comment-content">
                     <div class="comment-author">
                         <div class="comment-author-content">
-                            <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ post.author.avatar(128) }}">
-                            <p><b id="{{comment.id}}-comment-author">{{ comment.author.username }}</b>:<p>
+                            <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ comment.author.avatar(128) }}">
+                            <p><b><a id="{{comment.id}}-comment-author" href="{{ url_for('main.user', username=comment.author.username) }}">{{ comment.author.username }}</a></b>:<p>
                         </div>
                     </div>
                     <div class="comment-text">
