@@ -34,6 +34,17 @@ pre {
   overflow-wrap: break-word;
 }
 
+
+a {
+  font-family: "arial", sans-serif;
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color:rgb(249, 182, 48);
+}
+
 /* Form */
 
 .form {
@@ -79,7 +90,13 @@ pre {
   
   /* Add a hover effect for buttons */
 .form button:hover {
-    opacity: 0.8;
+    opacity: 0.8;  
+}
+
+.pagination-buttons {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
   
   /* Extra style for the cancel button (red) */

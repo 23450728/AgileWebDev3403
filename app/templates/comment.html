@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="container">
-    <button class="post-action" onclick="location.href=('/post/{{post.id}}')"><i class="fas fa-arrow-left"></i></button>
     <div class="post">
         <div class="post-content">
             <div class="post-author">
@@ -46,7 +45,8 @@
                     <p>{{ error }}</p>
                 </div>            
                 {% endfor %}
-            <button id="submit-comment" class="button" type="button" onclick="form.submit()">Submit</button>
+            <button class="cancel" type="button" onclick="location.href=('/post/{{post.id}}?prev={{ prev }}')">Cancel</button>
+            <button class="button" type="button" onclick="form.submit()">Submit</button>
     </form>
 </div>
     {% endblock %}
