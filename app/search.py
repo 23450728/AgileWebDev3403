@@ -5,7 +5,11 @@ def add_to_index(index, model):
         return
     payload = {}
     for field in model.__searchable__:
-        payload[field] = getattr(model, field)
+        if '.' in field:
+            obj = getattr(model, field.split('.')[0])
+            payload[field] = getattr(obj, field.split('.')[1])
+        else:
+            payload[field] = getattr(model, field)
 
     current_app.elasticsearch.index(index=index, id=model.id, document=payload)
 
