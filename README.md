@@ -31,3 +31,8 @@ export MAIL_PASSWORD=your-gmail-password<br />
 If you would like to enable testing:<br />
 python -m unittest seleniumtests.py<br />
 python -m unittest unittests.py<br />
+
+References:
+Migeul Grinberg Flask Tutorial Blog: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+Miguel Grinberg Flask Image upload: https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask
+CHATGPT 3.5 and 4.0
