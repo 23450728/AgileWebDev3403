@@ -67,11 +67,15 @@
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">
                 {% if current_user.is_anonymous != True %}
-                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/like')" style="justify-content: left;">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover {% if current_user in post.liked_by %}active{% endif %}"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/like')" style="justify-content: left;">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click {% if current_user in post.liked_by %}active{% endif %}"></i></button>
                 <button id="make-comment" class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% elif current_user.is_anonymous == True %}
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                {% endif %}
+                {% if ADMIN %}
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Ban user</p> </button>
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Delete post</p> </button>
                 {% endif %}
             </div>
         </div>

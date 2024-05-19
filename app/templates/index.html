@@ -1,49 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $(".active").removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
-
-        $(".like-click").click(
-            function () {
-                if ($(this).hasClass("active")) {
-                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
-                } else {
-                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
-                }
-            }
-        );
-
-        $(".like-hover").hover(
-            function () {
-                if ($(this).hasClass("active")) {
-                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
-                } else {
-                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
-                }
-            },
-            function () {
-                if ($(this).hasClass("active")) {
-                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
-                } else {
-                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
-                }
-            }
-        );
-
-        $(".comment-hover").hover(
-            function () {
-                $(this).removeClass("far fa-comment").addClass("fas fa-comment");
-            },
-            function () {
-                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
-            }
-        );
-    });
-</script>
-
     <div class="container">
         <img class="chef-icon-index" src="/static/images/male-chef.svg" alt="chef-icon">
         {% if current_user.is_anonymous != True %}
@@ -66,18 +23,21 @@
             </div>
             <div class="post-text" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
                 <h3 id="{{post.id}}-post-title">{{ post.title }}</h3>
-                {% if post.file %}
-                    <img id="{{post.id}}-image" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
-                {% endif %}
+                <div class="post-img-section">
+                    {% if post.file %}
+                    <img src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                    <img id="{{post.id}}-image" class="post-img-main" src="/static/images/{{ post.file }}" alt="Image for post {{post.title}}">
+                    {% endif %}
+                </div>
                 <pre id="{{post.id}}-post-body">{{ post.body }}</pre>
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">
                 {% if current_user.is_anonymous != True %}
-                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/like')" style="justify-content: left;">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover {% if current_user in post.liked_by %}active{% endif %}"></i></button>
-                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                <button class="post-action" type="button" style="justify-content: left;">{{ post.likes_count() }} <i class="fas fa-thumbs-up"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="fas fa-comment"></i></button>
                 {% elif current_user.is_anonymous == True %}
-                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover"></i></button>
-                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.likes_count() }} <i class="fas fa-thumbs-up like-click"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="fas fa-comment"></i></button>
                 {% endif %}
                 {% if ADMIN %}
                 <button class="post-action" type="button" onclick="location.href=('/index')"><p>Ban user</p> </button>
