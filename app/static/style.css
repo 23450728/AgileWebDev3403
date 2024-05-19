@@ -501,6 +501,11 @@ body {
   height: 180px
 }
 
+.chef-message-form {
+  text-align: left;
+  margin-left: 140px
+}
+
 .post-content {
   display:flex;
   justify-content: space-between;
