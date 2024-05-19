@@ -288,7 +288,7 @@ span.login {
  }
 
 @media (max-width: 850px) {
-  .post, .comment, .form {
+  .post, .form {
     margin:0px;
   }
 }
@@ -695,6 +695,12 @@ hr {
   margin-right: 140px;
 }
 
+@media (max-width:850px) {
+  .comment-section {
+    margin:0px;
+  }
+}
+
 .comment {
   display:flex;
   padding: 0px;
@@ -789,12 +795,14 @@ body {
   color:rgb(249, 182, 48);
   margin-left: 20px;
   font-size: 17px;
+  background-color: rgb(244, 244, 244);
 }
 
 .right-arrow {
   color:rgb(249, 182, 48);
   margin-right: 20px;
   font-size: 17px;
+  background-color: rgb(244, 244, 244);
 }
 
 
