@@ -52,14 +52,14 @@
 </script>
 
     <div class="container">
-        <img class="chef-icon" src="/static/images/chef-icon.svg" alt="chef-icon">
+        <img class="chef-icon-index" src="/static/images/male-chef.svg" alt="chef-icon">
         {% if current_user.is_anonymous != True %}
         <h2 id="hello">Hi, {{ current_user.username }}!</h2>
         {% endif %}
         <h2 id="question">What would you like to cook?</h2>
     </div>
 
-    <div class="posts-container">
+    <div class="grey-container">
         {% for post in posts %}
         <div id="{{post.id}}-post" class="post">
             <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/index' )" style="cursor: pointer;">

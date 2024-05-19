@@ -70,13 +70,18 @@
         </div>
     </div>
     <br>
-    {% if user.posts_count() == 1 %}
-    <h3 id="post-count">{{ user.posts_count() }} Post:</h3>
-    {% else %}
-    <h3>{{ user.posts_count() }} Posts:</h3>
-    {% endif %}
-
-    {% for post in posts %}
+    <div class="profile">
+        <div class="profile-content">
+        {% if user.posts_count() == 1 %}
+            <h3 id="post-count">{{ user.posts_count() }} Post:</h3>
+        {% else %}
+            <h3>{{ user.posts_count() }} Posts:</h3>
+        {% endif %}
+        </div>
+    </div>
+ </div>
+<div class="grey-container">
+{% for post in posts %}
     <div class="post">
         <div class="post-content" onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
             <div class="post-author">
@@ -103,10 +108,10 @@
         </div>
     </div>
     <br>
-    {% endfor %}
-    <div class="pagination-buttons">
-        <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
-        <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
-    </div>   
- </div>
+{% endfor %}
+<div class="pagination-buttons">
+    <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
+    <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
+</div>  
+</div> 
 {% endblock %}

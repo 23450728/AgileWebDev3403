@@ -36,16 +36,17 @@ pre {
 
 /* Form */
 
+/*
 .form {
     padding: 10px;
-}
+} */
 
-.comment-form {
+
+.form {
   margin-left: 140px;
   margin-right: 140px;
 }
 
-  
   /* Full-width inputs */
 .form input[type=text], input[type=password], input[type=email], textarea {
     width: 50%;
@@ -101,7 +102,7 @@ pre {
 }
 
 /* Container for posts in index */
-.posts-container {
+.grey-container {
   padding: 40px;
   background-color: rgb(244, 244, 244);
 }
@@ -270,7 +271,7 @@ span.login {
  }
 
 @media (max-width: 850px) {
-  .post {
+  .post, .comment, .form {
     margin:0px;
   }
 }
@@ -526,12 +527,29 @@ hr {
   border: 1px solid rgb(249, 182, 48)
 }
 
-.chef-icon {
+.chef-icon-index {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 180px;
   height: 180px
+}
+
+.chef-icon-form {
+  width: 180px;
+  height: 180px;
+  margin-left:140px;
+}
+
+.chef-message-form {
+  text-align: left;
+  margin-left: 140px
+}
+
+@media (max-width:850px) {
+  .chef-icon-form, .chef-message-form {
+    margin-left: 0px;
+  }
 }
 /* Post */
 
@@ -656,10 +674,8 @@ hr {
 }
 
 .comment-section {
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-left: 110px;
-  margin-right: 110px;
+  margin-left: 140px;
+  margin-right: 140px;
 }
 
 .comment {
