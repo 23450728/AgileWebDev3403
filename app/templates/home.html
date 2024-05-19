@@ -35,7 +35,7 @@
                 <ul data-slides>
                     {% for post in posts %}
                     {% if post.file %}
-                    <li class="slide" data-active onclick="location.href=('/post/{{post.id}}' )" style="cursor: pointer;">
+                    <li class="slide" data-active onclick="location.href=('/post/{{ post.id }}?prev=/home')" style="cursor: pointer;">
                         <img src="/static/images/{{post.file }}" alt="Image for post {{post.title}}">
                         <p><i>Made by: chef/{{post.author.username}}</i></p>
                     </li>
