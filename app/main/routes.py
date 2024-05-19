@@ -152,19 +152,25 @@ def AddComment(parent):
 
 @bp.route('/post/<int:id>/like', methods=['GET', 'POST'])
 def LikePost(id):
+    page = request.args.get('page', 1, type=int)
+    prev = request.args.get('prev', '/index')
     post = db.session.scalar(sa.select(Post).where(Post.id == id))
-
+    commentsQuery = sa.select(Comment).where(Comment.post_id == id).order_by(Comment.timestamp)
+    comments = db.paginate(commentsQuery, page=page, per_page=10, error_out=False)
     if current_user.is_anonymous:
         return redirect('/login?next=/post/' + str(id))
-
     if current_user in post.liked_by:
         statement = user_likes.delete().where(user_likes.c.post_id == post.id, user_likes.c.user_id == current_user.id)
     else:
         statement = user_likes.insert().values(post_id=post.id, user_id=current_user.id)
+    next_url = url_for('main.SelectPost', id=id, page=comments.next_num) \
+        if comments.has_next else None
+    prev_url = url_for('main.SelectPost', id=id, page=comments.prev_num) \
+        if comments.has_prev else None
 
     db.session.execute(statement)
     db.session.commit()
-    return redirect('/post/' + str(id))
+    return render_template("post view.html", post=post, comments=comments.items, next_url=next_url, prev_url=prev_url, prev=prev)
 
 @bp.route('/search')
 def search():
