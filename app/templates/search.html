@@ -52,6 +52,9 @@
 </script>
 
 <div class="container">
+    {% if not posts %}
+    <p>No results found!</p>
+    {% else %}
     {% for post in posts %}
     <div class="post">
         <div class="post-content" onclick="location.href=('/post/{{post.id}}?prev=/search?search={{ searchInput }}' )" style="cursor: pointer;">
@@ -80,5 +83,6 @@
     </div>
     <br>
     {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}
