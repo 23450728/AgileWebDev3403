@@ -14,7 +14,7 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired(), Length(max=30)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
@@ -31,13 +31,13 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('This email is already taken.')
         
 class PostForm(FlaskForm):
-    title = StringField('Your title', validators=[DataRequired(), Length(min=1, max=140)])
-    post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])
+    title = StringField('Your title', validators=[DataRequired(), Length(min=1, max=100)])
+    post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=3000)])
     file = FileField("Image")
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
-    comment = TextAreaField("Your comment", validators=[DataRequired(), Length(min=1, max=140)] )
+    comment = TextAreaField("Your comment", validators=[DataRequired(), Length(min=1, max=3000)] )
     submit = SubmitField('Submit')
 
 class SearchForm(FlaskForm):
@@ -45,7 +45,7 @@ class SearchForm(FlaskForm):
     submit = SubmitField('Search')
 
 class EditProfileForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired(), Length(max=30)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     bio = TextAreaField('Bio', validators=[Length(min=0, max=140)])
     submit = SubmitField('Submit')
