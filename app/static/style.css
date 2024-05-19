@@ -116,6 +116,7 @@ a:hover {
   /* Add padding to containers */
 .container {
     padding: 40px;
+    background-color: white;
 }
 
 /* Container for posts in index */
@@ -480,7 +481,7 @@ img {
 
 .bottom-row-left-column {
   flex: 50%;
-  background-color: white;
+  background-color: rgb(244, 244, 244);
   padding-right: 30px;
   padding-left: 30px;
   padding-bottom: 20px;
@@ -488,7 +489,7 @@ img {
 
 .bottom-row-right-column {
   flex: 50%;
-  background-color: white;
+  background-color: rgb(244, 244, 244);
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 20px;
@@ -742,6 +743,7 @@ hr {
 
 body {
   margin: 0;
+  background-color: rgb(244, 244, 244);
 }
 
 .comment-content{
