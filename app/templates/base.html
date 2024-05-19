@@ -27,7 +27,7 @@
                 <div class="search-container">
                     <form action="{{ url_for('main.search') }}" method="get" novalidate>
                         {{ g.search_form.search(size=20, placeholder=g.search_form.search.label.text) }}
-                        <button onclick="g.search_form.submit()"><i class="fas fa-search"></i></button>   
+                        <button id="submit-search" onclick="g.search_form.submit()"><i class="fas fa-search"></i></button>   
                     </form>
                 </div>
             {% endif %}

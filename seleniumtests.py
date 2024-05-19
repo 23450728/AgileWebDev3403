@@ -5,6 +5,7 @@ from flask_login import current_user
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from app import create_app, db
 from config import TestConfig
 import sqlalchemy as sa
@@ -38,7 +39,12 @@ class SeleniumTests(TestCase):
         self.app_context.pop()
     
     def register(self, username, email, password):
+    def register(self, username, email, password):
         self.driver.find_element("id", "start-cooking").click()
+        self.driver.find_element("id", "username").send_keys(username)
+        self.driver.find_element("id", "email").send_keys(email)
+        self.driver.find_element("id", "password").send_keys(password)
+        self.driver.find_element("id", "password2").send_keys(password)
         self.driver.find_element("id", "username").send_keys(username)
         self.driver.find_element("id", "email").send_keys(email)
         self.driver.find_element("id", "password").send_keys(password)
@@ -63,8 +69,28 @@ class SeleniumTests(TestCase):
     def test_register(self):
         SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
         topnav = self.driver.find_element("id", "topnav")
+
+    def login(self, username, password):
+        self.driver.find_element("id", "username").send_keys(username)
+        self.driver.find_element("id", "password").send_keys(password)
+        self.driver.find_element("id", "submit-credentials").click()
+
+    def post(self, title, text, image_file):
+        self.driver.find_element("id", "make-post").click()
+        self.driver.find_element("id", "title").send_keys(title)
+
+        if image_file is not None:
+            self.driver.find_element("id", "file").send_keys(os.path.abspath(image_file))
+
+        self.driver.find_element("id", "post").send_keys(text)
+        self.driver.find_element("id", "submit-post").click()
+        
+    def test_register(self):
+        SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
+        topnav = self.driver.find_element("id", "topnav")
         login_title = self.driver.find_element("id", "sign-in")
 
+        self.assertTrue(topnav is not None)
         self.assertTrue(topnav is not None)
         self.assertTrue(login_title.get_attribute("innerHTML") == "Sign In")
 
@@ -72,9 +98,14 @@ class SeleniumTests(TestCase):
         SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
         SeleniumTests.login(self, "susan", "cat")
         topnav = self.driver.find_element("id", "topnav")
+    def test_login(self):
+        SeleniumTests.register(self, "susan", "susan@gmail.com", "cat")
+        SeleniumTests.login(self, "susan", "cat")
+        topnav = self.driver.find_element("id", "topnav")
         hello = self.driver.find_element("id", "hello")
         question = self.driver.find_element("id", "question")
         
+        self.assertTrue(topnav is not None)
         self.assertTrue(topnav is not None)
         self.assertTrue(hello.get_attribute("innerHTML") == "Hi, susan!")
         self.assertTrue(question.get_attribute("innerHTML") == "What would you like to cook?")
@@ -175,6 +206,7 @@ class SeleniumTests(TestCase):
 
 
         #Plan
+        #Kelly - make tests for posts, comments, user profile page and edit profile, search
         #Kelly - make tests for posts, comments, user profile page and edit profile, search
 
 

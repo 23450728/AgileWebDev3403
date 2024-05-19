@@ -59,8 +59,11 @@
                 <div class="post-author">
                     <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}">
                     <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
+                    <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}">
+                    <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
                 </div>
                 <div class="timestamp">
+                    <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p1>
                     <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p1>
                 </div>
             </div>
@@ -72,8 +75,10 @@
                 <pre id="{{post.id}}-post-body">{{ post.body }}</pre>
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">
+            <div id="{{post.id}}-post-actions" class="post-actions">
                 {% if current_user.is_anonymous != True %}
                 <button class="post-action" style="justify-content: left;"><i class="far fa-thumbs-up like-click like-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% elif current_user.is_anonymous == True %}
                 <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
@@ -90,9 +95,12 @@
                         <div class="comment-author-content">
                             <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ post.author.avatar(128) }}">
                             <p><b id="{{comment.id}}-comment-author">{{ comment.author.username }}</b>:<p>
+                            <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ post.author.avatar(128) }}">
+                            <p><b id="{{comment.id}}-comment-author">{{ comment.author.username }}</b>:<p>
                         </div>
                     </div>
                     <div class="comment-text">
+                        <pre id="{{comment.id}}-comment-text" class="comment-text-content">{{ comment.comments }}</pre>
                         <pre id="{{comment.id}}-comment-text" class="comment-text-content">{{ comment.comments }}</pre>
                     </div>
                 </div>
@@ -101,6 +109,10 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+        <div class="pagination-buttons">
+            <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
+            <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>
         </div>
         <div class="pagination-buttons">
             <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
