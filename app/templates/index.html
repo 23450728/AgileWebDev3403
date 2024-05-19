@@ -10,43 +10,43 @@
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    var like_count = 0
-    $(document).ready(function(){
+    $(document).ready(function () {
+        $(".active").removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+
         $(".like-click").click(
-            function() {
-                like_count += 1 
-                if (like_count % 2 == 0) {
+            function () {
+                if ($(this).hasClass("active")) {
                     $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
-                }
-                if (like_count % 2 == 1) {
+                } else {
                     $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
                 }
             }
         );
-    });
-    $(document).ready(function(){
-        $(".like-hover").hover(
-            function() {
-                if (like_count % 2 == 0) {
-                    $(this).removeClass("far fa-comment").addClass("fas fa-comment");
-                }
-            }, 
-            function() {
-                if (like_count % 2 == 0) {
-                $(this).removeClass("fas fa-comment").addClass("far fa-comment");
-                }
-            }               
-        );
-    });
 
-    $(document).ready(function(){
+        $(".like-hover").hover(
+            function () {
+                if ($(this).hasClass("active")) {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                } else {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                }
+            },
+            function () {
+                if ($(this).hasClass("active")) {
+                    $(this).removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
+                } else {
+                    $(this).removeClass("fas fa-thumbs-up").addClass("far fa-thumbs-up");
+                }
+            }
+        );
+
         $(".comment-hover").hover(
-            function() {
+            function () {
                 $(this).removeClass("far fa-comment").addClass("fas fa-comment");
-            }, 
-            function() {
+            },
+            function () {
                 $(this).removeClass("fas fa-comment").addClass("far fa-comment");
-            }               
+            }
         );
     });
 </script>
@@ -80,10 +80,10 @@
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">
                 {% if current_user.is_anonymous != True %}
-                <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/like')" style="justify-content: left;">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover {% if current_user in post.liked_by %}active{% endif %}"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% elif current_user.is_anonymous == True %}
-                <button class="post-action"><i class="far fa-thumbs-up like-click like-hover"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% endif %}
                 {% if ADMIN %}
