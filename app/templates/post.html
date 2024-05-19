@@ -7,7 +7,7 @@
     <h3 id="greeting" class="chef-message-form">Hi, {{ current_user.username }}! What's cooking today?</h3>
  </div>
 <div class="grey-container">
-    <form class="form" action="" method="post" enctype="multipart/form-data">
+    <form class="form" method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <p>
             {{ form.title.label }}<br>

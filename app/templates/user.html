@@ -78,7 +78,7 @@
     <div class="post">
         <div class="post-content" onclick="location.href=('/post/{{ post.id }}?prev=/user/{{ user.username }}')" style="cursor: pointer;">
             <div class="post-author">
-                <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}">
+                <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}" alt="{{ post.author.username }}">
                 <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
             </div>
             <div class="timestamp">
@@ -102,6 +102,7 @@
     </div>
     <br>
 {% endfor %}
+</div>
 <div class="pagination-buttons">
     <a href="{{ prev_url }}" {% if not prev_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-left left-arrow"></i></a>
     <a href="{{ next_url }}" {% if not next_url %} style="visibility:hidden" {% endif %}><i class="fas fa-arrow-right right-arrow"></i></a>

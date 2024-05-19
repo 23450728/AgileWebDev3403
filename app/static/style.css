@@ -298,7 +298,6 @@ float: left;
 
 .home-container {
   display:flex;
-  align-items: left;
   justify-content: center;
   background-color: rgb(255, 235, 196);
   padding: 80px;
@@ -406,13 +405,11 @@ body {
 } /* Add padding to text on homepage */
 
 .our-aim {
-  align-items: left;
   display:flex;
   justify-content: right;
 }
 
 .what-we-do {
-  align-items: left;
   display:flex;
   justify-content: left;
 }
@@ -470,7 +467,6 @@ body {
   }
 
   .bottom-column {
-    align-items: left;
     display:flex;
     justify-content: center;
   } 

@@ -55,7 +55,7 @@
                     <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
                 </div>
                 <div class="timestamp">
-                    <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                    <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p>
                 </div>
             </div>
             <div class="post-text">
@@ -85,7 +85,7 @@
                 <div class="comment-content">
                     <div class="comment-author">
                         <div class="comment-author-content">
-                            <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ comment.author.avatar(128) }}">
+                            <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ comment.author.avatar(128) }}" alt="{{ comment.author.username }}">
                             <p><b><a id="{{comment.id}}-comment-author" href="{{ url_for('main.user', username=comment.author.username) }}">{{ comment.author.username }}</a></b>:<p>
                         </div>
                     </div>
