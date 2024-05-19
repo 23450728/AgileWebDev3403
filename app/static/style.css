@@ -1,116 +1,97 @@
 /* Text */
 
-h1 {
-  text-align: left;
+h1, h2, h3, h4, p, pre, a {
   font-family: "arial", sans-serif;
+} /* Set standardised font size */
+
+h1 {
   font-size: 40px;
 }
 
-p {
-  text-align: left;
-  font-family: "arial", sans-serif;
-}
-
 h2 {
-  font-family: "arial", sans-serif;
   text-align: center;
   font-size: 30px;
 }
 
 h3 {
-  font-family: "arial", sans-serif;
   font-size: 25px;
 }
 
 h4 {
   font-size: 20px;
-  font-family: "arial", sans-serif;
 }
 
 pre {
-  font-family: "arial", "sans-serif";
   white-space: pre-wrap; 
   word-wrap: break-word; 
   overflow-wrap: break-word;
-}
-
+} /* Allow word wrapping for comment and post body */
 
 a {
-  font-family: "arial", sans-serif;
   color: black;
   text-decoration: none;
-}
+} /* Remove line under links and make it black*/
 
 a:hover {
   color:rgb(249, 182, 48);
 }
 
+
 /* Form */
-
-/*
-.form {
-    padding: 10px;
-} */
-
 
 .form {
   margin-left: 140px;
   margin-right: 140px;
 }
 
-  /* Full-width inputs */
 .form input[type=text], input[type=password], input[type=email], textarea {
-    width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-  
-  /* Set a style for all buttons in forms */
-.form .submit {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+} /* Create full-width inputs */
+
+.form button {
   text-align: center;
   background-color: rgb(249, 182, 48);
+  color: black;
   border: none;
   border-radius: 10px;
   padding: 10px;
   font-size: 17px;
   cursor: pointer;
+} /* Set a style for all buttons in forms */
+
+.form .submit {
+  background-color: rgb(249, 182, 48);
   margin-left:5px;
-}
+} /* Change Submit button colour */
 
-
-  /* Set a style for cancel button in forms */
-
-.cancel {
-    text-align: center;
-    background-color: rgb(222, 122, 122);
-    color: black;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 17px;
-    cursor: pointer;
-    margin-right:5px;
-  }
+.form .cancel {
+  background-color: rgb(222, 122, 122);
+  margin-right:5px;
+} /* Change Submit button colour */
   
-  /* Add a hover effect for buttons */
 .form button:hover {
-    opacity: 0.8;  
-}
+    opacity: 0.7;  
+}/* Add a hover effect for buttons */
 
-.pagination-buttons {
-  display:flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-  
-  /* Extra style for the cancel button (red) */
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
+.error {
+  text-align: left;
+  color: red;
+ } /*Error Messages and Form errors */
+
+.success {
+  text-align: center;
+  color: green;
+} /* Success Messages */
+
+.chef-icon-form {
+  width: 180px;
+  height: 180px;
+  margin-left:140px;
 }
   
   /* Add padding to containers */
@@ -124,32 +105,52 @@ a:hover {
   padding: 40px;
   background-color: rgb(244, 244, 244);
 }
-  
+
 span.sign_up {
-    float: right;
+  float: right;
 }
 
-  /* The "Forgot password" text */
 span.psw {
-    float: left;
-}
+  float: left;
+}  /* The "Forgot password" text */
 
 span.login {
-  float: left;
-}
-  
-  /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-      display: block;
-      float: none;
-    }
-    .cancelbtn {
-      width: 100%;
-    }
+float: left;
 }
 
-/* Navigation Menu and styles*/
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+} /* Change styles for span and cancel button on extra small screens */
+
+/* Pagination */
+
+.right-arrow, .left-arrow {
+  color:rgb(249, 182, 48);
+  margin-right: 20px;
+  font-size: 17px;
+  background-color: rgb(244, 244, 244);
+}
+
+.pagination-buttons {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+ 
+.container {
+    padding: 40px;
+} /* Add padding to containers */
+
+.grey-container {
+  padding: 40px;
+  background-color: rgb(244, 244, 244);
+} /* Container for posts in index */
+
+
+/* Navigation Bar*/
 
 .topnav {
   overflow: hidden;
@@ -164,7 +165,6 @@ span.login {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-  font-family: "arial", sans-serif;
 }
 
 .topnav a:hover {
@@ -175,8 +175,7 @@ span.login {
 .topnav a.active {
   background-color: #505050;
   color: white;
-}
-
+} /* What does this do */
 
 .topnav .search-container {
   float: inline-end;
@@ -219,23 +218,18 @@ span.login {
   .topnav input[type=text] {
     border: 1px solid #ccc;  
   }
-
-
-}
-
+} /* Change style of Nav bar on smaller screens */
 
 /*W3Schools Vertical Tabs - Profile*/
 
-/* Style the tab */
 .tab {
   float: inline-start;
   border: 1px solid #e9e9e9;
   background-color: #e9e9e9;
   width: 25%;
   height: 200px;
-}
+} /* Style the tab on smaller screens */
 
-/* Style the buttons inside the tab */
 .tab button {
   display: block;
   background-color: inherit;
@@ -248,37 +242,23 @@ span.login {
   cursor: pointer;
   transition: 0.3s;
   font-size: 17px;
-}
+} /* Style the buttons inside the tab */
 
-/* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #ddd;
-}
+} /* Change background color of buttons on hover */
 
-/* Create an active/current "tab button" class */
 .tab button.active {
   background-color: #ccc;
-}
+} /* Create an active/current "tab button" class */
 
-/* Style the tab content */
 .tabcontent {
   float: inline-end;
   padding: 0px 12px;
   width: 65%;
   height: 300px;
-}
+} /* Style the tab content */
 
-/*Error Messages and Form errors */
-.error {
-  text-align: left;
-  color: red;
- }
-
-/* Success Messages */
-.success {
-  text-align: center;
-  color: green;
-}
 
 /*Posts */
 .post {
@@ -298,11 +278,9 @@ span.login {
   text-align:center
  }
 
+/* Buttons */
 
-/* Button */
-
- /* "Start Cooking!" Button */
-  .button {
+.button {
   text-align: center;
   background-color: rgb(249, 182, 48);
   border: none;
@@ -312,30 +290,20 @@ span.login {
   cursor: pointer;
   }
 
-  /* Add a hover effect for buttons */
-  .button:hover {
+.button:hover {
   opacity: 0.8;
-}
+} /* Add a hover effect for buttons */
 
-/* Create a div to center content */
-.center-container {
-  justify-content: center;
-  align-items: center;
-  display:flex;
-} 
 
 /* Carousel */
 
-/* Align text and carousel to be next to each other */
 .home-container {
   display:flex;
-  align-items: left;
   justify-content: center;
   background-color: rgb(255, 235, 196);
   padding: 80px;
-}
+} /* Align text and carousel to be next to each other */
 
-/* Set size of carousel */
 .carousel-section {
   justify-content: center;
   align-items: center;
@@ -345,9 +313,8 @@ span.login {
   background-color: rgb(249, 182, 48);
   width: 550px;
   height: 400px;
-}
+} /* Set size of carousel */
 
-/* Center carousel */
 .carousel {
   position: absolute;
   top: 50%;
@@ -355,7 +322,7 @@ span.login {
   transform: translate(-50%, -50%);
   width: 550px;
   height: 400px;
-}
+} /* Center carousel */
 
 .carousel > ul {
   margin: 0;
@@ -363,14 +330,13 @@ span.login {
   list-style: none;
 }
 
-/* Set transition of slides */
 .slide {
   position: absolute;
   inset: 0;
   opacity: 0;
   transition: 200ms opacity ease-in-out;
   transition-delay: 200ms;
-}
+} /* Set transition of slides */
 
 .slide > img {
   display: block;
@@ -386,7 +352,6 @@ span.login {
   transition-delay: 0ms;
 }
 
-/* Style carousel buttons */
 .carousel-button {
   position: absolute;
   z-index: 2;
@@ -400,7 +365,7 @@ span.login {
   border-radius: .2rem;
   padding: 0 .2rem;
   background-color: rgba(0, 0, 0, .1);
-}
+} /* Style carousel buttons */
 
 .carousel-button:hover,
 .carousel-button:focus {
@@ -425,35 +390,35 @@ img {
   max-height:100%;
 }
 
-/* Add padding to text on homepage */
-.home-text {
-  /*padding-right:10%;
-  padding-top: 10%;*/
-  padding: 15%;
+
+/* Home page */
+
+* {
+  box-sizing: border-box;
 }
 
-.about-us-section {
-  align-items: left;
+body {
+  margin: 0;
+}
+
+.home-text {
+  padding: 15%;
+} /* Add padding to text on homepage */
+
+.our-aim {
   display:flex;
   justify-content: right;
 }
 
-.about-us-section-2 {
-  align-items: left;
+.what-we-do {
   display:flex;
   justify-content: left;
-}
-
-.about-us {
-  border-radius: 25px;
-  background-color: rgb(255, 235, 196);
 }
 
 .about-us-text {
   text-align: left;
   max-width: 450px;
   padding:25px;
-
   background-color: rgb(249, 182, 48);
   border-radius: 25px;
 }
@@ -463,17 +428,19 @@ img {
   flex-wrap: wrap;
 }
 
-.top-row-left-column {
-  float: right;
+.top-column {
   flex: 50%;
   background-color: rgb(255, 235, 196);
-  justify-content: right;
   display: flex;
+  align-items: center;
+}
+
+.top-row-left-column {
+  float: right;
+  justify-content: right;
 }
 
 .top-row-right-column {
-  flex: 50%;
-  background-color: rgb(255, 235, 196);
   justify-content: left; 
   display: flex;
   align-items: center;
@@ -487,7 +454,7 @@ img {
   padding-bottom: 20px;
 }
 
-.bottom-row-right-column {
+.bottom-column {
   flex: 50%;
   background-color: rgb(244, 244, 244);
   padding-left: 30px;
@@ -496,16 +463,12 @@ img {
 }
 
 @media (max-width: 1150px) {
-  .top-row-left-column {
+  .top-row-left-column, .top-row-right-column{
     justify-content: center;
   }
 
   .home-text, .home-text p{
     text-align: center;
-  }
-
-  .top-row-right-column {
-    justify-content: center;
   }
 }
 
@@ -514,24 +477,10 @@ img {
     flex-direction: column;
   }
 
-  .about-us-section {
-    align-items: left;
+  .bottom-column {
     display:flex;
     justify-content: center;
-  }
-
-  .about-us-section-2 {
-    align-items: left;
-    display:flex;
-    justify-content: center;
-  }
-
-  .top-row-left-column{
-    align-items: left;
-    display:flex;
-    justify-content: center;
-  }
-  
+  } 
 }
 
 @media (max-width: 600px) {
@@ -541,9 +490,8 @@ img {
   }
 }
 
-hr {
-  border: 1px solid rgb(249, 182, 48)
-}
+
+/* Post */
 
 .chef-icon-index {
   display: block;
@@ -553,23 +501,10 @@ hr {
   height: 180px
 }
 
-.chef-icon-form {
-  width: 180px;
-  height: 180px;
-  margin-left:140px;
-}
-
 .chef-message-form {
   text-align: left;
   margin-left: 140px
 }
-
-@media (max-width:850px) {
-  .chef-icon-form, .chef-message-form {
-    margin-left: 0px;
-  }
-}
-/* Post */
 
 .post-content {
   display:flex;
@@ -621,13 +556,11 @@ hr {
   align-items: center;
 }
 
-/*.post-img {
-  max-height: 500px;
-  max-width: 100px;
-  min-width: 600px;
-  justify-content: center;
-  display: flex;
-}*/
+.author-picture {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+} /* Set size for post profile picture */
 
 .post-img-section {
   position: relative;
@@ -635,18 +568,16 @@ hr {
   justify-content: center;
   border-radius: 15px;
   overflow: hidden;
-  /*margin-right: 50px;
-  margin-left: 50px;*/
 }
 
 .post-img-section img:first-child {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;   /* Make images fill the container */
-  height: 100%;
-  max-height: 500px;  /* Make images fill the container */
-  z-index: 1;   /* Lower z-index, this is the background */
+  width: 100%;  
+  height: 100%; /* Make images fill the container */
+  max-height: 500px; 
+  z-index: 1; /* Lower z-index indicates it is the background */
   border-radius: 15px;
   filter: blur(30px) brightness(50%);
   margin: -1px;
@@ -660,8 +591,9 @@ hr {
   height: 100%;
   width: 100%;
   object-fit: contain;
-  z-index: 2;   /* Higher z-index, this is the foreground */
+  z-index: 2; /* Higher z-index indicates it is the foreground */
 }
+
 
 /* Comments */
 
@@ -675,7 +607,7 @@ hr {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-}
+} /* Prevent profile picture and username from moving with screen resizing */
 
 .author-picture-comment {
   width: 30px;
@@ -683,13 +615,7 @@ hr {
   margin-right: 10px;
   align-items: center;
   min-width: 30px;
-}
-
-.author-picture {
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-}
+} /* Set size for comment profile pictures */
 
 .comment-section {
   margin-left: 140px;
@@ -761,11 +687,6 @@ body {
   overflow-wrap: break-word;
 }
 
-/*@media (max-width: 1300px) {
-  .comment-timestamp {
-    display: none; /* Hide timestamp when the screen is smaller
-  }
-}*/
 
 /* Profile page */
 
@@ -780,33 +701,8 @@ body {
   align-content: center;
 }
 
-.pagination-buttons {
-  display:flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
 .profile-picture {
   width: 150px;
   height: 150px;
   object-fit: contain;
 }
-
-/* Pagination left and right arrows */
-.left-arrow {
-  color:rgb(249, 182, 48);
-  margin-left: 20px;
-  font-size: 17px;
-  background-color: rgb(244, 244, 244);
-}
-
-.right-arrow {
-  color:rgb(249, 182, 48);
-  margin-right: 20px;
-  font-size: 17px;
-  background-color: rgb(244, 244, 244);
-}
-
-
-
-

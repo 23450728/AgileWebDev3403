@@ -1,15 +1,9 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <title>Post View</title>
-</head>
-
 {% extends "base.html" %}
 
 {% block content %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $(".active").removeClass("far fa-thumbs-up").addClass("fas fa-thumbs-up");
@@ -57,11 +51,11 @@
         <div class="post">
             <div class="post-content">
                 <div class="post-author">
-                    <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}">
+                    <img id="{{post.id}}-author-picture" class="author-picture" src="{{ post.author.avatar(128) }}" alt="{{ post.author.username }}">
                     <p><b><a id="{{post.id}}-post-author" href="{{ url_for('main.user', username=post.author.username) }}">chef/{{ post.author.username }}</a></b><p>
                 </div>
                 <div class="timestamp">
-                    <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p1>
+                    <p style="font-size: 13px;"><i id="{{post.id}}-post-timestamp">{{ moment(post.timestamp).format('LLL') }}</i></p>
                 </div>
             </div>
             <div class="post-text">
@@ -73,11 +67,15 @@
             </div>
             <div id="{{post.id}}-post-actions" class="post-actions">
                 {% if current_user.is_anonymous != True %}
-                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/like')" style="justify-content: left;">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover {% if current_user in post.liked_by %}active{% endif %}"></i></button>
+                <button class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/like')" style="justify-content: left;">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click {% if current_user in post.liked_by %}active{% endif %}"></i></button>
                 <button id="make-comment" class="post-action" type="button" onclick="location.href=('/post/{{post.id}}/comment?prev={{ prev }}')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
                 {% elif current_user.is_anonymous == True %}
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.likes_count() }} <i class="far fa-thumbs-up like-click like-hover"></i></button>
                 <button class="post-action" type="button" onclick="location.href=('/login')">{{ post.comments_count() }} <i class="far fa-comment comment-hover"></i></button>
+                {% endif %}
+                {% if ADMIN %}
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Ban user</p> </button>
+                <button class="post-action" type="button" onclick="location.href=('/index')"><p>Delete post</p> </button>
                 {% endif %}
             </div>
         </div>
@@ -88,8 +86,8 @@
                 <div class="comment-content">
                     <div class="comment-author">
                         <div class="comment-author-content">
-                            <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ post.author.avatar(128) }}">
-                            <p><b id="{{comment.id}}-comment-author">{{ comment.author.username }}</b>:<p>
+                            <img id="{{comment.id}}-comment-author-picture" class="author-picture-comment" src="{{ comment.author.avatar(128) }}" alt="{{ comment.author.username }}">
+                            <p><b><a id="{{comment.id}}-comment-author" href="{{ url_for('main.user', username=comment.author.username) }}">{{ comment.author.username }}</a></b>:<p>
                         </div>
                     </div>
                     <div class="comment-text">
